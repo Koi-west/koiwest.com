@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What We Built — ATS, Karis, Invoko & Clico · koi</title>
+<link rel="preload" href="/assets/KingHwa_OldSong.subset.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  @font-face {
+    font-family: 'KingHwa_OldSong';
+    src: url('/assets/KingHwa_OldSong.subset.woff2') format('woff2');
+    font-display: swap;
+  }
+  :root {
+    --text:     #1D1D1F;
+    --mid:      #6E6E73;
+    --dim:      #ACACB0;
+    --rule:     #E5E5EA;
+    --bg:       #F5F5F7;
+    --card-bg:  #FFFFFF;
+    --accent:   #1D1D1F;
+    --font:     'KingHwa_OldSong', 'PingFang SC', system-ui, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    background: var(--bg);
+    min-height: 100vh;
+    padding: 40px 20px 80px;
+  }
+  .back {
+    display: inline-block;
+    font: 400 15px/1 var(--font);
+    color: var(--mid);
+    text-decoration: none;
+    margin-bottom: 36px;
+    letter-spacing: 0.02em;
+  }
+  .back:hover { color: var(--text); }
+  .card {
+    max-width: 780px;
+    margin: 0 auto;
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 56px 64px 52px;
+    box-shadow: 0 2px 24px rgba(0,0,0,0.06);
+  }
+  .meta-tag {
+    font: 400 13px/2 var(--font);
+    color: var(--dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  h1 {
+    font: 700 48px/1.15 var(--font);
+    color: var(--text);
+    letter-spacing: -0.03em;
+    margin-bottom: 20px;
+  }
+  .rule { width: 48px; height: 3px; background: var(--accent); margin-bottom: 44px; }
+  .body h2 {
+    font: 600 28px/1.4 var(--font);
+    color: var(--text);
+    margin: 44px 0 16px;
+    letter-spacing: -0.02em;
+  }
+  .body h3 {
+    font: 600 22px/1.4 var(--font);
+    color: var(--text);
+    margin: 32px 0 12px;
+  }
+  .body p {
+    font: 400 20px/1.8 var(--font);
+    color: var(--text);
+    margin-bottom: 20px;
+    max-width: 65ch;
+  }
+  .body blockquote {
+    border-left: 4px solid var(--accent);
+    padding: 16px 0 16px 24px;
+    margin: 32px 0;
+  }
+  .body blockquote p {
+    font: 500 22px/1.6 var(--font);
+    color: var(--text);
+    margin: 0;
+  }
+  .body ul, .body ol {
+    padding-left: 24px;
+    margin-bottom: 20px;
+  }
+  .body li {
+    font: 400 20px/1.8 var(--font);
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .body hr {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 40px 0;
+  }
+  .body strong { font-weight: 600; }
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 52px;
+    padding-top: 22px;
+    border-top: 1px solid var(--rule);
+  }
+  .footer-date { font: 400 15px/1.5 var(--font); color: var(--dim); }
+  .source {
+    font: 400 13px/1.5 var(--font);
+    color: var(--dim);
+    text-decoration: none;
+    word-break: break-all;
+  }
+  .source:hover { color: var(--mid); }
+  @media (max-width: 640px) {
+    html, body { padding: 20px 16px 60px; }
+    .card { padding: 36px 24px 36px; border-radius: 16px; }
+    h1 { font-size: 32px; }
+    .body p, .body li { font-size: 17px; }
+    .body h2 { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+  <div style="max-width:780px;margin:0 auto;">
+    <a class="back" href="/">← 首页</a>
+  </div>
+  <article class="card">
+    <div class="meta-tag">koi · 2026-03-27</div>
+    <h1>What We Built — ATS, Karis, Invoko & Clico</h1>
+    <div class="rule"></div>
+    <div class="body"><p>Infrastructure</p>
+<h2>ATS — Agent Transport System</h2>
+<p>ATS is the transport layer for an economy that is still becoming. It is infrastructure designed for agents — autonomous systems that will navigate, transact, and operate across the digital world with the fluency we now reserve for humans.</p>
+<p>But we built it with a deliberate duality. Because the future is certain and its timing is not, ATS serves two masters: the agents that are arriving and the humans who are already here. For people, it is a tool that amplifies productivity, surfaces unexpected connections, and sparks the kind of ideas that emerge only when your tools are quietly, reliably excellent.</p>
+<p>We do not build for a future that asks you to wait. We build for a present that rewards you now, and a future that will reward you further.</p>
+<p>For Agents</p>
+<p>A transport system that enables AI agents to navigate, interact, and transact across the digital economy — autonomously and at scale.</p>
+<p>For Humans</p>
+<p>A productivity companion that helps you work with greater speed, discover new workflows, and arrive at ideas you would not have found alone.</p>
+<p><a href="https://ats.sh/">Visit ats.sh →</a></p>
+<p>Visibility</p>
+<h2>Karis</h2>
+<p>Too many beautiful things die in silence. Their makers poured everything into craft and had nothing left for the stage. Karis exists because we believe remarkable products deserve to be seen and used — not buried beneath noise and algorithm.</p>
+<p>Karis helps founders and creators bridge the gap between what they have built and the people whose lives it would change. It is not marketing in the traditional sense. It is the quiet, deliberate work of carrying something worthy into the light.</p>
+<p><a href="https://karis.im/">Visit karis.im →</a></p>
+<p>Voice</p>
+<h2>Invoko</h2>
+<p>Invoko is a voice-first agent you summon by pressing a single key. Speak your intent, and it executes across your apps — no clicking through menus, no switching between windows, no learning new interfaces.</p>
+<p>Designed for multitaskers and people who think faster than they can click. Invoko treats your voice as the most natural command line — turning spoken intent into real action across the tools you already use.</p>
+<p><a href="https://invoko.ai/">Visit invoko.ai →</a></p>
+<p>Writing</p>
+<h2>Clico</h2>
+<p>Clico lives inside every text box on the web. It is a browser extension that brings AI writing, summarization, and voice input directly into the places you already work — Gmail, Notion, Slack, LinkedIn, and thirty more.</p>
+<p>No tab-switching, no copy-pasting, no friction. Press a single shortcut and Clico drafts, rewrites, or summarizes right where your cursor sits. We built it for people who think faster than they can type — and who refuse to break flow for a tool.</p>
+<p><a href="https://tryclico.com/">Visit tryclico.com →</a></p>
+<p>•</p>
+<h2>Have something the world should see?</h2>
+<p>Whether you want to explore our products or you've built something that deserves to be found — we would love to hear from you.</p>
+<p><a href="mailto:monica@amplift.ai">Contact Me</a></p></div>
+    <div class="footer">
+      <span class="footer-date">2026-03-27</span>
+      <a class="source" href="https://monicaforest.com/products" target="_blank" rel="noopener">https://monicaforest.com/products</a>
+    </div>
+  </article>
+</body>
+</html>
