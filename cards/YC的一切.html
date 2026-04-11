@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="viewport" content="width=1080, user-scalable=yes">
+<title>YC 的一切 二十七个切面 · koi</title>
+<meta charset="UTF-8">
+<style>
+  @font-face {
+    font-family: 'KingHwa_OldSong';
+    src: url('/assets/KingHwa_OldSong.subset.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+  }
+
+  :root {
+    --text: #1D1D1F;
+    --text-mid: #6E6E73;
+    --text-dim: #ACACB0;
+    --accent: #B8541F;
+    --rule: #E5E5EA;
+    --tint: #FBF7F2;
+    --font: 'KingHwa_OldSong', 'PingFang SC', system-ui, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 1080px;
+    background: #FFFFFF;
+  }
+
+  .card {
+    width: 1080px;
+    background: #FFFFFF;
+    padding: 72px 80px 56px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── Title ── */
+  .title-area {
+    flex-shrink: 0;
+    margin-bottom: 58px;
+  }
+
+  .title-area .eyebrow {
+    font: 400 22px/1.5 'Menlo', 'SF Mono', monospace;
+    color: var(--accent);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .title-area h1 {
+    font: 700 92px/1.08 var(--font);
+    color: var(--text);
+    letter-spacing: -0.035em;
+    margin-bottom: 26px;
+  }
+
+  .title-area .tagline {
+    font: 400 28px/1.5 var(--font);
+    color: var(--text-mid);
+    max-width: 720px;
+  }
+
+  .title-area::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--accent);
+    margin-top: 36px;
+  }
+
+  /* ── Intro ── */
+  .intro {
+    font: 400 32px/1.7 var(--font);
+    color: var(--text);
+    margin-bottom: 52px;
+    padding-bottom: 52px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .intro em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  /* ── Item ── */
+  .item {
+    display: grid;
+    grid-template-columns: 88px 1fr;
+    gap: 0 28px;
+    margin-bottom: 58px;
+    padding-bottom: 58px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .item:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .item .num {
+    font: 500 36px/1 'Menlo', 'SF Mono', monospace;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+    padding-top: 10px;
+  }
+
+  .item .label {
+    font: 700 42px/1.35 var(--font);
+    color: var(--text);
+    margin-bottom: 18px;
+    letter-spacing: -0.015em;
+  }
+
+  .item p {
+    font: 400 30px/1.7 var(--font);
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+
+  .item p:last-child {
+    margin-bottom: 0;
+  }
+
+  .item blockquote {
+    margin: 20px 0;
+    padding: 6px 0 6px 26px;
+    border-left: 3px solid var(--accent);
+  }
+
+  .item blockquote p {
+    font: 400 30px/1.65 var(--font);
+    font-style: italic;
+    color: var(--text-mid);
+    margin-bottom: 0;
+  }
+
+  .item strong {
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  /* ── Glossary ── */
+  .gloss {
+    margin-top: 24px;
+    padding: 22px 26px;
+    background: var(--tint);
+    border-left: 3px solid var(--text-dim);
+  }
+
+  .gloss .g-head {
+    font: 500 20px/1.4 'Menlo', 'SF Mono', monospace;
+    color: var(--text-mid);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .gloss dl {
+    display: block;
+  }
+
+  .gloss dt {
+    font: 600 24px/1.5 var(--font);
+    color: var(--text);
+    display: inline;
+  }
+
+  .gloss dt::before {
+    content: '·  ';
+    color: var(--text-dim);
+  }
+
+  .gloss dd {
+    font: 400 24px/1.55 var(--font);
+    color: var(--text-mid);
+    display: inline;
+    margin-left: 8px;
+  }
+
+  .gloss .g-row {
+    margin-bottom: 10px;
+  }
+
+  .gloss .g-row:last-child {
+    margin-bottom: 0;
+  }
+
+  /* ── Section Divider ── */
+  .section-mark {
+    font: 500 22px/1 'Menlo', 'SF Mono', monospace;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin: 24px 0 52px;
+    padding-top: 58px;
+    border-top: 2px solid var(--text);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .section-mark span:last-child {
+    color: var(--text-dim);
+  }
+
+  /* ── Footer ── */
+  .footer {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 72px;
+    padding-top: 26px;
+    border-top: 2px solid var(--text);
+  }
+
+  .footer .author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .footer .avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .footer .author-name {
+    font: 400 22px/1.5 var(--font);
+    color: var(--text-mid);
+    letter-spacing: 0.03em;
+  }
+
+  .footer .endmark {
+    font: 500 20px/1 'Menlo', 'SF Mono', monospace;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="title-area">
+      <div class="eyebrow">W26 / S25 · FIELD DISPATCH</div>
+      <h1>YC 的一切<br>二十七个切面</h1>
+      <div class="tagline">从一场两个小时的硅谷对谈里，把所有关于 YC 的段落拆成独立切面。每一面都是一把切刀——共同切出 2026 年当下 YC 的全貌。</div>
+    </div>
+
+    <div class="intro">
+      <p>这是一份<em>贴近现场</em>的切片集。访谈对象是 Cathy Di（Dedalus Labs CEO，S25）和 Long Yi（IncidentFox co-founder，W26）——他们都是刚跑完或正在跑 YC 的现役 founder。每一个切面都保留原话引用，并为文中出现的英文术语做了一份小字典——因为创业语境下许多术语是"半翻译状态"，直接沿用英文反而更精确。</p>
+    </div>
+
+    <div class="item">
+      <div class="num">01</div>
+      <div>
+        <div class="label">Agent Batch 的身份标签</div>
+        <p>YC partner Gustaf Alströmer 公开定义：<strong>2023 批次 = GPT batch，W26 = the real first agent batch</strong>。这一批里 AI Agent 相关项目占比显著提升，垂直领域（医疗健康、保险、物流、房地产）成为主流方向，平均估值是两年前的两倍。亮眼项目包括 Pax Historia（月活 300 万、估值 3 亿美元、ARR 约 1 亿）和 Arc Intelligence（post-training benchmark）。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Batch</dt><dd>YC 的"一届"，每三个月为一期，按季节命名：W = Winter, S = Summer，数字是年份。W26 = 2026 年冬季批次。</dd></div>
+          <div class="g-row"><dt>Vertical</dt><dd>"垂直领域"，指聚焦某一行业的产品，与 horizontal（横向、通用）相对。</dd></div>
+          <div class="g-row"><dt>ARR</dt><dd>Annual Recurring Revenue，年度经常性收入。SaaS 公司最常用的估值锚。</dd></div>
+          <div class="g-row"><dt>Post-training benchmark</dt><dd>用于评估模型在预训练之后微调阶段质量的基准测试。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">02</div>
+      <div>
+        <div class="label">Pivot 是 batch 期间的常态</div>
+        <p>内部数据：batch 期间 <strong>50-60% 的公司会 pivot，平均 pivot 两到三次</strong>。IncidentFox 就在 batch 内从 AI SRE pivot 到 Healthcare——当时同一届有 20 家公司在做 SRE，metric growth 太慢。</p>
+        <blockquote><p>从 metric 理智地看，这是一个很强的 signal，我们应该马上换 idea。</p></blockquote>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Pivot</dt><dd>创业术语：在不关停公司的前提下，显著改变产品方向或目标市场。</dd></div>
+          <div class="g-row"><dt>SRE</dt><dd>Site Reliability Engineering，站点可靠性工程——Google 发明的概念，负责保障线上系统稳定。</dd></div>
+          <div class="g-row"><dt>Metric</dt><dd>指标。这里特指增长指标（留存、活跃、收入），是决定是否 pivot 的硬证据。</dd></div>
+          <div class="g-row"><dt>Signal</dt><dd>"信号"——硅谷语境下指值得据以行动的微弱证据，与 noise（噪声）相对。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">03</div>
+      <div>
+        <div class="label">YC Partner 会亲自"蛊惑"你 Pivot</div>
+        <p>Pivot 不是 founder 一个人的决定。访谈里嘉宾明确说："也是应该是有 YC 的 partner 去<strong>蛊惑</strong>你去做这件事，建议你去做这件事。"YC partner 是 batch 期间最核心的外部输入，他们的一次 office hours 可能直接改变一家公司的方向。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Partner</dt><dd>YC 的合伙人——通常是成功退出过的创业者，负责指导一批里的若干家公司。</dd></div>
+          <div class="g-row"><dt>Office Hours</dt><dd>YC 每周的一对一答疑时间，partner 会就具体公司问题给出尖锐反馈。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">04</div>
+      <div>
+        <div class="label">"进 YC 就是进创业的体制内"</div>
+        <p>一位 YC 申请者在小红书上造的比喻，被播客嘉宾全票通过。"体制内"三个字的意味是：<strong>往前走更安全，更有保障，路径是铺好的</strong>。代价是你换来这份确定性时交出去的一部分自主性——以及 6% 的股权。</p>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">05</div>
+      <div>
+        <div class="label">Launch Often, Launch Soon</div>
+        <p>YC 第一天的教义。"你第一天去 YC，他们就会跟你说：launch often, launch soon。不停地 launch——因为你不 launch 的话，用户就不知道你存在；不知道你存在就不会用你；所以你要不停地跟世界宣导：嘿，我做了一个很酷的东西，你来看一眼。" Cathy 是 S25 最晚 launch 的公司之一，她的 launch 第一天就是第一次 investor call——demo 甚至跑在 dev 环境里。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Launch</dt><dd>产品公开发布。YC 语境下不等于"完美再发"，而是"有个最小可用版本就昭告天下"。</dd></div>
+          <div class="g-row"><dt>Dev environment</dt><dd>开发环境，不稳定但允许快速改动。对立面是 production（生产环境）。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">06</div>
+      <div>
+        <div class="label">Defer Demo Day 机制</div>
+        <p>一个少被公开讨论的细节：YC 允许你 <strong>defer Demo Day 最多三次</strong>，把你的"出场"推迟到下一批。很多人这样做是因为产品还没成熟，但现在甚至有人用 defer 过的 Demo Day 去融 Series A——他们 C 轮都融完了，还回来用 Demo Day 做第二轮脉冲。这说明 Demo Day 在他们眼里已经不是"毕业典礼"，而是一次<strong>可复用的融资触发器</strong>。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Defer</dt><dd>延后，延期。这里是正式机制，不是临时商量。</dd></div>
+          <div class="g-row"><dt>Series A / Seed / C 轮</dt><dd>融资阶段：Seed（种子）→ Series A → B → C……，代表公司成熟度在逐级上升。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">07</div>
+      <div>
+        <div class="label">Demo Day 本质上就是融钱</div>
+        <p>IncidentFox 做 pivot 时错过了 Demo Day。嘉宾问："这对你意味着什么？"他的回答：<strong>"没特别多意义。Demo Day 本质上是融钱。"</strong> 对一个 technical co-founder 配置、runway 充足、能持续写代码的 AI 创业团队来说——"作为一个 business 只要能实现 positive cash flow，甚至没必要去融资。"</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Runway</dt><dd>"跑道"——按当前烧钱速度，账上的钱还能活多久（月数）。runway = 现金 / 月烧钱率。</dd></div>
+          <div class="g-row"><dt>Positive cash flow</dt><dd>正向现金流：收入大于支出。很多 VC-backed 公司一辈子没有过这件事。</dd></div>
+          <div class="g-row"><dt>Technical co-founder</dt><dd>技术背景的联合创始人——通常指能独立 build 产品的那位。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">08</div>
+      <div>
+        <div class="label">Demo Day 规模演变：40 → 150</div>
+        <blockquote><p>我十年前去 YC Demo Day 的时候，已经 40 多个公司，我已经看起来很累了。现在在 Dogpatch 那个新 office 一天，我看很多投资人下午 4 点钟还没出来。150 个公司流水线——这不是 factory 是什么？</p></blockquote>
+        <p>从 40 到 150，是四倍规模，但投资人的注意力总量没有变。这是 YC 内部最容易被观察到、也最难被承认的结构性变化。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Dogpatch</dt><dd>旧金山东南部一个前工业区，YC 新 office 所在地。旧 YC 在 Mountain View。</dd></div>
+          <div class="g-row"><dt>Factory</dt><dd>"工厂"——此处是贬义，暗示流水线生产而非手工甄选。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">09</div>
+      <div>
+        <div class="label">YC 本质上是一门概率生意</div>
+        <blockquote><p>At the end of the day, YC is a business model. 他必须盈利——他拼的是概率。150 家 × 4 batch / 年。内部数据是 2% 能成独角兽（实际可能更低）。但只要一年能出几个独角兽，他就赚翻了。</p></blockquote>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Business model</dt><dd>盈利模式——公司靠什么赚钱的基本结构。</dd></div>
+          <div class="g-row"><dt>Unicorn</dt><dd>独角兽：估值超过 10 亿美元的未上市公司。术语来自 Aileen Lee 2013 年的那篇博客。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">10</div>
+      <div>
+        <div class="label">YC 的 6% Equity</div>
+        <p>YC 标准入场条件：用 12.5 万美元换 7% 股权，后续 SAFE 再追加——整体通常落在 ≈6% 左右的稀释上。访谈里嘉宾的原话："很多人做得很好很强了，那你何必稀释你的 6%？" 这个数字是 YC 的价格标签，一切"进 YC 值不值"的讨论都围绕它。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Equity</dt><dd>股权。创业者最宝贵也最有限的资源。</dd></div>
+          <div class="g-row"><dt>Dilution</dt><dd>稀释：每轮融资后 founder 持股比例的下降。</dd></div>
+          <div class="g-row"><dt>SAFE</dt><dd>Simple Agreement for Future Equity——YC 发明的简化投资协议，把估值推迟到未来一轮。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">11</div>
+      <div>
+        <div class="label">YC 辅导班现象</div>
+        <p>旧金山出现了专门"教 founders 如何 pitch YC"的加速器——被戏称为 <strong>"YC 新东方"</strong>。嘉宾承认"情有可原"：</p>
+        <blockquote><p>YC interview 绝大部分情况下都是 pattern recognition。你符合他们熟悉的 pattern，你就进了——那这个 pattern 我很难用文字形容，但是 pattern recognition。</p></blockquote>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Accelerator</dt><dd>加速器：给早期公司提供短期集中指导 + 小额资金的机构。YC 是最早也最大的一家。</dd></div>
+          <div class="g-row"><dt>Pitch</dt><dd>融资陈述——几分钟内把公司讲清楚并让投资人心动。</dd></div>
+          <div class="g-row"><dt>Pattern recognition</dt><dd>模式识别：不靠硬指标而靠经验快速判断"这家像不像能成的"。硅谷投资人最核心的技艺，也是最常被指控的偏见来源。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">12</div>
+      <div>
+        <div class="label">融资难度的 10-20 倍差距</div>
+        <blockquote><p>如果你没有走 YC Demo Day 的 schedule，fundraising 就是非常难——maybe ten times harder。除非你已经有很多 traction。</p></blockquote>
+        <p>嘉宾进一步量化："10 到 20 倍的区别——从融资难度上来看，不是规模。" 这是量级差，不是比例差。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Fundraising</dt><dd>融资：找投资人要钱的全过程——远不止一次 pitch。</dd></div>
+          <div class="g-row"><dt>Traction</dt><dd>"牵引力"：可被外部验证的增长证据（用户数、收入、留存），投资人唯一真正相信的东西。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">13</div>
+      <div>
+        <div class="label">种子到下一轮的 16-20%</div>
+        <p>YC 内部数据："并不是每个融到种子的人都可以走到下一轮——比例在 16% 到 20% 之间。" 嘉宾补了一句："已经很高了——你没有 YC 的话，可能第一轮都融不到。" 这句话把 YC 的价值直接翻译成一个概率比：同样的 founder，YC 内 vs YC 外，下一轮成功率的绝对差。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Seed round</dt><dd>种子轮——公司第一次系统化融资，通常数百万美元级。</dd></div>
+          <div class="g-row"><dt>Next round</dt><dd>种子轮之后的 Series A，是"活下来的证据"关。大部分初创公司死在这里。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">14</div>
+      <div>
+        <div class="label">YC = Seal of Approval</div>
+        <blockquote><p>YC 更多像一个 seal of approval，像 FDA approval 一样——确保你确实是 technical，确保你好像是 out to something。</p></blockquote>
+        <p>这句类比是关键：FDA 审批本身不保证药效，但没有它就不能上市。YC 的 credibility 效应也是如此——它不验证你会成功，它只让你具备"被认真考虑"的资格。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Seal of approval</dt><dd>"认可印章"——由权威机构颁发的通过标记，本身不保证质量但提供信用锚。</dd></div>
+          <div class="g-row"><dt>FDA approval</dt><dd>美国食品药品监督管理局批准，制药行业上市的强制门槛。</dd></div>
+          <div class="g-row"><dt>Credibility</dt><dd>可信度——融资、招聘、卖产品时最隐蔽但最重要的乘数。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">15</div>
+      <div>
+        <div class="label">Defense Tech 也在走 YC 流程</div>
+        <p>一个嘉宾自己都没想到的新现象：<strong>许多直接和 Pentagon 合作的 defense tech 公司，都要先走一套 YC 的流程</strong>——先拿 YC 的 credibility，再去和政府谈合作。YC 的背书效应已经渗出了 VC 圈，渗进了国防工业的采购链。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Defense tech</dt><dd>国防科技——面向军方采购的技术公司。过去十年从 Palantir、Anduril 开始变成 VC 热门赛道。</dd></div>
+          <div class="g-row"><dt>Pentagon</dt><dd>"五角大楼"——美国国防部的代称，也是 defense tech 最大的买家。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">16</div>
+      <div>
+        <div class="label">YC 不教 Taste</div>
+        <blockquote><p>我觉得 YC 不会讨论 taste。Taste I cannot teach, but I can teach methodology, I can teach suspicion to the world.</p></blockquote>
+        <p>YC 的教学立场是刻意的：不传授审美（不可教），只传授方法论和对世界的怀疑——"你永远要去质疑已有的解决方案，它究竟是不是最好的。"</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Taste</dt><dd>品味。近年被红杉资本 coined 进创业词汇——指选择和判断的直觉而非方法。</dd></div>
+          <div class="g-row"><dt>Methodology</dt><dd>方法论：可被复制、可被教授的一套做事步骤。与 taste 正好相反。</dd></div>
+          <div class="g-row"><dt>Suspicion to the world</dt><dd>"对世界的怀疑"——创业者必备心态：不默认任何现有方案是最优的。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">17</div>
+      <div>
+        <div class="label">"Make Something Agents Want"</div>
+        <p>YC 最经典的名言 <em>make something people want</em>（让人想要）正在被改写：</p>
+        <blockquote><p>要么改成 make something agents want，要么改成 make something somebody wants enough to pay for it——这句话现在要改了。</p></blockquote>
+        <p>后一个版本尤其狠——它把"想要"硬化成了"想要到愿意付钱"。在 AI bubble 充盈的当下，这是一句对 wishful thinking 最锐利的反动。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Make something people want</dt><dd>YC 最古老的口号，挂在 YC office 墙上。源自 Paul Graham 的一篇文章。</dd></div>
+          <div class="g-row"><dt>Wishful thinking</dt><dd>一厢情愿的思考——凭感觉认为用户会喜欢而没有证据。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">18</div>
+      <div>
+        <div class="label">PMF 方法论：Talk to Users + Hockey Stick</div>
+        <p>YC 没法直接告诉你 PMF 是什么，但给了一套系统化的方法。嘉宾复述："YC 说你每天都必须跟用户聊天。整个 batch，你除了睡觉、产品和运动以外，必须是 talking to users。" 真正的 PMF 不是一时的 hype，是 hockey stick growth：</p>
+        <blockquote><p>它的 growth 一定是不停地涨，之后也没有落下来。且有人愿意持续付钱——不是"很多人用你"，而是"有人愿意付 20 万美金"。</p></blockquote>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>PMF</dt><dd>Product-Market Fit，产品市场契合度。Marc Andreessen 2007 年造的词——最接近"找到金矿"的信号。</dd></div>
+          <div class="g-row"><dt>Hockey stick growth</dt><dd>曲棍球棒式增长——前期平坦、某一点后指数上升的图形，是真 PMF 的外观。</dd></div>
+          <div class="g-row"><dt>Hype</dt><dd>炒作热度。与真正的留存相反：hype 会衰减，PMF 不会。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">19</div>
+      <div>
+        <div class="label">Storytelling 是 CEO 最重要的 skill</div>
+        <p>一个有趣的内部张力：YC 其实<strong>没有系统地教 storytelling</strong>——因为它 "hard to teach"。但嘉宾同时说：这是一个好 CEO 最重要的 skill。</p>
+        <blockquote><p>每一个 founder 都必须是 good storyteller——首先你先 convince 自己，你自己都 convince 不了，怎么 convince 别人？你怎么去 convince 一堆十个人，跟着你一起追梦想？You have to speak with almost blind conviction.</p></blockquote>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Storytelling</dt><dd>讲故事——创业语境下指用一个 narrative 把技术、痛点、市场、团队串成一个让人相信的整体。</dd></div>
+          <div class="g-row"><dt>Blind conviction</dt><dd>"盲目的信念"——不依赖充分证据的坚定。在正常生活里是缺点，在创业里是必需。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">20</div>
+      <div>
+        <div class="label">Do Things That Don't Scale</div>
+        <p>YC 经典教义之一，来自 Paul Graham 的同名文章。嘉宾原话：</p>
+        <blockquote><p>最开始找用户的时候，最好是用一种还是比较手动、比较 unscalable 的方式——do things that don't scale。因为这样你人工来一遍才有感觉，到底知道是怎么回事。</p></blockquote>
+        <p>结论是 <em>growth and sales has to be founder led</em>——你先把模式手动跑通，之后才 automate。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Unscalable</dt><dd>不可规模化的——通常是贬义，但在 YC 语境里是美德。</dd></div>
+          <div class="g-row"><dt>Founder-led</dt><dd>创始人亲自带队做某事。与 hire-to-fix（雇人解决）相对。</dd></div>
+          <div class="g-row"><dt>Automate</dt><dd>自动化——把已经验证过的重复工作交给机器或 agent。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">21</div>
+      <div>
+        <div class="label">互相买服务的内循环</div>
+        <p>Brian Chesky（Airbnb 创始人、YC 老 alumni）去年的原话：</p>
+        <blockquote><p>现在的 YC 全是 to B——他们就在互相做 distribution。</p></blockquote>
+        <p>YC 公司彼此互相买服务，形成了一个内部消化的生态闭环。嘉宾补充："这是个误区——只有你做 internal tooling，大家才都可以用你。真正 vertical 的 B2B，还是得去外面找 market。"</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>B2B / to B</dt><dd>Business-to-Business，面向企业客户。对立是 B2C / to C（面向消费者）。</dd></div>
+          <div class="g-row"><dt>Distribution</dt><dd>分销/分发——把产品触达到用户的通道，硅谷眼里比产品本身更重要。</dd></div>
+          <div class="g-row"><dt>Internal tooling</dt><dd>内部工具：研发、DevOps、数据等公司内部团队使用的软件。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">22</div>
+      <div>
+        <div class="label">什么情况不适合 YC</div>
+        <p>嘉宾给出的三种反例：</p>
+        <p><strong>(a) 已有 traction 的 repeat founder</strong>——"何必稀释你的 6%？"<br>
+        <strong>(b) Deep tech 公司</strong>——YC 的 playbook 不适配深科技的长周期。<br>
+        <strong>(c) Consumer 公司</strong>——"YC 对于 consumer distribution 做得没有那么好，我们自己做 consumer distribution 都是自己学的。" YC 内部主要是 B2B，consumer 公司在这里找不到同类经验。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Repeat founder</dt><dd>连续创业者——已经创过一次或多次公司的 founder，通常被 VC 给更高估值。</dd></div>
+          <div class="g-row"><dt>Deep tech</dt><dd>深科技——biotech、量子、航天、新材料等需要长研发周期的硬技术。</dd></div>
+          <div class="g-row"><dt>Consumer / to C</dt><dd>面向个人消费者的产品。和 B2B 打法完全不同——靠品牌、病毒传播、内容。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">23</div>
+      <div>
+        <div class="label">Paul Graham 的万亿梦想 vs 当下 YC</div>
+        <p>一个少被公开说的内部观察：</p>
+        <blockquote><p>PG 现在的个人理想，是投一家未来会值 trillion 的公司——Airbnb 没到，Dropbox 没到，Stripe 现在可能连千亿都不到。但我老觉得现在 YC 目前的这个 model runs far away from Paul Graham's current ambition.</p></blockquote>
+        <p>这是一道裂缝：<strong>创始人的野心和机器的运转方向正在分开</strong>。150 家/批流水线擅长批发"下一个 Airbnb"，但它不擅长孵化一家"下一个 Apple"。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>PG</dt><dd>Paul Graham——YC 创始人、《Hackers & Painters》作者、硅谷最有影响力的博客作者之一。</dd></div>
+          <div class="g-row"><dt>Trillion</dt><dd>万亿美元。目前全球只有 Apple、Microsoft、NVIDIA、Google、Amazon 几家。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">24</div>
+      <div>
+        <div class="label">21 年的 Network 护城河</div>
+        <blockquote><p>YC 有 21 年了。世界上很多你每天都会使用的公司，或者每周都会使用的公司，其实都是 YC 或者是 YC 的 alumni——这个 network 只要你进了 YC 你就也等于拥有了。</p></blockquote>
+        <p>这是 YC 别家无法复制的资产：时间 + 累计。一个 21 岁的 accelerator 累加起来的 alumni network 密度，不是任何新型加速器能在 5 年内追平的。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Alumni</dt><dd>校友——YC 把所有毕业过 batch 的公司创始人都纳入 alumni 体系，享受长期网络。</dd></div>
+          <div class="g-row"><dt>Network</dt><dd>关系网络——硅谷里最有价值的资产之一，决定你能融谁的钱、雇谁的人、卖给谁。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">25</div>
+      <div>
+        <div class="label">这一批的技术栈偏好：Claude</div>
+        <blockquote><p>I can confirm——就是这个 YC batch 大部分都用 Claude SDK，然后基本上就是一个 Claude Code。</p></blockquote>
+        <p>这一行话的信息密度比它看起来更高：它说明 Anthropic 的开发者生态已经在最新一批早期公司里占了主导。上一批（W25/S24）这个答案还不是这样——那还是 OpenAI 和 Anthropic 平分秋色的时代。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Claude SDK</dt><dd>Anthropic 提供的 Claude 开发工具包——让开发者把 Claude 嵌进自己产品的代码库。</dd></div>
+          <div class="g-row"><dt>Claude Code</dt><dd>Anthropic 的官方 CLI 编程 agent——让 Claude 直接在你的终端里写代码、跑测试、改文件。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">26</div>
+      <div>
+        <div class="label">Agent Batch 的 Second-Order Effect</div>
+        <p>一个更深一层的观察：W26 不仅多 agent，还多<strong>"给 agent 做基础设施"的 agent</strong>。嘉宾指出一批 second-order 的公司：Token compression（压缩 token 花费）、offensive security testing（对 agent 做进攻式安全测试）、evaluation reports、post-training environments、data collection for post-training……这是移动互联网时代 Mixpanel、Optimizely、Parse 的重演——新 infra 出现后，会有新的应用再出现。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Second-order effect</dt><dd>二阶效应——第一阶是"AI 出现"，第二阶是"因为 AI 出现而出现的配套市场"。</dd></div>
+          <div class="g-row"><dt>Token compression</dt><dd>压缩大模型调用时传入的 token 数，直接降低成本。</dd></div>
+          <div class="g-row"><dt>Post-training</dt><dd>预训练之后的微调阶段——用特定数据让通用模型在某任务上变强。</dd></div>
+          <div class="g-row"><dt>Offensive security</dt><dd>主动安全测试——用攻击手段找漏洞，与 defensive（被动防守）相对。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">27</div>
+      <div>
+        <div class="label">Garry Tan 的 G Stack 着魔</div>
+        <p>访谈里一个意外的八卦：现任 YC 总裁 Garry Tan 最近"着魔"于一个个人项目——"G Stack"，一个基于 Claude Code 的开源工具链，Star 数已经比 OpenClaw（OpenAI 的 Claude Code 对标品）还多。嘉宾的评价是半开玩笑的："Garry Tan 现在就很很着魔——他就病了，每天就疯疯癫癫的。"这是一个耐人寻味的信号：<strong>YC 的最高掌门人自己在亲手做 Claude 生态的工具</strong>——而这一批的公司也大多用 Claude。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Garry Tan</dt><dd>Initialized Capital 创始人、YC 现任 President（2023 至今）。Twitter 上非常高调。</dd></div>
+          <div class="g-row"><dt>Star 数</dt><dd>GitHub 的"收藏数"——是开源项目受关注度的粗略代理指标。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="author">
+        <img class="avatar" src="/assets/kanye.png" alt="">
+        <span class="author-name">硅基立场 · W26 / S25 访谈拆解</span>
+      </div>
+      <div class="endmark">FIN ∎</div>
+    </div>
+  </div>
+</body>
+</html>

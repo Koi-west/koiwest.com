@@ -12,130 +12,120 @@
     font-display: swap;
   }
   :root {
-    --text:     #1D1D1F;
-    --mid:      #6E6E73;
-    --dim:      #ACACB0;
-    --rule:     #E5E5EA;
-    --bg:       #F5F5F7;
-    --card-bg:  #FFFFFF;
-    --accent:   #1D1D1F;
-    --font:     'KingHwa_OldSong', 'PingFang SC', system-ui, sans-serif;
+    --text: #1D1D1F;
+    --mid:  #6E6E73;
+    --dim:  #ACACB0;
+    --rule: #E5E5EA;
+    --bg:   #F5F5F7;
+    --card: #FFFFFF;
+    --font: 'KingHwa_OldSong', 'PingFang SC', system-ui, sans-serif;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body {
     background: var(--bg);
     min-height: 100vh;
     font-family: var(--font);
+    color: var(--text);
   }
   header {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 56px 32px 40px;
+    padding: 64px 32px 44px;
     display: flex;
     align-items: baseline;
     gap: 16px;
   }
   header h1 {
-    font: 700 28px/1 var(--font);
-    color: var(--text);
+    font: 700 32px/1 var(--font);
     letter-spacing: -0.03em;
   }
   header span {
     font: 400 15px/1 var(--font);
     color: var(--dim);
+    letter-spacing: 0.04em;
   }
   .grid {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 32px 80px;
+    padding: 0 32px 100px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
   }
   .card {
-    background: var(--card-bg);
-    border-radius: 16px;
-    padding: 22px 22px 18px;
+    background: var(--card);
+    border-radius: 18px;
+    padding: 28px 28px 22px;
     text-decoration: none;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     min-height: 180px;
-    transition: box-shadow 0.15s ease;
-    border: 1px solid rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: box-shadow 0.18s ease, transform 0.18s ease;
   }
   .card:hover {
-    box-shadow: 0 4px 20px rgba(0,0,0,0.09);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
   }
-  .card-inner { flex: 1; }
   .card-title {
-    font: 600 16px/1.4 var(--font);
+    font: 600 20px/1.35 var(--font);
     color: var(--text);
-    margin-bottom: 10px;
+    letter-spacing: -0.01em;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  .card-excerpt {
-    font: 400 13px/1.65 var(--font);
-    color: var(--mid);
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  .card-date {
+  .card-meta {
     font: 400 12px/1 var(--font);
     color: var(--dim);
-    margin-top: 18px;
+    letter-spacing: 0.08em;
+    margin-top: 22px;
   }
   @media (max-width: 1024px) {
-    .grid { grid-template-columns: repeat(3, 1fr); }
+    .grid { grid-template-columns: repeat(2, 1fr); }
   }
-  @media (max-width: 720px) {
-    .grid { grid-template-columns: repeat(2, 1fr); padding: 0 16px 60px; gap: 12px; }
-    header { padding: 36px 16px 28px; }
-  }
-  @media (max-width: 420px) {
-    .grid { grid-template-columns: 1fr; }
+  @media (max-width: 640px) {
+    .grid { grid-template-columns: 1fr; padding: 0 16px 60px; }
+    header { padding: 40px 16px 28px; }
+    header h1 { font-size: 26px; }
   }
 </style>
 </head>
 <body>
   <header>
     <h1>koi</h1>
-    <span>reading notes</span>
+    <span>card dispatch</span>
   </header>
   <div class="grid">
-    
-    <a class="card" href="/articles/harness-dataset.html">
-      <div class="card-inner">
-        <div class="card-title">Harness is the New Dataset：模型智能提升的下一个关键方向</div>
-        <div class="card-excerpt">模型能力过线之后，开始比拼 harness</div>
-      </div>
-      <div class="card-date">2026-03-28</div>
+    <a class="card" href="/cards/YC的一切.html">
+      <div class="card-title">YC 的一切 二十七个切面</div>
+      <div class="card-meta">2026-04-11</div>
     </a>
-    <a class="card" href="/articles/my-story.html">
-      <div class="card-inner">
-        <div class="card-title">My Story — Mengqi</div>
-        <div class="card-excerpt">A girl from the outskirts of Tianjin, on family, solitude, loss, and the long road to becoming whole.</div>
-      </div>
-      <div class="card-date">2026-03-27</div>
+    <a class="card" href="/cards/HF0.html">
+      <div class="card-title">HF0 二十七个切面</div>
+      <div class="card-meta">2026-04-11</div>
     </a>
-    <a class="card" href="/articles/open-sourcing.html">
-      <div class="card-inner">
-        <div class="card-title">Open-Sourcing My Mistakes — Mengqi</div>
-        <div class="card-excerpt">Six months of AI entrepreneurship: the traps, the pessimism, and the stubborn hope.</div>
-      </div>
-      <div class="card-date">2026-03-27</div>
+    <a class="card" href="/cards/harness-xray.html">
+      <div class="card-title">Harness Engineering</div>
+      <div class="card-meta">2026-04-11</div>
     </a>
-    <a class="card" href="/articles/what-we-built.html">
-      <div class="card-inner">
-        <div class="card-title">What We Built — ATS, Karis, Invoko & Clico</div>
-        <div class="card-excerpt">Four products for the agent era: infrastructure, visibility, voice-first interaction, and AI-powered writing.</div>
-      </div>
-      <div class="card-date">2026-03-27</div>
+    <a class="card" href="/cards/Final_Round_AI.html">
+      <div class="card-title">Final Round AI 二十八个切面</div>
+      <div class="card-meta">2026-04-11</div>
+    </a>
+    <a class="card" href="/cards/FateTell八字AI出海.html">
+      <div class="card-title">FateTell：八字AI出海</div>
+      <div class="card-meta">2026-04-11</div>
+    </a>
+    <a class="card" href="/cards/ACE_Studio.html">
+      <div class="card-title">ACE Studio 二十六个切面</div>
+      <div class="card-meta">2026-04-11</div>
+    </a>
+    <a class="card" href="/cards/奇门遁甲与现代认知.html">
+      <div class="card-title">玄之又玄：奇门遁甲与现代认知</div>
+      <div class="card-meta">2026-04-11</div>
     </a>
   </div>
 </body>

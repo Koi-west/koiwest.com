@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="viewport" content="width=1080, user-scalable=yes">
+<title>Final Round AI 二十八个切面 · koi</title>
+<meta charset="UTF-8">
+<style>
+  @font-face {
+    font-family: 'KingHwa_OldSong';
+    src: url('/assets/KingHwa_OldSong.subset.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+  }
+
+  :root {
+    --text: #1D1D1F;
+    --text-mid: #6E6E73;
+    --text-dim: #ACACB0;
+    --accent: #B8541F;
+    --rule: #E5E5EA;
+    --tint: #FBF7F2;
+    --font: 'KingHwa_OldSong', 'PingFang SC', system-ui, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 1080px;
+    background: #FFFFFF;
+  }
+
+  .card {
+    width: 1080px;
+    background: #FFFFFF;
+    padding: 72px 80px 56px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── Title ── */
+  .title-area {
+    flex-shrink: 0;
+    margin-bottom: 58px;
+  }
+
+  .title-area .eyebrow {
+    font: 400 22px/1.5 'Menlo', 'SF Mono', monospace;
+    color: var(--accent);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .title-area h1 {
+    font: 700 92px/1.08 var(--font);
+    color: var(--text);
+    letter-spacing: -0.035em;
+    margin-bottom: 26px;
+  }
+
+  .title-area .tagline {
+    font: 400 28px/1.5 var(--font);
+    color: var(--text-mid);
+    max-width: 820px;
+  }
+
+  .title-area::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--accent);
+    margin-top: 36px;
+  }
+
+  /* ── Intro ── */
+  .intro {
+    font: 400 32px/1.7 var(--font);
+    color: var(--text);
+    margin-bottom: 52px;
+    padding-bottom: 52px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .intro em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  /* ── Item ── */
+  .item {
+    display: grid;
+    grid-template-columns: 88px 1fr;
+    gap: 0 28px;
+    margin-bottom: 58px;
+    padding-bottom: 58px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .item:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .item .num {
+    font: 500 36px/1 'Menlo', 'SF Mono', monospace;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+    padding-top: 10px;
+  }
+
+  .item .label {
+    font: 700 42px/1.35 var(--font);
+    color: var(--text);
+    margin-bottom: 18px;
+    letter-spacing: -0.015em;
+  }
+
+  .item p {
+    font: 400 30px/1.7 var(--font);
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+
+  .item p:last-child {
+    margin-bottom: 0;
+  }
+
+  .item blockquote {
+    margin: 20px 0;
+    padding: 6px 0 6px 26px;
+    border-left: 3px solid var(--accent);
+  }
+
+  .item blockquote p {
+    font: 400 30px/1.65 var(--font);
+    font-style: italic;
+    color: var(--text-mid);
+    margin-bottom: 0;
+  }
+
+  .item strong {
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  /* ── Glossary ── */
+  .gloss {
+    margin-top: 24px;
+    padding: 22px 26px;
+    background: var(--tint);
+    border-left: 3px solid var(--text-dim);
+  }
+
+  .gloss .g-head {
+    font: 500 20px/1.4 'Menlo', 'SF Mono', monospace;
+    color: var(--text-mid);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .gloss dl { display: block; }
+
+  .gloss dt {
+    font: 600 24px/1.5 var(--font);
+    color: var(--text);
+    display: inline;
+  }
+
+  .gloss dt::before {
+    content: '·  ';
+    color: var(--text-dim);
+  }
+
+  .gloss dd {
+    font: 400 24px/1.55 var(--font);
+    color: var(--text-mid);
+    display: inline;
+    margin-left: 8px;
+  }
+
+  .gloss .g-row { margin-bottom: 10px; }
+  .gloss .g-row:last-child { margin-bottom: 0; }
+
+  /* ── Footer ── */
+  .footer {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 72px;
+    padding-top: 26px;
+    border-top: 2px solid var(--text);
+  }
+
+  .footer .author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .footer .avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .footer .author-name {
+    font: 400 22px/1.5 var(--font);
+    color: var(--text-mid);
+    letter-spacing: 0.03em;
+  }
+
+  .footer .endmark {
+    font: 500 20px/1 'Menlo', 'SF Mono', monospace;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="title-area">
+      <div class="eyebrow">SF / SHANGHAI / BANGALORE · FIELD DISPATCH</div>
+      <h1>Final Round AI<br>二十八个切面</h1>
+      <div class="tagline">一位非 ABC 华人 founder 如何"一步到位"地在硅谷创业。从贾维斯启发到千万 ARR，从 HF0 闭关到拉斯维加斯 KOL 拍摄屋——把访谈里所有关于 Final Round AI 的段落拆成独立切面。</div>
+    </div>
+
+    <div class="intro">
+      <p>这是一份贴近现场的切片集。讲述人是 <em>Michael Guan</em>，Final Round AI 创始人兼 CEO，27 岁，UIUC 本科、耶鲁 MBA 肄业、连续创业者。每一个切面都保留原话引用，并为首次出现的英文术语做一份小字典——创业语境里许多术语是"半翻译状态"，沿用英文反而更精确。</p>
+    </div>
+
+    <div class="item">
+      <div class="num">01</div>
+      <div>
+        <div class="label">"一步到位"在硅谷创业</div>
+        <p>在中国 AI 应用公司面临的三条出海路径里——产品出海、肉身出海、一步到位——Final Round AI 属于第三条。<strong>作为一家美国公司，从 day one 就服务全球</strong>。Michael 本人 27 岁，本科 UIUC，耶鲁 MBA 肄业，2021 年第一次创业被收购，2023 年 10 月再次起航。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>ABC</dt><dd>American-born Chinese，在美国出生的华裔。Michael 不是 ABC，但长期在美国学习工作。</dd></div>
+          <div class="g-row"><dt>Day one</dt><dd>硅谷创始人黑话："从第一天起"——强调某件事是公司基因，不是后加的。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">02</div>
+      <div>
+        <div class="label">产品全貌：end-to-end 职业 AI 平台</div>
+        <p>Final Round AI 做的是一个<strong>端到端的职业 AI 平台</strong>：AI 改简历、AI 自动投递工作申请、AI 模拟面试 avatar、面试中的实时 <em>Interview Copilot</em>、AI Job Hunter……覆盖面试前、面试中、面试后全流程。目标客群是北美和欧洲的 mid-level / senior level 的 knowledge workers。</p>
+        <blockquote><p>我们打造了一个 end to end 的这个职业的 AI 平台，通过为求职者提供 AI superpower 去帮助他们更快更好地找到自己理想的工作。</p></blockquote>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>End-to-end</dt><dd>端到端——一套产品覆盖一条业务流程的所有环节，不是只解决其中一段。</dd></div>
+          <div class="g-row"><dt>Interview Copilot</dt><dd>面试副驾——Final Round AI 的旗舰产品，面试过程里实时给候选人提示。</dd></div>
+          <div class="g-row"><dt>Knowledge worker</dt><dd>知识工作者——大部分时间在电脑前完成脑力产出的职业人群。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">03</div>
+      <div>
+        <div class="label">规模的四组数字</div>
+        <p>截至访谈时：<strong>总用户约 700 万，遍及 150+ 个国家</strong>；上个季度 ARR 突破 <strong>1000 万美元</strong>；全球 20 位同事；办公室在旧金山、上海、班加罗尔三地。天使轮融资 <strong>688 万美元</strong>（接近 700 万）。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>ARR</dt><dd>Annual Recurring Revenue，年度经常性收入。SaaS 公司最常用的估值锚。</dd></div>
+          <div class="g-row"><dt>班加罗尔</dt><dd>Bangalore，印度南部城市，被称为"印度硅谷"。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">04</div>
+      <div>
+        <div class="label">起点是"贾维斯"</div>
+        <p>2023 年暑假在探索"beyond chat interface"的 AI native 交互方式时，Michael 想到了钢铁侠面具里的 AI 贾维斯——<strong>能看到主角所看、听到主角所听，主动给出支持</strong>。这是他从小对"真正的 AI"的想象。</p>
+        <blockquote><p>Jarvis 他呢就是在钢铁侠的面具上，可以去实时地看到钢铁侠所看到的东西，听到钢铁侠所听到的东西，然后去主动的给到他一些支持。</p></blockquote>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Chat interface</dt><dd>聊天交互——用户输入一段话/图片，AI 给出一段话/图片/音频。Michael 认为这种交互方式"非常落后"。</dd></div>
+          <div class="g-row"><dt>AI native</dt><dd>AI 原生——围绕 AI 能力重新设计的产品/交互，而不是旧形态加个 AI 外挂。</dd></div>
+          <div class="g-row"><dt>Real-time conversational intelligence</dt><dd>实时对话智能——Final Round AI 的技术描述：主动聆听、主动理解、主动提示。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">05</div>
+      <div>
+        <div class="label">第一个付费用户：十分钟后有个面试</div>
+        <p>2023 年 10 月发布的第一版产品甚至没有名字，只是"meeting copilot"贴在论坛里。<strong>一个用户发邮件说"我十分钟以后有个面试，能不能付费使用"</strong>——Michael 随手编了一个数字：99 美金/月。那时候所有 AI 产品都定价十块二十块。这一封邮件打开了整个面试场景。</p>
+        <blockquote><p>我收到这个邮件以后，其实感觉蛮惊喜的，我觉得我们马上解锁一个非常大的一个 use case。</p></blockquote>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Use case</dt><dd>使用场景——一个产品在某类具体需求下被用起来的方式。"解锁 use case" = 找到了新的刚需点。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">06</div>
+      <div>
+        <div class="label">不加 bot 的 notetaker</div>
+        <p>和当时所有 AI notetaker 不同，Final Round AI <strong>不把一个机器人加到会议室里</strong>——面试场景下，你不可能让面试官在会议另一端看到你接了一个助手。"在我们做了这件事情以后，非常多新一代的 notetaker，比如说 Granola，也再也不加一个 bot 到会议室里面。"</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Notetaker</dt><dd>会议记录 AI。主流实现：派一个可见的 bot 加入会议去听。</dd></div>
+          <div class="g-row"><dt>Granola</dt><dd>爆款 AI 会议记录产品，也采用"不加 bot"的做法。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">07</div>
+      <div>
+        <div class="label">面试辅助是不是作弊？</div>
+        <p>产品上线就带着争议。Michael 的态度是：<strong>所有创新都会挑战传统认知</strong>，但"我们不做，别人也会做"。他专门提到 a16z 1500 万美元投资的 Cluely——刚被学校开除的学生 Roy Lee 做的、直接打"cheat on everything"的营销——并把它作为同赛道里"打法最激进、最创新"的团队。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Cluely</dt><dd>硅谷最近的争议产品，打"cheat on everything"的 slogan，被 a16z A 轮投资 1500 万美元。</dd></div>
+          <div class="g-row"><dt>Hands-free</dt><dd>免手动——Final Round AI 是实时主动提示，不需要用户截图或激活。Cluely 则需要手动激活。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">08</div>
+      <div>
+        <div class="label">对 retention 的反常态度</div>
+        <p>求职是短期高峰使用场景——这个月面试，下 7 个月不面试，复购必然低。Michael 的态度很奇特：<strong>"我们并不会去担心用户的 retention，更多是怎么样去持续获客。"</strong> 他的理由是，全球每年超过 10 亿人找工作——这是一个 huge market，非常流动的 market。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Retention</dt><dd>留存率——衡量老用户是否持续回来。SaaS 常被视为头号指标。</dd></div>
+          <div class="g-row"><dt>Huge market</dt><dd>巨型市场——Michael 认为求职人群的绝对数量足够大，可以抵消低复购。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">09</div>
+      <div>
+        <div class="label">ARR 算法的保守派</div>
+        <p>Michael 披露业内 ARR 计算的各种套路：<strong>最高单日 × 365、最高一小时 × 24 × 365</strong>——都是为了在发布时喊出"第一周几千万美元"。Final Round AI 用的是最保守的一种：<strong>上个季度收入 × 4</strong>。数字背后反映的是一家公司的 momentum 和业务量。</p>
+        <blockquote><p>我们非常 stay true to ourself。</p></blockquote>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Momentum</dt><dd>势能，业务加速度。硅谷投资人常用这个词代替"增长率"，更感性。</dd></div>
+          <div class="g-row"><dt>Stay true to ourself</dt><dd>对自己诚实，不玩数字游戏。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">10</div>
+      <div>
+        <div class="label">最触动的用户故事：第 8 个月的 offer</div>
+        <p>一位 senior 用户已经失业面试了 8 个月，有家庭有小朋友，在一家大支付公司的第十轮被刷掉。他用上 Final Round AI 的 AI Job Hunter 之后，<strong>7 天内拿到面试机会，第 17 天拿到 offer</strong>。"他用了我们全系列的产品帮助他在失业的第八个月拿到自己的一份理想的工作的 offer。"</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>AI Job Hunter</dt><dd>Final Round AI 的自动投递产品，可一夜投递几千份工作申请。</dd></div>
+          <div class="g-row"><dt>Director of Product Marketing</dt><dd>产品市场总监，美国中产 professional 的典型岗位之一。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">11</div>
+      <div>
+        <div class="label">HF0：硅谷的连续创业者闭关营</div>
+        <p>2024 年 4 月加入 <strong>HF0 孵化器</strong>。HF0 在旧金山 Alamo Square 有一栋巨大但走路嘎吱响的老房子，提供一日三餐、私人健身教练、拳击教练，<strong>极度关注创始人的身心健康</strong>。只招连续创业者，每届筛选 10 个团队。Michael 就是在这里开始学拳击的。</p>
+        <blockquote><p>非常关注在创始人的身心健康、身体状态。他还提供了私人的健身教练，还有拳击教练。</p></blockquote>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>HF0</dt><dd>Hackathon Fellowship Zero，湾区知名加速器，只接受连续创业者的十团小批次。</dd></div>
+          <div class="g-row"><dt>Alamo Square</dt><dd>旧金山西侧的老城区，以"彩虹屋"维多利亚建筑闻名，如今也是创业者聚集区之一。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">12</div>
+      <div>
+        <div class="label">HF0 十二周：收入从 1M 翻到 3M</div>
+        <p>Michael 和 co-founder 整个团队 5 个人，主要是他和 CTO 住进 HF0 大 house。短短 <strong>12 周，ARR 从 100 万翻到 300 万美元</strong>（月收入小 10 万到 30 万）。在这里他学到了硅谷最核心的一套：<strong>做大量实验 + growth hacking，比如 Airbnb 最早卖麦片赚到 100k</strong>。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Growth hacking</dt><dd>增长黑客——用非常规、高杠杆的手段拉动数据增长，Airbnb 创始人早期卖奥巴马、麦肯主题麦片是经典案例。</dd></div>
+          <div class="g-row"><dt>Co-founder</dt><dd>联合创始人。Final Round AI 的联创 Jay 也是专业 CTO + 业余 DJ。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">13</div>
+      <div>
+        <div class="label">反直觉动作一：把价格从 99 提到 150</div>
+        <p>HF0 期间一位 advisor 给了最震撼的一句建议——<strong>"最简单增长收入的方式就是把价格变高"</strong>。当时 99 美元已经是业内罕见的高价，Michael 还是硬提到 150 美元/月。结果"大家还是挺喜欢这个产品的，还是愿意付费"——仅此一个动作就是 50% 的涨幅。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Advisor</dt><dd>导师/顾问——HF0 为创始人引入的 external input，常常是一次点破。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">14</div>
+      <div>
+        <div class="label">反直觉动作二：关掉试用</div>
+        <p>常识说试用能让用户更开心，Final Round AI 在某个阶段<strong>直接把试用关掉——必须付费才能使用</strong>。这改变了产品定位、收入预期和增长预期。Michael 把这归为 HF0 教会他的方法论：快速试错，做一些"逻辑上想起来没道理"的事，然后看它实际上有没有效。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Counter-intuitive</dt><dd>反直觉——硅谷推崇的"好判断"常常长这样：第一眼看不通，数据却支持。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">15</div>
+      <div>
+        <div class="label">品牌重做：Tesla / OpenAI 的设计团队</div>
+        <p>第一版品牌是 Michael "手搓"出来的。HF0 期间他们<strong>请了为 Tesla 和 OpenAI 做过品牌的设计团队重新设计了 logo 和设计语言</strong>，整个品牌变得"正面积极有能量"——这也是后来 Michael 提到某家中国 VC 前 investor 的公司"直接抄袭我们 logo，只是把红色改成紫色或蓝色"时的对照点。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Brand awareness</dt><dd>品牌认知度——top funnel 营销的一部分，让潜在用户第一次知道你存在。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">16</div>
+      <div>
+        <div class="label">688 万美元天使轮 · 13 家机构</div>
+        <p>HF0 结束后拿下 688 万美元天使轮，<strong>不寻常的是有 13 家机构参投</strong>——其中新老搭配：老牌的 Sequoia / a16z / Khosla / Google Ventures 没明说投没投，但 Final Round AI 确认的名单里包括 <strong>First Round Capital</strong>（"和我们名字很配"）和专投 consumer 的 <strong>Goodwater Capital</strong>，以及 XYZ Venture Capital 等 emerging fund。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Emerging fund</dt><dd>新兴基金——通常由传统大基金出来的投资人创立，更激进、更愿意押年轻创业者。</dd></div>
+          <div class="g-row"><dt>Follow-up</dt><dd>跟投方——除了领投方之外的参与方。硅谷现在同一轮有十几家机构很常见。</dd></div>
+          <div class="g-row"><dt>Conviction</dt><dd>信念/确信度——投资人决定出手的关键指标，常来自 traction + 创始人信任 + 行业信号。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">17</div>
+      <div>
+        <div class="label">自己也投了 28 家公司</div>
+        <p>Michael 本人作为天使，<strong>投过 28 家创业公司，check size 从 3000 到 10000 美元</strong>——都是从个人积蓄工资里一点点掏出来。他认为这是硅谷创业者密度到一定程度后自然发生的事。</p>
+        <blockquote><p>一起遛狗的社交，一起去音乐节的社交，一起讨论创业 exciting ideas 的社交。</p></blockquote>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Check size</dt><dd>"票面金额"——天使单笔投资的大小。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">18</div>
+      <div>
+        <div class="label">Hacker House 里的每月千人音乐 Party</div>
+        <p>他们在硅谷有一个 hacker house，<strong>其中一层被改造成 dancefloor</strong>，联创 Jay 是非常优秀的业余 DJ。<strong>每月一次，每场 800-900 人</strong>——创业者、投资人、AI practitioner、researcher、设计师。主题只有音乐，不搞技术讨论，"创业这么辛苦，难得办一次活动就不要讨论这些东西了"。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Hacker house</dt><dd>"黑客屋"——创业者共住共工作的大房子，湾区标配。</dd></div>
+          <div class="g-row"><dt>Practitioner</dt><dd>从业者——AI practitioner = 在一线写 AI 代码的工程师/研究员。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">19</div>
+      <div>
+        <div class="label">硅谷版 996</div>
+        <p>Michael 证实 <strong>996 正在硅谷风靡</strong>，来源是 AI 时代 + Elon Musk + Bezos + Zuckerberg 的返岗大刀阔斧。Final Round AI 找办公室的硬标准：<strong>必须是 24 小时 office，并且能睡觉洗澡</strong>。累了直接睡，醒了就写代码。但 Michael 强调："我不希望为加班而加班，而是真正有激情地追逐理想。"</p>
+        <blockquote><p>High risk, high reward。当传统场景下 996 被诟病，是因为并没有获得超额回报。</p></blockquote>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>996</dt><dd>早 9 晚 9 一周 6 天。中国语境里是被反思的词。Michael 说它现在在硅谷 AI 公司里是 new normal。</dd></div>
+          <div class="g-row"><dt>Unlimited PTO</dt><dd>无限带薪休假——Final Round AI 的正式制度。Michael 会主动问 co-founder 和团队"你要不要去休个假"。</dd></div>
+          <div class="g-row"><dt>Burn out</dt><dd>职业耗竭——Michael 认为 Windsurf 被 Google "不地道收购"一个内因是创始人已经 burn out。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">20</div>
+      <div>
+        <div class="label">每周 100+ A/B 实验 · 内部自研平台</div>
+        <p>Final Round AI 的增长核心不是钱而是实验密度：<strong>每周 100 多个实验在跑</strong>，从按钮颜色到落地页布局。<strong>他们自研了一个 AI 原生的 A/B 测试平台</strong>，让 marketing、运营、开发同事都能上线自己想测的东西——"我们希望所有同事都有自己的产品的 face"。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>A/B test</dt><dd>同时上线两个版本分流量对比，用转化率判优劣。</dd></div>
+          <div class="g-row"><dt>Compound</dt><dd>复利——5% 的小增长不断叠加，能带来长期动能。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">21</div>
+      <div>
+        <div class="label">Agent-driven Growth：SEO 每周生成 4-5k 个页面</div>
+        <p>Final Round AI 用 AI 批量生成 SEO 长尾页面：<strong>每周 4000-5000 个页面</strong>，用经用户许可的面试问答填充。招聘方某家公司怎么面试的长尾搜索词都能命中这些页面。团队很小，手动根本做不出这件事。</p>
+        <blockquote><p>我们一个星期大概有四千到五千个页面生成。完全靠人工是做不出这种事情的。</p></blockquote>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>SEO</dt><dd>Search Engine Optimization，搜索引擎优化，让页面在 Google 等搜索结果更靠前。</dd></div>
+          <div class="g-row"><dt>Long-tail</dt><dd>长尾——搜索量小但数量庞大的关键词，总量可以超过头部。</dd></div>
+          <div class="g-row"><dt>In-house creator</dt><dd>内部创作者——Final Round AI 养自己的内容生产者做 SEO/PR。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">22</div>
+      <div>
+        <div class="label">Hedge Fund 式事件引擎</div>
+        <p>最独门的武器：一套 <strong>事件信号捕捉系统</strong>。对标对冲基金——当 Microsoft 裁员两万人时，系统<strong>十分钟内生成落地页、podcast、社交媒体 post 并自动投放</strong>到被裁员的人群。他们的页面排名常常<strong>高于 CNBC 等新闻源</strong>——因为 CNBC 只是新闻，而 Final Round AI 能真正帮到这些人。目前有十几家朋友公司在用这套系统。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Hedge fund</dt><dd>对冲基金——以事件驱动套利著称。这里用作比喻：抢先捕捉、抢先反应。</dd></div>
+          <div class="g-row"><dt>Actionable items</dt><dd>可行动项——从"一个信号"到"实际可以跑的动作"的转化。</dd></div>
+          <div class="g-row"><dt>AI SEO</dt><dd>除了在 Google 上排名，现在还要在 ChatGPT / Gemini 等 LLM 回答里出现。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">23</div>
+      <div>
+        <div class="label">拉斯维加斯 KOL 拍摄屋</div>
+        <p>Final Round AI 全球有 <strong>100+ KOL 长期合作</strong>。不是一次性付费拍视频，而是在 <strong>拉斯维加斯租了一栋大房子，摆满 Final Round AI swag</strong>，包机票包住宿邀请 KOL 来沉浸式拍摄。<strong>每周平均 5 个 influencer 飞过去</strong>。每个人有 house manager 指导拍摄。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>KOL / Influencer</dt><dd>关键意见领袖 / 网红。中文叫 KOL，美国叫 influencer。</dd></div>
+          <div class="g-row"><dt>Swag</dt><dd>品牌周边（T 恤、贴纸、水杯……）。</dd></div>
+          <div class="g-row"><dt>House manager</dt><dd>房屋管家——Final Round AI 在 KOL 屋配了一位本地同事同时管房和管拍摄。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">24</div>
+      <div>
+        <div class="label">"借"特朗普做线下广告</div>
+        <p>在湾区、纽约、芝加哥的关键车站，Final Round AI 投放线下广告，<strong>最著名的一个标语是"Interview confidently like our president"</strong>，配特朗普照片。还有更直白的"Stop working for jokers, get a new job"。目的是 top funnel awareness——上下班路上的打工人被直接怂恿换工作。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Top funnel</dt><dd>漏斗最上端——用户旅程的第一眼，还没产生转化意图的阶段。</dd></div>
+          <div class="g-row"><dt>Impression campaign</dt><dd>曝光活动——不追求点击，只追求"被看到"的广告。</dd></div>
+          <div class="g-row"><dt>Holistic</dt><dd>全方位——不是单点攻击，而是各渠道同时合力。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">25</div>
+      <div>
+        <div class="label">每周 500 组广告素材 · 全 AI 生成</div>
+        <p>硅谷人才昂贵，Final Round AI 没有国内几十人的投放团队——用 AI 替代。<strong>每周测试 500 份广告素材</strong>，全部 AI 生成 + 人工微调。内部平台自动跑"素材 × 国家 × 时段"的三维 A/B，<strong>自动优化预算分配</strong>。常规公司一期广告可能就几个素材，Final Round AI 把大数定律推到极限。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Performance marketing</dt><dd>效果广告/买量——按点击或转化结果付费的广告。</dd></div>
+          <div class="g-row"><dt>Data flywheel</dt><dd>数据飞轮——用户数据回流改进模型/投放，形成正反馈。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">26</div>
+      <div>
+        <div class="label">招人标准：你能不能做一个 AI 替代掉你自己</div>
+        <p>Final Round AI 的招人问题是："你能不能做一款 AI 去替代掉你目前进来的所有早期同事？"<strong>能回答"是"的才被录用</strong>。Michael 本人也在找方法赋能自己——"复制十个我、二十个我"。每个内部项目都由一个专家 lead，marketing 团队里直接配 engineering 同事。</p>
+        <blockquote><p>这应该是完全的 agent driven 的。</p></blockquote>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Agent-driven</dt><dd>Agent 驱动——Michael 认为比"AI 自动化"更进一步，是由 AI 自己决策、自己行动。</dd></div>
+          <div class="g-row"><dt>Merit-based</dt><dd>唯结果论/唯实力论——不看资历只看产出。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">27</div>
+      <div>
+        <div class="label">B2B 新产品：面试 → AI 试用期</div>
+        <p>B2B 新产品 <strong>九月正式 launch</strong>——Michael 称之为"可以让我们从 1000 万增长到 10 亿美元的机会"。核心想法：<strong>传统面试正在被淘汰，应该被 AI 产品化的"试用期"替代</strong>。一个 programmable workspace：候选人登入后和 AI 模拟的公司交互，完成第一天或第一周的工作，AI 生成评估信号。"有点像《令人心动的 offer》"。</p>
+        <blockquote><p>现在在我们公司没有面试了。我们邀请候选人来办公室一起工作一天或五天，然后快速了解这个人。</p></blockquote>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Programmable workspace</dt><dd>可编程工作空间——模拟真实公司运作的虚拟环境，候选人在里面"上班"。</dd></div>
+          <div class="g-row"><dt>Design partner</dt><dd>共同设计伙伴——B2B 产品早期合作企业客户，既是用户又是共创方。</dd></div>
+          <div class="g-row"><dt>Moonshot project</dt><dd>登月项目——Google X 式的宏大长期押注。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">28</div>
+      <div>
+        <div class="label">最新思考：招聘从考核结果转向考核过程</div>
+        <p>因为 AI 能帮任何人做出结果，<strong>未来的招聘要考核的是"实现路径"而不是"最终产出"</strong>——你怎么使用工具、你在过程中做了什么。Michael 说这是他最近收到的最重要的启发："人人都来自同样的学校、同样的背景，人人都能做出来这个东西，大家都不傻——评估标准必须从 standardized test 变成过程评估。"Cluely、Anthropic、OpenAI 内部都在探索类似方向，他认为当前不是零和竞争时代，反而欢迎其他人一起 build。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Zero-sum</dt><dd>零和博弈——一方赢等于另一方输。Michael 认为现在 AI 赛道更像 Lovable / Bolt.new / v0 的状态：大家都在涨。</dd></div>
+          <div class="g-row"><dt>As-a-service</dt><dd>作为服务——Anthropic、OpenAI 内部探索的形态，把人才筛选当成服务卖给大企业。</dd></div>
+          <div class="g-row"><dt>PRD</dt><dd>Product Requirement Document，产品需求文档——Michael 用它举例说明结果 vs 路径的差别。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="author">
+        <img class="avatar" src="/assets/kanye.png" alt="">
+        <span class="author-name">硅基立场 · Final Round AI · 晚点聊拆解</span>
+      </div>
+      <div class="endmark">FIN ∎</div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="viewport" content="width=1080, user-scalable=yes">
+<title>Harness Engineering · koi</title>
+<meta charset="UTF-8">
+<style>
+  @font-face {
+    font-family: 'KingHwa_OldSong';
+    src: url('/assets/KingHwa_OldSong.subset.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+  }
+
+  :root {
+    --text: #1D1D1F;
+    --text-mid: #6E6E73;
+    --text-dim: #ACACB0;
+    --accent: #1D1D1F;
+    --rule: #E5E5EA;
+    --bg-warm: #F7F5F2;
+    --font: 'KingHwa_OldSong', 'PingFang SC', system-ui, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 1080px;
+    background: #FFFFFF;
+  }
+
+  .card {
+    width: 1080px;
+    background: #FFFFFF;
+    padding: 64px 72px 52px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── Title ── */
+  .title-area {
+    flex-shrink: 0;
+    margin-bottom: 52px;
+  }
+
+  .title-area h1 {
+    font: 700 78px/1.15 var(--font);
+    color: var(--text);
+    letter-spacing: -0.03em;
+    margin-bottom: 12px;
+  }
+
+  .title-area .tag {
+    font: 400 22px/1.5 var(--font);
+    color: var(--text-dim);
+    letter-spacing: 0.12em;
+    margin-bottom: 22px;
+  }
+
+  .title-area::after {
+    content: '';
+    display: block;
+    width: 52px;
+    height: 3px;
+    background: var(--accent);
+  }
+
+  /* ── Content ── */
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .content p {
+    font: 400 36px/1.7 var(--font);
+    color: var(--text);
+    margin-bottom: 28px;
+  }
+
+  .content .highlight {
+    font: 500 40px/1.55 var(--font);
+    color: var(--text);
+    padding: 14px 0 14px 26px;
+    border-left: 3px solid var(--accent);
+    margin: 36px 0;
+  }
+
+  .content h2 {
+    font: 600 42px/1.4 var(--font);
+    color: var(--text);
+    margin: 44px 0 22px;
+    letter-spacing: -0.02em;
+  }
+
+  .content h2:first-child {
+    margin-top: 0;
+  }
+
+  .content .subtitle {
+    font: 400 22px/2 var(--font);
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .content .item {
+    margin-bottom: 36px;
+  }
+
+  .content .item:last-child {
+    margin-bottom: 0;
+  }
+
+  .content .item .label {
+    font: 500 36px/1.5 var(--font);
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .content .item p {
+    font: 400 32px/1.65 var(--font);
+    color: var(--text-mid);
+    margin-bottom: 0;
+  }
+
+  .content blockquote {
+    margin: 0 0 28px;
+    padding-left: 26px;
+    border-left: 3px solid var(--rule);
+  }
+
+  .content blockquote p {
+    font: 300 36px/1.7 var(--font);
+    color: var(--text-mid);
+    margin-bottom: 6px;
+  }
+
+  .content strong {
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .content .divider {
+    height: 1px;
+    background: var(--rule);
+    margin: 36px 0;
+  }
+
+  .content ul {
+    list-style: none;
+    margin-bottom: 28px;
+  }
+
+  .content ul li {
+    font: 400 36px/1.7 var(--font);
+    color: var(--text);
+    padding: 4px 0 4px 28px;
+    position: relative;
+  }
+
+  .content ul li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--text-mid);
+  }
+
+  /* ── Drop Cap ── */
+  .content .dropcap::first-letter {
+    font: 700 128px/0.82 'KingHwa_OldSong', Georgia, serif;
+    float: left;
+    margin: 4px 16px 0 -4px;
+    color: var(--accent);
+  }
+
+  /* ── Topology Box ── */
+  .topo-box {
+    background: var(--bg-warm);
+    border-radius: 12px;
+    padding: 36px 40px;
+    margin: 28px 0 36px;
+    overflow-x: auto;
+  }
+
+  .topo-box pre {
+    font: 400 26px/1.55 'Menlo', 'SF Mono', monospace;
+    color: #3a3a3a;
+    white-space: pre;
+    margin: 0;
+  }
+
+  /* ── Collision Card ── */
+  .collision {
+    background: var(--bg-warm);
+    border-radius: 12px;
+    padding: 40px 44px;
+    margin: 28px 0 20px;
+  }
+
+  .collision .collision-title {
+    font: 600 34px/1.4 var(--font);
+    color: var(--text);
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .collision pre {
+    font: 400 24px/1.55 'Menlo', 'SF Mono', monospace;
+    color: #3a3a3a;
+    white-space: pre;
+    margin: 0 0 24px;
+  }
+
+  .collision .takeaway {
+    font: 500 32px/1.6 var(--font);
+    color: var(--text);
+    padding-left: 20px;
+    border-left: 3px solid var(--accent);
+    margin-top: 16px;
+  }
+
+  /* ── Migration ── */
+  .migration {
+    background: #F2F2F7;
+    border-radius: 12px;
+    padding: 36px 40px;
+    margin: 28px 0;
+  }
+
+  .migration .mig-label {
+    font: 500 28px/1.5 var(--font);
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+    margin-bottom: 12px;
+  }
+
+  .migration p {
+    font: 400 32px/1.65 var(--font);
+    color: var(--text);
+    margin-bottom: 0;
+  }
+
+  /* ── End Mark ── */
+  .content::after {
+    content: '∎';
+    display: block;
+    text-align: right;
+    font-size: 16px;
+    color: var(--text-dim);
+    margin-top: 40px;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 52px;
+    padding-top: 22px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .footer .author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .footer .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .footer .author-name {
+    font: 400 24px/1.5 var(--font);
+    color: var(--text-mid);
+    letter-spacing: 0.03em;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="title-area">
+      <p class="tag">X-RAY · 四篇合集</p>
+      <h1>Harness Engineering</h1>
+    </div>
+    <div class="content">
+
+      <h2>文章说了什么</h2>
+
+      <p class="subtitle">真问题</p>
+      <p class="dropcap">当执行智能下沉到模型，工程师造的那层"壳"——会不会被它包裹的东西吃掉？四篇文章的表面议题各异（源码分析 / 控制论类比 / 工程体系 / 护城河辩论），但共享同一个焦虑：如果模型每个季度都在变强，那围绕模型搭建的工程系统，是在积累价值还是在积累负债？</p>
+
+      <p class="subtitle">真回答</p>
+      <p class="highlight">Harness 的价值不会归零——它会迁移。补位层衰减，反馈层增值。工程师的工作从造肌肉变成造传感器。</p>
+
+      <p class="subtitle">论证骨架</p>
+      <ul>
+        <li><strong>控制论模式已出现三次</strong>（瓦特调速器 → K8s 控制器 → Harness），每次都是：人停止亲手操作，转向设计自动运转的机制</li>
+        <li><strong>倒U型衰减曲线</strong>：同一模型有无 Harness 差距 36pp（42%→78%），但顶级 Harness 之间仅差 2.5pp——不同层衰减速度不同</li>
+        <li><strong>Claude Code 的存在证明</strong>：51万行 TypeScript，TAOR 循环仅 50 行，智能全下沉模型，运行时刻意做"笨"——框架越薄越稳定</li>
+      </ul>
+
+      <p class="subtitle">隐含假设</p>
+      <p>模型能力将持续以足够快的速度提升，使得 harness 组件定期变为冗余。若模型进步停滞，harness 从临时脚手架变为永久基础设施，整个分析框架翻转。</p>
+
+      <p class="subtitle">边界</p>
+      <p>四篇全部以 coding agent 为分析对象。知识工作、客服、医疗等领域的 harness 价值曲线可能完全不同——那些领域的"反馈信号"更主观、更难结构化。</p>
+
+      <div class="topo-box">
+<pre>                  真问题
+                    |
+       "我造的壳会被模型吃掉吗？"
+                    |
+       +------------+------------+
+       |                         |
+  会（补位层）              不会（反馈层）
+       |                         |
+  Claude Code 已在          自进化三难困境:
+  拆旧组件加新组件          外部信号是结构性需求
+       |                         |
+       +--------+   +-----------+
+                |   |
+          控制论: 同一模式
+          第三次出现
+          人: 操作者 --> 掌舵者
+                |
+          五个根本挑战
+          (状态/目标/验证/熵/边界)
+          模型结构性解决不了
+                |
+                v
+            真回答:
+       价值不归零，它迁移
+    "投资信号，而非逻辑"</pre>
+      </div>
+
+      <div class="divider"></div>
+
+      <h2>对我意味着什么</h2>
+
+      <div class="collision">
+        <p class="collision-title">碰撞一：你的 komorebi 就是一套 Harness——但它在贬值</p>
+<pre>文章框架                    你的系统
+--------                    --------
+Agentic Harness  &lt;=====&gt;  komorebi
+
++-- Durable State    &lt;--&gt;  memory.md + daily-memory
++-- Decomposition    &lt;--&gt;  skill 分层 (L1-L4)
++-- Feedback Loop    &lt;--&gt;  ai.md 十二原则
++-- Legibility       &lt;--&gt;  soul.md
++-- Entropy Control  &lt;--&gt;  "即写不攒"协议
++-- Tool Mediation   &lt;--&gt;  17个技能的编排
+
+但: 每个组件都编码了一个假设
+   "模型做不到 X，所以我来补"
+
+   你上次审计哪些假设已过期了吗？</pre>
+        <p class="takeaway">给每个技能步骤贴"假设标签"，每次模型大版本更新后做消融审计——关掉某个步骤，看输出是否变差。不降反升 = 该拆了。</p>
+      </div>
+
+      <div class="collision">
+        <p class="collision-title">碰撞二：投资信号而非逻辑——ai.md 是最持久的资产</p>
+<pre>技能系统中两类组件:
+
+衰减快 (逻辑层)          衰减慢 (信号层)
+==================       ==================
+"先fetch再markitdown"     ai.md 十二原则
+"分步提取论证骨架"        soul.md 认知锚点
+"ASCII art用基本字符"     "内容忠实性铁律"
+"先org报告再制卡"         "好卡片vs坏卡片"标准
+       |                         |
+       v                         v
+  模型变强后                模型越强
+  这些步骤可能              这些标准越值钱
+  被简化或跳过              (更好的模型能从
+                            更精确的标准中
+                            提取更多价值)</pre>
+        <p class="takeaway">减少技能中的固定步骤（逻辑），加深 ai.md / soul.md 中的品味标准（信号）。流程步骤越多，未来要拆的技术债越多。</p>
+      </div>
+
+      <div class="collision">
+        <p class="collision-title">碰撞三：on the loop → on the META loop</p>
+<pre>in the loop          on the loop         on the META loop
+(低层)               (你在这里)           (还没到这里)
+===========          ===========          ===============
+卡片不好看            卡片不好看            定期审计:
+    |                     |               "哪些规则本身
+    v                     v                已经过时了？"
+手动改这张卡          修改模板规则               |
+                     让下次自动更好              v
+                                          季度消融审计
+                                          1. 关掉一个步骤
+                                          2. 跑同样的输入
+                                          3. 比较输出质量
+                                          4. 不降 = 拆掉</pre>
+        <p class="takeaway">你已经在 on the loop，但技能系统从三月搭建至今没做过减法。模型换了代，步骤没换。</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <h2>迁移</h2>
+
+      <div class="migration">
+        <p class="mig-label">SPARK LAB 产品设计</p>
+        <p>"可撕裂性"原则——好的产品架构应该让每个功能模块都能被轻松移除。给每个 feature 贴"假设标签"（此功能存在是因为用户不具备Y能力），每个季度审计哪些假设已过期。不降反升的功能，砍掉比保留更有竞争力。</p>
+      </div>
+
+      <div class="migration">
+        <p class="mig-label">个人知识系统</p>
+        <p>"投资信号而非逻辑"翻译为——花时间打磨判断标准（什么是好文章、什么值得存、什么级别的洞见值得一张卡），而不是花时间优化处理流程的步骤数。判断标准越精确，AI 能从中提取的价值越大。</p>
+      </div>
+
+    </div>
+    <div class="footer">
+      <div class="author">
+        <img class="avatar" src="/assets/kanye.png" alt="">
+        <span class="author-name">四篇合集 · Founder Park / George Zhang / 深度解析 / 黄大年茶思屋</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

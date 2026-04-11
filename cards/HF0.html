@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="viewport" content="width=1080, user-scalable=yes">
+<title>HF0 二十七个切面 · koi</title>
+<meta charset="UTF-8">
+<style>
+  @font-face {
+    font-family: 'KingHwa_OldSong';
+    src: url('/assets/KingHwa_OldSong.subset.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+  }
+
+  :root {
+    --text: #1D1D1F;
+    --text-mid: #6E6E73;
+    --text-dim: #ACACB0;
+    --accent: #2D5F3F;
+    --rule: #E5E5EA;
+    --tint: #F5F2EB;
+    --font: 'KingHwa_OldSong', 'PingFang SC', system-ui, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 1080px;
+    background: #FFFFFF;
+  }
+
+  .card {
+    width: 1080px;
+    background: #FFFFFF;
+    padding: 72px 80px 56px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .title-area {
+    flex-shrink: 0;
+    margin-bottom: 58px;
+  }
+
+  .title-area .eyebrow {
+    font: 400 22px/1.5 'Menlo', 'SF Mono', monospace;
+    color: var(--accent);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .title-area h1 {
+    font: 700 92px/1.08 var(--font);
+    color: var(--text);
+    letter-spacing: -0.035em;
+    margin-bottom: 26px;
+  }
+
+  .title-area .tagline {
+    font: 400 28px/1.5 var(--font);
+    color: var(--text-mid);
+    max-width: 720px;
+  }
+
+  .title-area::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--accent);
+    margin-top: 36px;
+  }
+
+  .intro {
+    font: 400 32px/1.7 var(--font);
+    color: var(--text);
+    margin-bottom: 52px;
+    padding-bottom: 52px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .intro em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .item {
+    display: grid;
+    grid-template-columns: 88px 1fr;
+    gap: 0 28px;
+    margin-bottom: 58px;
+    padding-bottom: 58px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .item:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .item .num {
+    font: 500 36px/1 'Menlo', 'SF Mono', monospace;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+    padding-top: 10px;
+  }
+
+  .item .label {
+    font: 700 42px/1.35 var(--font);
+    color: var(--text);
+    margin-bottom: 18px;
+    letter-spacing: -0.015em;
+  }
+
+  .item p {
+    font: 400 30px/1.7 var(--font);
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+
+  .item p:last-child {
+    margin-bottom: 0;
+  }
+
+  .item blockquote {
+    margin: 20px 0;
+    padding: 6px 0 6px 26px;
+    border-left: 3px solid var(--accent);
+  }
+
+  .item blockquote p {
+    font: 400 30px/1.65 var(--font);
+    font-style: italic;
+    color: var(--text-mid);
+    margin-bottom: 0;
+  }
+
+  .item strong {
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .gloss {
+    margin-top: 24px;
+    padding: 22px 26px;
+    background: var(--tint);
+    border-left: 3px solid var(--text-dim);
+  }
+
+  .gloss .g-head {
+    font: 500 20px/1.4 'Menlo', 'SF Mono', monospace;
+    color: var(--text-mid);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .gloss dt {
+    font: 600 24px/1.5 var(--font);
+    color: var(--text);
+    display: inline;
+  }
+
+  .gloss dt::before {
+    content: '·  ';
+    color: var(--text-dim);
+  }
+
+  .gloss dd {
+    font: 400 24px/1.55 var(--font);
+    color: var(--text-mid);
+    display: inline;
+    margin-left: 8px;
+  }
+
+  .gloss .g-row {
+    margin-bottom: 10px;
+  }
+
+  .gloss .g-row:last-child {
+    margin-bottom: 0;
+  }
+
+  .footer {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 72px;
+    padding-top: 26px;
+    border-top: 2px solid var(--text);
+  }
+
+  .footer .author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .footer .avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .footer .author-name {
+    font: 400 22px/1.5 var(--font);
+    color: var(--text-mid);
+    letter-spacing: 0.03em;
+  }
+
+  .footer .endmark {
+    font: 500 20px/1 'Menlo', 'SF Mono', monospace;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="title-area">
+      <div class="eyebrow">HF0 · RESIDENCY FIELD DISPATCH</div>
+      <h1>HF0<br>二十七个切面</h1>
+      <div class="tagline">从 ACE Studio（W24）和 Final Round AI（同年春）两家在册 residents 的现身说法里，把他们对 HF0 的每一段描述拆成独立切面，拼出这家硅谷顶级 residency 的全貌。</div>
+    </div>
+
+    <div class="intro">
+      <p>HF0 = <em>Hard Fork Zero</em>——硅谷一家只招 10 个团队/届的 residency 孵化器，位于旧金山 Alamo Square 一栋维多利亚老房子里。由 Dave Fontenot、Evan Stites-Clayton、Emily Liu 创办，Marc Andreessen、Chris Dixon 等硅谷顶级 VC 背书，孵化过 ComfyUI、Story.com、Raven 等独角兽/准独角兽。它不教业务，只给你一间没有阳光的地下室、一日三餐、一位拳击教练，和一杯叫做"信念感"的水。</p>
+    </div>
+
+    <div class="item">
+      <div class="num">01</div>
+      <div>
+        <div class="label">HF0 = Hard Fork Zero</div>
+        <p>名字里有句双关："Hard Fork" 是代码世界里最激进的分叉，"Zero" 是起点。HF0 由三位创始人共同创办：<strong>Dave Fontenot</strong>（世界上最大的学生黑客松 MHacks 的创始人）、<strong>Evan Stites-Clayton</strong>、<strong>Emily Liu</strong>。背书阵容包含 <strong>Marc Andreessen（a16z）、Chris Dixon</strong> 等硅谷顶级 VC。创办第一年就孵化出 3 家独角兽，此后的在册名单里有 <strong>ComfyUI、Story.com、Raven</strong> 等 AI 圈响亮的名字。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Hard Fork</dt><dd>区块链/开源世界里的"硬分叉"——与旧版本不兼容的彻底分裂。HF0 把这个词拿来形容自己的创业起点。</dd></div>
+          <div class="g-row"><dt>MHacks</dt><dd>密歇根大学主办的大型学生黑客松，Dave Fontenot 是其创始人。学生黑客文化是 HF0 的基因源头。</dd></div>
+          <div class="g-row"><dt>a16z</dt><dd>Andreessen Horowitz，硅谷顶级风投之一。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">02</div>
+      <div>
+        <div class="label">"Residency" 不是 "Accelerator"</div>
+        <p>ACE Studio 创始人 Joe 在访谈里专门纠正过这个措辞：HF0 不是 accelerator，它管自己叫 <strong>residency</strong>。它强调的词是 <strong>container</strong>——容器。</p>
+        <blockquote><p>它不是那种"给你点钱 + 周期性 checkin + demo day"的松散模式——它强制你长期物理地待在一个地方。</p></blockquote>
+        <p>这一个词的区别，定义了 HF0 区别于 YC 的全部路径：物理在场、时间压缩、环境作用 > 内容作用。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Residency</dt><dd>"驻留"——原本是艺术家驻地项目的词，强调共同生活、共同创作的物理时长。HF0 刻意借用了这个词。</dd></div>
+          <div class="g-row"><dt>Container</dt><dd>容器。HF0 官方隐喻。物理上是一栋 house，文化上是一个时空扭曲的保护罩——把 founder 从外部世界隔离出来。</dd></div>
+          <div class="g-row"><dt>Accelerator</dt><dd>加速器——YC、500 Startups 那一类短期集中培训的模式。HF0 拒绝这个标签。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">03</div>
+      <div>
+        <div class="label">3000 进 10 的筛选率</div>
+        <p>HF0 每届只录取 <strong>10 个团队</strong>。ACE Studio 那届申请池 <strong>约 3000 家</strong>——录取率约 <strong>0.33%</strong>。作对比：YC 现在一届录 150+，候选池约 4% 上下。HF0 的极端稀缺是设计出来的——它要的不是筛出足够多的"有潜力"，而是筛到可以让每一位 founder 都被个别对待。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Batch</dt><dd>一期孵化。HF0 一期 12 周，远短于 YC 的 3 个月 + 长尾。</dd></div>
+          <div class="g-row"><dt>Acceptance rate</dt><dd>录取率。0.33% 大约是美国顶级 MBA 项目的 1/10。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">04</div>
+      <div>
+        <div class="label">筛选口味 I：连续创业者优先</div>
+        <p>Final Round AI 创始人 Michael Guan 披露：HF0 <strong>只招连续创业者</strong>。他前一家公司 2021 年起步、被收购，这正是 HF0 评估系统里的高亮项。"It's only for repeat founders"——这句原话切掉了 HF0 85% 的潜在申请者。背后逻辑：HF0 不想花时间教你做 founder 的基本功，它预设你已经会了。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Repeat founder</dt><dd>连续创业者。前一家公司无论 exit 还是关掉，都有价值。失败过比没做过更被 HF0 认可。</dd></div>
+          <div class="g-row"><dt>Exit</dt><dd>退出——被收购或 IPO 的统称。不是所有 exit 都意味着成功，但都意味着"经历过完整周期"。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">05</div>
+      <div>
+        <div class="label">筛选口味 II：技术够硬 + 被数据验证</div>
+        <p>ACE Studio 进 HF0 时已经有 <strong>8–9 万美金月收入</strong>、付费用户来自 50+ 国家。他们不是 repeat founder，但他们把路径换了——用"技术硬壁垒 + 已经在跑的数字"代替连续创业经历。这说明 HF0 的筛选口味是一个 OR 条件：<strong>要么你做过，要么你做成了</strong>——至少一项。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>MRR</dt><dd>Monthly Recurring Revenue，月度经常性收入。订阅制 SaaS 的血压。</dd></div>
+          <div class="g-row"><dt>Moat</dt><dd>"护城河"——Warren Buffett 借来的词，指竞争对手很难复制的壁垒。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">06</div>
+      <div>
+        <div class="label">筛选口味 III：你让我感到害怕吗</div>
+        <p>硅基立场那场 YC 对谈里，Cathy Di 转述过 HF0 的官方筛选 thesis：</p>
+        <blockquote><p>YC 可能看的更多是 can you make something people want，那么 HF0 讲的更多是——<strong>do you make me scared?</strong> Do you have a sense of inevitability?</p></blockquote>
+        <p>"你让我感到害怕吗？你身上有没有一种'这事一定会发生'的必然感？"——这是一套完全不同的评估口味。YC 筛"会不会解决问题"，HF0 筛"你本人这个人，是不是那种无论如何会把自己推到顶点的人"。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Sense of inevitability</dt><dd>"必然感"——硅谷用语，形容 founder 身上那种"这件事我一定会做成"的不可阻挡性。</dd></div>
+          <div class="g-row"><dt>Thesis</dt><dd>投资哲学/筛选原则。每家加速器都有自己的 thesis，HF0 的 thesis 是押单个 founder 的人格张力。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">07</div>
+      <div>
+        <div class="label">Dave 亲自护航：地缘政治敏感</div>
+        <p>ACE Studio 那次，Joe 一开始想线上远程面试。Dave 在第二轮通话里直接跟他说：</p>
+        <blockquote><p>你别 IC（信息通话），你赶紧来——因为现在有地缘政治的问题，cap table 上如果有更多的中国投资人，可能就更难。</p></blockquote>
+        <p>这是一个罕见的细节：HF0 的创始人本人会<strong>主动出手去优化中国团队的结构</strong>，让他们更容易进入美国 VC 生态。HF0 对中国 founder 的态度，是把他们往里拉，不是往外推。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>IC</dt><dd>Information Call，初步的电话了解。Dave 直接否决了这个选项。</dd></div>
+          <div class="g-row"><dt>Cap table</dt><dd>Capitalization Table，股权结构表。中国投资人在 cap table 上的占比，在 2024 年之后变成了美国 VC 的敏感点。</dd></div>
+          <div class="g-row"><dt>In person</dt><dd>面对面。HF0 对 in person 的坚持不只是仪式——它是"你是不是愿意押上一切"的测试。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">08</div>
+      <div>
+        <div class="label">Alamo Square 的维多利亚老房子</div>
+        <p>HF0 的物理空间是旧金山西侧 Alamo Square 附近的一栋巨大的老房子。Michael 形容它："走路会<strong>嘎吱响</strong>的那种大房子。"Joe 的记忆更具体：地下室 + 地下室里有个休息间，<strong>房顶投影了星空</strong>。</p>
+        <p>这不是硅谷典型的 tech office，它甚至不像一个 accelerator——它更像一个 artists' commune（艺术家公社）的 hacker 版本。物理的老旧、嘎吱响的地板、地下室、星空投影，全都是设计过的"离开真实世界"感。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Alamo Square</dt><dd>旧金山西侧老城区，以"彩虹屋"维多利亚建筑闻名，如今也是 founder 聚集区。</dd></div>
+          <div class="g-row"><dt>Victorian house</dt><dd>维多利亚式建筑。旧金山 1906 大地震后留下的那批老房。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">09</div>
+      <div>
+        <div class="label">地下室策略：没有阳光是 feature</div>
+        <p>HF0 的 house 有两个办公区，ACE Studio 被分到地下室。Joe 的原话里有一个让人回味的细节：</p>
+        <blockquote><p>HF0 的说法是——地下室更好，<strong>没有阳光，你可以忽略时间</strong>。出了休息间就是白天，累了进去就是晚上。</p></blockquote>
+        <p>这是一个刻意的时间扭曲装置。"昼夜被抹掉"的目的，是让 founder 不再按地球自转节奏生活，转而按项目节奏生活——一切围绕那一根 KPI 曲线转。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Crunch mode</dt><dd>冲刺模式——游戏/软件行业用语，指项目末期的高强度赶工期。HF0 把它拉成常态。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">10</div>
+      <div>
+        <div class="label">入营仪式：先上山灵修</div>
+        <p>12 周正式开营前，HF0 把所有团队<strong>拉到山上做类灵修的素质拓展、一起冥想</strong>。Joe 解释目的："让团队从山上回来进到 house 的下一秒，就全力专注在最重要的那一件事情上。"这个动作的功能类似于宗教里的 consecration（献祭仪式）——它把 12 周从"一段时间"变成"一段被圣化的时间"。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Retreat</dt><dd>"静修/撤退"——从日常生活中抽离的集体活动。硅谷创业圈越来越把它标准化。</dd></div>
+          <div class="g-row"><dt>Consecration</dt><dd>献祭/圣化——宗教用语。标识一段时间或一个空间"不是普通的"。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">11</div>
+      <div>
+        <div class="label">12 周物理在场</div>
+        <p>一期 <strong>12 周</strong>——比 YC 的 3 个月稍短。但 12 周全程被要求住进 house，不是 9-to-5 上班。Michael 的描述："我和 co-founder、CTO 整个团队 5 个人都住进去。"这种"住进去"的程度是 HF0 区别于所有其他加速器的硬核差异。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Live-in program</dt><dd>住校式项目——常见于 MBA 的一些 mini-MBA 或 executive programs，在创业加速器世界里极其罕见。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">12</div>
+      <div>
+        <div class="label">身心健康当作一级目标</div>
+        <p>Michael 的原话是整个访谈里最反差的一段：</p>
+        <blockquote><p>它非常关注在创始人的身心健康、身体状态。还提供了私人的健身教练，还有拳击教练。</p></blockquote>
+        <p>HF0 提供 <strong>一日三餐 + 私人健身教练 + 拳击教练</strong>。Michael 就是在 HF0 <strong>开始学拳击的</strong>——他说整个人变得"更有自信心、更加激进"。把 fighter 的身体状态当作 founder output 的一部分，这不是 MBA case study，这是古希腊式的身体教育。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Somatic training</dt><dd>身体训练——不是为健身目的而为心智素质目的的体能训练。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">13</div>
+      <div>
+        <div class="label">HF0 的底层机制：那杯水叫信念感</div>
+        <p>Joe 用《太空大灌篮》里的一个镜头把 HF0 的本质讲透了：乔丹带着一支没法赢的卡通队，中场休息时给队友喝一杯"兴奋剂"——其实是一杯水。喝下去之后，卡通队打败了外星人。</p>
+        <blockquote><p>HF0 就是那杯水——它不教你怎么做业务。<strong>它让你相信你能涨 10 倍</strong>。这个东西在表演艺术里有个术语，叫"信念感"。</p></blockquote>
+        <p>HF0 的有效性里有一层公开承认的 placebo effect。承认它之后，反而更强。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Placebo effect</dt><dd>安慰剂效应——被相信是有效的东西真的产生了效果。HF0 的半个机制是这个。</dd></div>
+          <div class="g-row"><dt>Stanislavski 信念感</dt><dd>表演艺术术语，指演员对角色情境的全面相信。一旦相信，身体反应就是真实的。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">14</div>
+      <div>
+        <div class="label">Demo Dinner：周一晚上 6 点两分钟</div>
+        <p>HF0 最核心的周期性仪式是 <strong>Demo Dinner</strong>：每周一晚上 6 点，每个团队 <strong>两分钟</strong> 当着所有 residents 分享上周成果。规则很重：</p>
+        <blockquote><p>不鼓励讲"我这周开发了什么"——只鼓励讲"<strong>我这周实现了什么结果</strong>"。</p></blockquote>
+        <p>"做了什么"和"得到了什么"之间的差距，是 founder 最常回避的那一格。HF0 用每周一次的 forced disclosure 把它钉在桌面上。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Demo Dinner</dt><dd>HF0 每周一晚上的仪式。Demo + Dinner 的合成词——展示和进食同时发生。</dd></div>
+          <div class="g-row"><dt>Forced disclosure</dt><dd>强制披露——把不愿意说的东西变成"必须在同辈面前说出来"的场景。</dd></div>
+          <div class="g-row"><dt>Output vs Outcome</dt><dd>产出 vs 成果。硅谷语境里反复区分——output 是你做了什么，outcome 是改变了什么。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">15</div>
+      <div>
+        <div class="label">Weekly Check-in：Partner 一对一定 KPI</div>
+        <p>Demo Dinner 的次日（周二），还有一次 <strong>weekly check-in</strong>——HF0 的 partner 一对一和每个团队对话，帮你把 KPI 定得更精准。注意不是"给建议"，不是"指导"——是<strong>帮你定 KPI</strong>。这是一个执行层面的 reset，不是咨询。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>KPI</dt><dd>Key Performance Indicator，关键绩效指标。HF0 要求每个团队的 KPI 极度简化——理想数量是 1。</dd></div>
+          <div class="g-row"><dt>Office hours</dt><dd>办公时间——硅谷加速器通用的 1:1 咨询时段。HF0 的 check-in 更像是审计，不是答疑。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">16</div>
+      <div>
+        <div class="label">North Star 只有一个：收入</div>
+        <p>HF0 要求所有团队把 KPI 简化到极致——<strong>不是用户数、不是留存、不是 engagement，就一个数字：收入</strong>。ACE Studio 给自己定的 12 周目标是月收入 50 万美金（开营时 8–9 万）——约 5–6 倍。Joe 故意往高瞄："先瞄准月亮才能落在星星上。"Dave 和 Evan 的反应是——"厉害。"</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>North Star metric</dt><dd>北极星指标——一个公司决定性的单一指标。Facebook 早年是 DAU，HF0 给大家的默认答案是 Revenue。</dd></div>
+          <div class="g-row"><dt>Retention</dt><dd>留存率。用户一段时间后还在用的比例。HF0 刻意不把它列为 KPI。</dd></div>
+          <div class="g-row"><dt>Engagement</dt><dd>互动度。用户在产品里停留和操作的程度。HF0 也刻意不列。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">17</div>
+      <div>
+        <div class="label">Dave 的第一句金句</div>
+        <p>前 5 周，ACE Studio 每周只涨 1–2%。同期 batch 里另一个团队从 2 万→3 万→4 万，每周 30–40%。10 月 31 日晚上 Dave 在全场做了一次 speech——</p>
+        <blockquote><p>Some team breakout, some team hangout.</p></blockquote>
+        <p>一句话，两个动词：breakout（突破）和 hangout（闲晃）。Joe 第二天就去找 Dave 想换目标。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Breakout</dt><dd>"爆发"——从一个指标区间突进到下一个数量级。</dd></div>
+          <div class="g-row"><dt>Hangout</dt><dd>闲逛——Dave 在这里作为 breakout 的反义词使用，隐含着轻度羞辱。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">18</div>
+      <div>
+        <div class="label">Dave 的第二句金句</div>
+        <p>Joe 去找 Dave 商量："能不能换一个目标？我们的增长太慢了。"Dave 的回答：</p>
+        <blockquote><p>你们的目标应该还是有且只有收入。其他的东西都是<strong>你们妥协了、你们害怕了</strong>。</p></blockquote>
+        <p>这是 HF0 partner 权威的全部：他不给你新方案，他拒绝让你换目标。他把"换目标"这个逃跑通道直接堵死。"妥协 + 害怕"这四个字，是 HF0 用来识别 founder 灰区的词。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Anchor target</dt><dd>锚定目标——一旦定下就不允许移动的目标。HF0 对此的坚持是文化性的。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">19</div>
+      <div>
+        <div class="label">Advisor 生态：Quora / Blake Anderson / Tesla-OpenAI 设计</div>
+        <p>HF0 的独家资产之一是它能把硅谷最"应用层"的现役 operator 请进 house。两个被具名的例子：</p>
+        <p>· <strong>Quora 的 co-founder</strong>——来讲他们瓶颈时穷举 20 个增长方案、试到第 11 个才指数级增长的故事。ACE Studio 当晚就照办。<br>
+        · <strong>Blake Anderson</strong>（Cal AI 创始人，20 多岁做 AI 独立 App 月入 100 万美金）——office hour 里问 Joe "你一周能联系多少个 influencer？"Joe 答"几十到一百"，Blake 说"<strong>我一天就 100 个</strong>"。</p>
+        <p>外加 Final Round AI 提到的：<strong>为 Tesla 和 OpenAI 做过品牌的设计团队</strong>在 HF0 期间帮他们重做 logo。这些人不是 HF0 partner，是 HF0 的关系网。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Advisor</dt><dd>顾问——非全职的 external input。HF0 为每个团队匹配若干 advisor。</dd></div>
+          <div class="g-row"><dt>Influencer marketing</dt><dd>通过网红/KOL 为产品做广告的推广方式。Blake Anderson 把它工业化了。</dd></div>
+          <div class="g-row"><dt>Cal AI</dt><dd>一个用 AI 做日历管理的独立 App，创始人 Blake Anderson 做到月入百万美金。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">20</div>
+      <div>
+        <div class="label">反直觉动作 I：涨价 50–100%</div>
+        <p>HF0 的方法论鼓励"逻辑上没道理但数据验证"的尝试。两家公司都在 HF0 做了<strong>反直觉涨价</strong>：</p>
+        <p>· ACE Studio：<strong>一招涨价一倍，第二天日收入 double</strong>——这是 Joe 说的"绝境逢生的戏剧化转折"。<br>
+        · Final Round AI：Michael 把价格从 99 美金/月硬提到 150 美金/月——50% 涨幅。结果："大家还是挺喜欢这个产品，还是愿意付费。"</p>
+        <p>这两个案例合起来给出一个 HF0 的暗藏 playbook：<strong>先在价格上试一试</strong>，这是 founder 最容易抗拒、最不需要新代码、反馈最快的杠杆。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Elasticity</dt><dd>价格弹性——涨价后需求下降的程度。硅谷 SaaS 长期以来 under-priced 是共识。</dd></div>
+          <div class="g-row"><dt>Playbook</dt><dd>剧本/打法手册——可被复制的一套动作。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">21</div>
+      <div>
+        <div class="label">反直觉动作 II：关掉免费试用</div>
+        <p>Final Round AI 在 HF0 期间做过另一件常识上不应该做的事——<strong>关掉免费试用，必须付费才能使用</strong>。按常识免费试用会让 funnel 更宽，关掉它会杀掉转化。但 Michael 的观察是：</p>
+        <blockquote><p>关掉试用反而改变了产品定位、收入预期和增长预期。这是 HF0 教会我的方法论——<strong>快速试错，做一些"逻辑上想起来没道理"的事</strong>。</p></blockquote>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Funnel</dt><dd>漏斗——从访问到购买的用户转化流程。</dd></div>
+          <div class="g-row"><dt>Free trial</dt><dd>免费试用——SaaS 默认配置。Final Round AI 选择反配置。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">22</div>
+      <div>
+        <div class="label">投资结构：100 万美金 SAFE</div>
+        <p>HF0 给 ACE Studio 的投资是 <strong>100 万美金 SAFE</strong>。作比较：YC 现在的标准条款是 12.5 万美金换 7% 股权 + 37.5 万 SAFE——合计 50 万美金。<strong>HF0 的支票是 YC 的 2 倍</strong>，而且 founder 友好程度更高（SAFE + 不强制估值）。配合它只收 10 个团队——HF0 的每 founder 单位投入是 YC 的若干倍。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>SAFE</dt><dd>Simple Agreement for Future Equity——YC 发明的可转债式早期融资协议。比股权投资灵活，比贷款友好。</dd></div>
+          <div class="g-row"><dt>Standard deal</dt><dd>标准投资条款——YC 每一期发给所有入选公司的统一合约。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">23</div>
+      <div>
+        <div class="label">12 周的硬结果：10x 和 3x</div>
+        <p>两家公司的 HF0 结束数据都很漂亮：</p>
+        <p>· <strong>ACE Studio</strong>：月收入从 8 万美金 → 80 万美金，<strong>10 倍</strong>。跻身千万美金 ARR 第一梯队。<br>
+        · <strong>Final Round AI</strong>：ARR 从 100 万 → 300 万，<strong>3 倍</strong>。月收入从小 10 万 → 30 万。</p>
+        <p>12 周的时间窗口是一样的，但结果是数量级差异。这不是 HF0 的"承诺"，而是 HF0 的"允许"——它把天花板搬开，让 founder 自己决定飞多高。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>ARR</dt><dd>Annual Recurring Revenue，年度经常性收入。订阅制 SaaS 公司最常用的估值锚。</dd></div>
+          <div class="g-row"><dt>Order of magnitude</dt><dd>数量级——10x、100x 级的差异。ACE Studio 12 周完成了一整个数量级。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">24</div>
+      <div>
+        <div class="label">HF0 结束 = 融资触发器</div>
+        <p>两家公司毕业后都立刻完成了一轮融资：</p>
+        <p>· <strong>Final Round AI</strong>：<strong>688 万美元天使</strong>，13 家机构参投（First Round / Goodwater / XYZ 等）。<br>
+        · <strong>ACE Studio</strong>：直接进入"千万美金 ARR 第一梯队"，下一轮估值跳升。</p>
+        <p>HF0 的 Demo Day 不是庆典，是<strong>一次可预测的融资触发器</strong>。residents 进门时就知道出门那天就是 fundraising 的开始——这个机械性让他们可以把全部 12 周投入到数字上，而不是融资上。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Angel round</dt><dd>天使轮——种子轮之前的小型融资。Final Round AI 的 688 万已经偏大。</dd></div>
+          <div class="g-row"><dt>First Round Capital</dt><dd>一家以早期投资出名的 VC。和 Final Round AI 的名字正好对仗。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">25</div>
+      <div>
+        <div class="label">前 5 周不涨：信念感的测试窗</div>
+        <p>ACE Studio 在 HF0 的前 5 周每周只涨 1–2%——几乎等于不涨。同期 batch 里别家 30–40%。Joe 承认信念感"接近崩塌"。他自己的复盘："前六周的苦工是省不掉的。" HF0 的 12 周不是线性的——<strong>前 5–6 周是基建和试错，后 6–7 周才是爆发</strong>。HF0 的设计容忍前半段的 flat line，并把它作为<strong>测试 founder 是否会放弃的窗口</strong>。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Flat line</dt><dd>平线——增长曲线没有斜率的那一段。创业里最磨人的状态。</dd></div>
+          <div class="g-row"><dt>Inflection point</dt><dd>拐点——从 flat line 切换到 hockey stick 的那个数学节点。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">26</div>
+      <div>
+        <div class="label">Alumni：一份越来越有分量的名单</div>
+        <p>HF0 一期只 10 家，但累计 alumni 已经很有分量：</p>
+        <p>· <strong>ComfyUI</strong>——AI 图像生成工作流的事实标准。<br>
+        · <strong>Story.com</strong>——AI 故事生成平台。<br>
+        · <strong>Raven</strong>——Joe 的好朋友那家，上一期 batch。<br>
+        · <strong>ACE Studio</strong>（本文案例）。<br>
+        · <strong>Final Round AI</strong>（本文案例）。<br>
+        · 以及据 HF0 官方说法——"创办第一年就孵化出 3 家独角兽"。</p>
+        <p>密度远高于 YC 的单位产出。这是 HF0 作为 exclusive residency 的复利效应：每届只 10 家，独角兽概率却显著更高。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Alumni network</dt><dd>校友网络——毕业后的长期互助关系。HF0 的 alumni 密度是它对新 resident 最有吸引力的资产。</dd></div>
+          <div class="g-row"><dt>ComfyUI</dt><dd>一款开源的 AI 图像/视频生成节点式工作流工具——Stable Diffusion / Flux 生态的中枢。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">27</div>
+      <div>
+        <div class="label">把 HF0 搬回国内：ACE0</div>
+        <p>HF0 结束后，ACE Studio 做了一件少见的事——<strong>把 HF0 的体验复刻回国内</strong>。他们在<strong>惠州租了一栋海景大 house</strong>，把核心开发拉过去做封闭研发。目标是端出下一代 AI 歌声模型 + 音乐大模型。他们把这轮起名叫 <strong>ACE0</strong>——就是自家小 HF0。</p>
+        <p>为什么一定要海景？Joe 说便宜的小区别墅也有，但"我希望大家推门进去那一刻就感受到这个地方是不同的——这是建构信念感的基础条件。" 这一个细节是对 HF0 机制的最高认可：<strong>它是一套可以被复制、可以被工程化的"信念感装置"</strong>。HF0 卖的不是场地，也不是投资——它卖的是一整套<strong>让 founder 在三个月里相信不可能</strong>的设施、人、仪式和时空。</p>
+        <div class="gloss">
+          <div class="g-head">术语</div>
+          <div class="g-row"><dt>Belief machine</dt><dd>"信念机器"——本文为 HF0 起的描述。它的一切设计都围绕一件事：让 founder 在有限时间内相信自己能做不可能的事。</dd></div>
+          <div class="g-row"><dt>Atmospheric design</dt><dd>氛围设计——通过空间、灯光、仪式去塑造使用者心理状态。HF0 是这方面的硅谷之最。</dd></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="author">
+        <img class="avatar" src="/assets/kanye.png" alt="">
+        <span class="author-name">HF0 · 由 ACE Studio / Final Round AI 双视角合成</span>
+      </div>
+      <div class="endmark">FIN ∎</div>
+    </div>
+  </div>
+</body>
+</html>
