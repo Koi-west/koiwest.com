@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="viewport" content="width=1080, user-scalable=yes">
+<title>对话汪滔 求真理、得自由、活成故事 · koi</title>
+<meta charset="UTF-8">
+<style>
+  @font-face {
+    font-family: 'KingHwa_OldSong';
+    src: url('/assets/KingHwa_OldSong.subset.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+  }
+
+  :root {
+    --text: #1D1D1F;
+    --text-mid: #6E6E73;
+    --text-dim: #ACACB0;
+    --accent: #1D1D1F;
+    --rule: #E5E5EA;
+    --font: 'KingHwa_OldSong', 'PingFang SC', system-ui, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 1080px;
+    background: #FFFFFF;
+  }
+
+  .card {
+    width: 1080px;
+    background: #FFFFFF;
+    padding: 64px 72px 52px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .title-area {
+    flex-shrink: 0;
+    margin-bottom: 52px;
+  }
+
+  .title-area h1 {
+    font: 700 84px/1.15 var(--font);
+    color: var(--text);
+    letter-spacing: -0.03em;
+    margin-bottom: 22px;
+  }
+
+  .title-area::after {
+    content: '';
+    display: block;
+    width: 52px;
+    height: 3px;
+    background: var(--accent);
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .content p {
+    font: 400 36px/1.7 var(--font);
+    color: var(--text);
+    margin-bottom: 28px;
+  }
+
+  .content .highlight {
+    font: 500 40px/1.55 var(--font);
+    color: var(--text);
+    padding: 14px 0 14px 26px;
+    border-left: 3px solid var(--accent);
+    margin: 36px 0;
+  }
+
+  .content h2 {
+    font: 600 50px/1.3 var(--font);
+    color: var(--text);
+    margin: 18px 0 28px;
+    letter-spacing: -0.02em;
+  }
+
+  .content h2:first-child { margin-top: 0; }
+
+  .content .subtitle {
+    font: 500 24px/1.6 'Menlo', 'SF Mono', monospace;
+    color: var(--text-dim);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+
+  .content .en-note {
+    font: 300 26px/1.6 var(--font);
+    color: #8a8a8f;
+    margin: -8px 0 28px 0;
+    padding-left: 22px;
+    border-left: 2px solid #e5e5ea;
+  }
+
+  .content blockquote {
+    margin: 0 0 28px;
+    padding-left: 26px;
+    border-left: 3px solid var(--rule);
+  }
+
+  .content blockquote p {
+    font: 300 36px/1.7 var(--font);
+    color: var(--text-mid);
+    margin-bottom: 6px;
+  }
+
+  .content strong {
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .content .divider {
+    height: 1px;
+    background: var(--rule);
+    margin: 48px 0;
+  }
+
+  .content .dropcap::first-letter {
+    font: 700 128px/0.82 'KingHwa_OldSong', Georgia, serif;
+    float: left;
+    margin: 4px 16px 0 -4px;
+    color: var(--accent);
+  }
+
+  .content::after {
+    content: '∎';
+    display: block;
+    text-align: right;
+    font-size: 16px;
+    color: var(--text-dim);
+    margin-top: 40px;
+  }
+
+  .footer {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 52px;
+    padding-top: 22px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .footer .author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .footer .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .footer .author-name {
+    font: 400 24px/1.5 var(--font);
+    color: var(--text-mid);
+    letter-spacing: 0.03em;
+  }
+</style>
+
+<style>
+  html, body {
+    width: 100% !important;
+    min-width: 1080px !important;
+    background: #F5F5F7 !important;
+  }
+  body > .card, body > .page, body > main {
+    margin: 0 auto !important;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="title-area">
+      <h1>对话汪滔<br>求真理、得自由、活成故事</h1>
+    </div>
+    <div class="content">
+      <p class="dropcap">消失十年后，汪滔接受《晚点》独家访谈，谈话断断续续进行了 19 个小时。这是一份从里面挖出来的清单——10 个深度洞察，穿插 10 个有趣事件。顺序是故事本身的节奏。</p>
+
+      <div class="divider"></div>
+
+      <p class="subtitle">Insight 01 · 洞察</p>
+      <h2>世界蠢得不可思议，我也是</h2>
+      <p>十年前那句「世界蠢得不可思议」被当成大头照拍下来，擦也擦不掉。汪滔补上后半句——「我也是」。判断没变，只是加上了内归因：是我蠢得不可思议。再引申一层——世界可以好很多，我也还能好很多。</p>
+      <p class="highlight">"当时没有后半句，我现在觉得加上后半句才是最妙的。"</p>
+
+      <div class="divider"></div>
+
+      <p class="subtitle">Event 01 · 事件</p>
+      <h2>深圳荔枝公园的橱窗</h2>
+      <p>三四年级的汪滔隔一段时间就跑去荔枝公园青少年宫，盯着橱窗里一台六七千块的电动遥控直升机。80 年代末，这个价格「想都不要想」。买不起就买本书回家翻，书里有一张模型直升机的拆解图，他反复看图，在脑子里一遍遍想象它怎么拆、怎么装、怎么飞。</p>
+
+      <div class="divider"></div>
+
+      <p class="subtitle">Insight 02 · 洞察</p>
+      <h2>「我」字是毒药</h2>
+      <p>汪滔前半辈子都靠「我要第一、我要赢」驱动。直到有一天他发现：自己花很长时间去想的「大疆独特的管理方法」，外面早就有成熟的；闭门造车觉得很牛的 idea，出去一看——世界上没什么新鲜事，更多是吸收、搬运、组合。想明白这一点，原本让他上瘾的驱动力一下被拆掉了，开始感到虚无。</p>
+      <p class="highlight">"我创造、我产生，那个「我」字是毒药。"</p>
+
+      <div class="divider"></div>
+
+      <p class="subtitle">Event 02 · 事件</p>
+      <h2>「大爱无疆」</h2>
+      <p>公司起名想过很多，「天目」、「乐创」，要么太常见、要么注册不了。有一天跟妈走在路上，她看到一个牌子写着「大爱无疆」，说：那就叫「大疆」吧。汪滔一开始没觉得多好，后来越看越好。</p>
+
+      <div class="divider"></div>
+
+      <p class="subtitle">Insight 03 · 洞察</p>
+      <h2>叶片与树枝的坍塌定律</h2>
+      <p>礼崩乐坏不是突然的。汪滔说，他们是充满生命力的草本植物，疯狂生长——每个人都想做光鲜亮丽的叶片（做产品、搞创新），没人想成为沉默的树枝与树干（做管理、定规则）。</p>
+      <p class="highlight">"当叶片数量与面积超过了根茎的负荷，坍塌就是必然。"</p>
+
+      <div class="divider"></div>
+
+      <p class="subtitle">Event 03 · 事件</p>
+      <h2>900 万去南非拍广告，老板不审批</h2>
+      <p>那个所谓的「田园时代」，大疆花过 900 万去南非拍 Mavic Air 第一代的广告，成片很一般。但大家很开心：ROI 不用算、目标不用定、钱随便花，想干什么就干什么。900 万都不需要汪滔审批——「不需要，所有都不用过我，我从来不看。」</p>
+      <p class="en-note">英 · ROI (Return on Investment) —— 投资回报率。</p>
+
+      <div class="divider"></div>
+
+      <p class="subtitle">Insight 04 · 洞察</p>
+      <h2>孙悟空本身是一个更大的妖怪</h2>
+      <p>反腐反到研发那一层，过快触动了整个阶层，人人自危。汪滔复盘自己：一个孙悟空的性格，看见妖怪就想一棒子打「死」，试图用强对抗来追求一个理想的干净状态。但他后来才意识到，孙悟空本身是一个更大的妖怪。如果你给了别人很多诱惑和机会，却要求他一点都不动心，这是反人性的。</p>
+      <p class="highlight">"农民在打谷子，鸟飞下来叼几口，鸟其实连「偷」的概念都没有。"</p>
+
+      <div class="divider"></div>
+
+      <p class="subtitle">Event 04 · 事件</p>
+      <h2>「你可不能冤枉人！」</h2>
+      <p>反腐查到研发时，锁定一个关键嫌疑人，汪滔去找他的上级沟通。对方第一反应是：你可不能冤枉人！那个上级是早期员工、股东，手里有大疆的股份。再后来，汪滔想找人把研发管一管，发现到处找不到人——他这才意识到，公司已经到处都是山头，每个人都在自己的「藩属国」里当大王。</p>
+
+      <div class="divider"></div>
+
+      <p class="subtitle">Insight 05 · 洞察</p>
+      <h2>管理的第一宇宙速度</h2>
+      <p>把公司当产品打分，大疆从 30 分爬到 65 分，花了八年。真正关键的是 70 分——一旦越过，从 70 到 90 是大概率事件；但从 50 到 70，99.9% 的公司都跨不过去。70 分的难度是 50 分的十倍。华为翻过去了，汪滔希望自己也能翻过去，甚至有一点年龄焦虑——「出师未捷身先老」。</p>
+      <p class="highlight">"组织能力一旦达到 70 分，便进入了自我驱动的轨道。"</p>
+
+      <div class="divider"></div>
+
+      <p class="subtitle">Event 05 · 事件</p>
+      <h2>毕业答辩的 C 和差的三个礼拜</h2>
+      <p>港科大毕业答辩那天，汪滔的直升机没飞起来。教授王立新给了 C，后来写了一篇文章叫《毕业设计给了 C，成就了大疆无人机汪滔》——「我毁掉了一位潜在的优秀学者，成就了一位伟大的企业家」。那天晚上汪滔愤愤不平：「这题目很难啊，要是想拿高分，一般不会选它。」寒假他又狠狠干了三个礼拜，日以继夜，把飞机飞起来了。其实就差那三个礼拜。</p>
+
+      <div class="divider"></div>
+
+      <p class="subtitle">Insight 06 · 洞察</p>
+      <h2>熵值的反向读法</h2>
+      <p>汪滔说，很少有互联网公司的人去华为，但华为的人能去几乎所有地方——所以某种意义上，华为是熵值最低的地方。反过来，什么时候你看到一个公司的员工「再也去不了别的地方」，说明这个公司熵值最高：要么工资高、要么地位高、要么 feel good，一旦到了那个地方，就没办法往回走。</p>
+      <p class="highlight">"大疆的人去不了华为，但华为的人能来这儿——你就知道谁厉害了。"</p>
+      <p class="en-note">英 · feel good —— 自我感觉良好的舒适状态。此处指被公司的优渥条件「锁住」，失去了再出去的底气。</p>
+
+      <div class="divider"></div>
+
+      <p class="subtitle">Event 06 · 事件</p>
+      <h2>创始员工 0.5% 股份的骗局</h2>
+      <p>创业第二年，一位创始员工对汪滔说：能不能把我的 0.5% 股份分给另一个技术差的同事？汪滔拒了，他说自己要让技术好的人多拿。那位员工说这件事伤害了他。没几天，团队几个人陆续离职。多年以后汪滔才知道，他们是被惠州一家钻床老板一起挖走的——整件事是个骗局。</p>
+      <p class="highlight">"后来知道这是个骗局的时候，我反而释然了一点。"</p>
+
+      <div class="divider"></div>
+
+      <p class="subtitle">Insight 07 · 洞察</p>
+      <h2>好的 idea 是不纠结的</h2>
+      <p>汪滔说，好的 idea / 设计一定是不纠结的——你看到它，内心是舒畅的，那八成就是对的。真正能 make different 的东西往往是非逻辑的：一个 good idea 首先得符合逻辑，但真正拉开差距的那一下，常常不是因为逻辑。靠的是大量观看和输入——把你见过的好东西拆开、重组，再拼出一个答案。</p>
+      <p class="highlight">"Great artists steal。"</p>
+      <p class="en-note">英 · Great artists steal —— 毕加索的名言完整版是 "Good artists copy, great artists steal"（好的艺术家模仿，伟大的艺术家偷）。「偷」的意思是把别人的东西彻底消化重组成自己的。</p>
+      <p class="en-note">英 · make different —— 做出真正的不同，做出差异化。</p>
+
+      <div class="divider"></div>
+
+      <p class="subtitle">Event 07 · 事件</p>
+      <h2>2002 年的金字塔草图</h2>
+      <p>2002 年汪滔申请加州理工大学，对方出的题是——用你觉得有意思的东西填满下面的空白，要有创造力。他画了一张图：上海的高楼林立中，耸立着一座巨型金字塔，顶端是空中花园，有瀑布、森林、环湖赛道、停机坪——最中间还有一个 200 米高的他自己的巨型雕像。二十多年后，他找日本设计师帮他画天空之城草图，突然发现：这不就是 20 年前我画的么？</p>
+      <p class="en-note">英 · "Fill the space below with something you think it's interesting, be creative." —— 加州理工申请题目原文，意思是「用你觉得有意思的东西填满下面的空白，要有创造力」。</p>
+
+      <div class="divider"></div>
+
+      <p class="subtitle">Insight 08 · 洞察</p>
+      <h2>互利共赢结出的果子，不一定甜</h2>
+      <p>创业让汪滔明白，人跟人的最高纲领是「互利共赢」的交易模式——它结出的果子可能又大又红，但不一定甜。华为有中国公司最好的金字塔底座，像一艘无敌战舰。但当你慢慢往上走，发现塔顶没有「更高的意义」，只有更复杂的平衡和分配，就会感到迷茫和虚无。能不能有一种关系，是超越「贫富」「利益交换」这些评价框架的？</p>
+      <p class="highlight">"对我来说，这个最高纲领可能就是——大家一起去找真理。"</p>
+
+      <div class="divider"></div>
+
+      <p class="subtitle">Event 08 · 事件</p>
+      <h2>泡茶的侄子与《论语的故事》</h2>
+      <p>有一次和爸去朋友家，朋友侄子给他们泡茶。爸看他气质不一般，问最近看了什么书，侄子拿出下村湖人写的《论语的故事》。汪滔客气说「我也买一本」，结果买回去翻开，就被子贡和孔子那段对话击中：子贡说自己能做到「贫而无谄，富而无骄」，孔子说不错，但更高境界是——根本不会起这种念头，不用贫富的框架去评判别人。</p>
+      <p class="highlight">"我一下就意识到，这也许就是我的 missing part——人与人的关系。"</p>
+      <p class="en-note">英 · missing part —— 缺失的那一块。汪滔用这个词描述他在那段 "something is wrong" 时期一直找不到、直到看到这段对话才补上的那个位置。</p>
+
+      <div class="divider"></div>
+
+      <p class="subtitle">Insight 09 · 洞察</p>
+      <h2>错误的期待，是最大的不自由</h2>
+      <p>汪滔说的「自由」不是做什么，而是松开什么：接受人性的弱点和脆弱，接受管理的灰色，接受有人离开、有人犯错、有人跟你志不同道不合。</p>
+      <p class="highlight">"错误的期待是最大的不自由。"</p>
+
+      <div class="divider"></div>
+
+      <p class="subtitle">Event 09 · 事件</p>
+      <h2>五万块的「星星之火」</h2>
+      <p>大学时汪滔帮妈处理一批无人认领的货，卖完有二十万，他「剥削」了大概五万。那五万成了「星星之火」——他买了个遥控直升机，变成他的宝贝，走到哪里就搬到哪里。做毕设时，他在网上看到 Rotor Motion 的开源项目，参考里面的代码，硬件几个人重新设计、手工焊接，连 PCB 都是自己蚀刻，做出了第一个飞控。</p>
+      <p class="en-note">英 · PCB (Printed Circuit Board) —— 印刷电路板，电子硬件的底板。「自己蚀刻 PCB」意味着连最基础的电路板都是手工做的，而不是交给工厂。</p>
+
+      <div class="divider"></div>
+
+      <p class="subtitle">Insight 10 · 洞察</p>
+      <h2>活出来，才是那 99% 的难度</h2>
+      <p>《阿特拉斯耸耸肩》是小说，可以牺牲真实来拼凑情节，爽一把。但人生不行。汪滔说，如果要 live 一本小说，它的难度是你只能活出来——先要是真理；再要真实活出来；然后你才能写出来。</p>
+      <p class="highlight">"活出来，才是那 99% 的难度。"</p>
+      <p class="en-note">英 · live a novel —— 活成一本小说。不是「写」一本小说，而是把自己的一生真正过成一个值得被写下来的故事。这比写要难得多，因为它不允许任何虚构。</p>
+
+      <div class="divider"></div>
+
+      <p class="subtitle">Event 10 · 事件</p>
+      <h2>2026 年春天的猫、Cursor 和乐高</h2>
+      <p>2026 年春天，记者见到汪滔时，和传说中那个冷酷、紧绷的汪老板不同，他松弛、平静。扎进裤子的白衬衫下摆，总有一角跑出来。办公室里养着四只猫，他每天给它们称重，留意食欲和体重的细微变化。他刚刚花了一周用 Cursor 手搓出一个组织和流程的共创编辑器，说那是他的乐高。</p>
+      <p class="en-note">英 · Cursor —— 一款 AI 编程工具/编辑器，让不太会写代码的人也能用自然语言「手搓」出软件。</p>
+
+    </div>
+    <div class="footer">
+      <div class="author">
+        <img class="avatar" src="/assets/kanye.png" alt="">
+        <span class="author-name">晚点 LatePost × 汪滔</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
