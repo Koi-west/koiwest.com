@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="viewport" content="width=1080, user-scalable=yes">
+<title>对话汪滔：求真理、得自由、活成故事 · koi</title>
+<meta charset="UTF-8">
+<style>
+  @font-face {
+    font-family: 'KingHwa_OldSong';
+    src: url('/assets/KingHwa_OldSong.subset.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+  }
+
+  :root {
+    --text: #1D1D1F;
+    --text-mid: #6E6E73;
+    --text-dim: #ACACB0;
+    --accent: #1D1D1F;
+    --rule: #E5E5EA;
+    --font: 'KingHwa_OldSong', 'PingFang SC', system-ui, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 1080px;
+    background: #FFFFFF;
+  }
+
+  .card {
+    width: 1080px;
+    background: #FFFFFF;
+    padding: 64px 72px 52px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── Title ── */
+  .title-area {
+    flex-shrink: 0;
+    margin-bottom: 52px;
+  }
+
+  .title-area h1 {
+    font: 700 84px/1.15 var(--font);
+    color: var(--text);
+    letter-spacing: -0.03em;
+    margin-bottom: 22px;
+  }
+
+  .title-area::after {
+    content: '';
+    display: block;
+    width: 52px;
+    height: 3px;
+    background: var(--accent);
+  }
+
+  /* ── Content ── */
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .content p {
+    font: 400 36px/1.7 var(--font);
+    color: var(--text);
+    margin-bottom: 28px;
+  }
+
+  .content .highlight {
+    font: 500 40px/1.55 var(--font);
+    color: var(--text);
+    padding: 14px 0 14px 26px;
+    border-left: 3px solid var(--accent);
+    margin: 36px 0;
+  }
+
+  .content h2 {
+    font: 600 42px/1.4 var(--font);
+    color: var(--text);
+    margin: 44px 0 22px;
+    letter-spacing: -0.02em;
+  }
+
+  .content h2:first-child {
+    margin-top: 0;
+  }
+
+  .content .subtitle {
+    font: 400 22px/2 var(--font);
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .content .item {
+    margin-bottom: 36px;
+  }
+
+  .content .item:last-child {
+    margin-bottom: 0;
+  }
+
+  .content .item .label {
+    font: 500 36px/1.5 var(--font);
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .content .item p {
+    font: 400 32px/1.65 var(--font);
+    color: var(--text-mid);
+    margin-bottom: 0;
+  }
+
+  .content blockquote {
+    margin: 0 0 28px;
+    padding-left: 26px;
+    border-left: 3px solid var(--rule);
+  }
+
+  .content blockquote p {
+    font: 300 36px/1.7 var(--font);
+    color: var(--text-mid);
+    margin-bottom: 6px;
+  }
+
+  .content strong {
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .content .divider {
+    height: 1px;
+    background: var(--rule);
+    margin: 36px 0;
+  }
+
+  .content ul {
+    list-style: none;
+    margin-bottom: 28px;
+  }
+
+  .content ul li {
+    font: 400 36px/1.7 var(--font);
+    color: var(--text);
+    padding: 4px 0 4px 28px;
+    position: relative;
+  }
+
+  .content ul li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--text-mid);
+  }
+
+  /* ── Drop Cap ── */
+  .content .dropcap::first-letter {
+    font: 700 128px/0.82 'KingHwa_OldSong', Georgia, serif;
+    float: left;
+    margin: 4px 16px 0 -4px;
+    color: var(--accent);
+  }
+
+  /* ── End Mark ── */
+  .content::after {
+    content: '∎';
+    display: block;
+    text-align: right;
+    font-size: 16px;
+    color: var(--text-dim);
+    margin-top: 40px;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 52px;
+    padding-top: 22px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .footer .author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .footer .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .footer .author-name {
+    font: 400 24px/1.5 var(--font);
+    color: var(--text-mid);
+    letter-spacing: 0.03em;
+  }
+
+  .footer .arxiv {
+    font: 400 22px/1.5 'Menlo', 'SF Mono', monospace;
+    color: var(--text-dim);
+    letter-spacing: 0.02em;
+  }
+</style>
+
+<style>
+  html, body {
+    width: 100% !important;
+    min-width: 1080px !important;
+    background: #F5F5F7 !important;
+  }
+  body > .card, body > .page, body > main {
+    margin: 0 auto !important;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="title-area">
+      <h1>对话汪滔：求真理、得自由、活成故事</h1>
+    </div>
+    <div class="content">
+      <p class="subtitle">晚点 LatePost × 大疆创始人</p>
+
+      <p class="dropcap">汪滔上一次公开露面是在十年前，此后彻底消失在公众视野，只留下一句被反复引用的话：世界蠢得不可思议。十年后，他补上了后半句——"世界蠢得不可思议，我也是。"</p>
+
+      <p class="highlight">世界蠢得不可思议，我也是</p>
+
+      <p>这或许是汪滔对自己漫长创业生涯最简短的概括。</p>
+
+      <div class="divider"></div>
+
+      <h2>一、种子与主场</h2>
+
+      <div class="item">
+        <p class="label">三四岁的执念</p>
+        <p>深圳荔枝公园青少年宫的模型店，橱窗里摆着电动遥控直升机，要六七千块。买不起飞机就买本书回来翻，看着书里一张拆解图，在脑子里一遍遍想象它怎么拆、怎么装、怎么飞。</p>
+      </div>
+
+      <div class="item">
+        <p class="label">主场意识</p>
+        <p>高考差 0.5 分没去成浙工大，去华东师大读了三年转学港科大，代价是从大一重读，比同龄人大三岁。"考试、读书，在别人制定好的游戏规则里你玩不转，要到自己的主场去游戏。"</p>
+      </div>
+
+      <div class="item">
+        <p class="label">毕设给了 C</p>
+        <p>答辩那天直升机没飞起来，教授后来写文章说"我毁掉了一位潜在的优秀学者，成就了一位伟大的企业家"。寒假狠狠干了三个礼拜，日以继夜，最后飞起来了——其实就差这三个礼拜。</p>
+      </div>
+
+      <p class="highlight">很多是命运：浙工大差 0.5 分没去成，直升机没飞起来没能出国——最后把我推到另一条路上</p>
+
+      <div class="divider"></div>
+
+      <h2>二、礼崩乐坏</h2>
+
+      <p>2017-2018 年，大疆供应链腐败导致公司损失超过 10 亿元。处理员工 45 人，16 人移交司法。</p>
+
+      <div class="item">
+        <p class="label">藩镇割据</p>
+        <p>查到研发时才发现：公司已经到处都是山头，每个人都在自己的"藩属国"里当大王。当没有一个人愿意站到公司立场为公司出头，当时觉得公司要崩溃了。</p>
+      </div>
+
+      <div class="item">
+        <p class="label">沙滩上的城堡</p>
+        <p>"我们像充满生命力的草本植物，疯狂生长。每个人都想做光鲜亮丽的叶片，没人想成为沉默的树枝与树干。当叶片数量与面积超过了根茎的负荷，坍塌就是必然。"</p>
+      </div>
+
+      <div class="item">
+        <p class="label">错误的顺序</p>
+        <p>反腐反到研发时过快触动了一整个阶层。后来反思：更正确的做法是先招人、重构组织、削弱山头，再择机处理腐败问题。"我还没经验，也没人提醒我。"</p>
+      </div>
+
+      <p class="highlight">一个孙悟空的性格，看见妖怪就想一棒子打死，试图用强对抗来追求理想的干净状态，但其实孙悟空是一个更大的"妖怪"</p>
+
+      <div class="divider"></div>
+
+      <h2>三、熵减与管理</h2>
+
+      <div class="item">
+        <p class="label">熵增熵减</p>
+        <p>一家公司有 1 位 CEO 和 6000 名员工，组织每天都会制造熵增，管理者的职责就是持续熵减。但每个人的熵减能力有上限，如果 CEO 一年最多只能完成"4000 份熵减"，而 6000 人产生的熵增远大于这个数，公司就会进入混乱状态。</p>
+      </div>
+
+      <div class="item">
+        <p class="label">第一宇宙速度</p>
+        <p>管理的第一宇宙速度：CEO 的主要职责是把握战略方向与文化根基，其他事务只需投入较少精力，组织也能有效运转；组织能"净产出"高级管理者，不但够自己用，还能向外输出。一旦越过 70 分，从 70 分走到 90 分是大概率事件——但 70 分的管理水平，是 50 分的十倍难度。</p>
+      </div>
+
+      <div class="item">
+        <p class="label">单脑搅拌</p>
+        <p>"多脑就没得搅拌，你怎么搅拌呢？都在一个地方才能搅起来嘛。"不是集权，是一个综合能力很强的人，收集各方信息后消化，做出最好的平衡。</p>
+      </div>
+
+      <p class="highlight">产品能力是 1 分，管理能力是 10 分。产品能力二十多岁就自然习得，基本出道即巅峰；管理，用了半条命去补课</p>
+
+      <div class="divider"></div>
+
+      <h2>四、黄埔军校</h2>
+
+      <p>大疆两波离职潮：2019-2020 年一批早期研发骨干离职，第二次是从 2025 年到现在。几乎全部是创业了。</p>
+
+      <div class="item">
+        <p class="label">为什么成功率这么高</p>
+        <p>"我本来以为用最高的标准做全世界最好的产品，是显而易见的事，但似乎挺有效，大家只要 follow，成功率就会高一点。"</p>
+      </div>
+
+      <div class="item">
+        <p class="label">校长的自我修养</p>
+        <p>一开始别人叫"黄埔军校"，也不愿意当这个"校长"，因为"黄埔军校"自己很多都黄了。后来想明白了：黄埔军校首先自己不能黄。</p>
+      </div>
+
+      <div class="item">
+        <p class="label">人才是社会的</p>
+        <p>从"防堵对抗"到"招得比挖得快"。内部孵化 + 对外投资：大疆的人不只有上班一条路，也可以有别的选择；大疆把供应链能力赋能出去，甚至输送一些人才。</p>
+      </div>
+
+      <p class="highlight">厉害公司出来的人，能去所有地方。大疆的人去不了华为，但华为的人能来这儿，你就知道谁厉害了</p>
+
+      <div class="divider"></div>
+
+      <h2>五、Something is wrong</h2>
+
+      <p>2016-2019 年，汪滔感到"Something is wrong"。自己和公司的状态像一个大而不甜的苹果。35 岁以后每年快乐程度都比前一年打个 9 折，一度跌到 6 分。</p>
+
+      <div class="item">
+        <p class="label">第四个角</p>
+        <p>潜意识里觉得自己是一个城堡，应该有四个角，但地震山体滑坡，把第四个角埋住了。缺的这个角到底是什么？一直没想到。</p>
+      </div>
+
+      <div class="item">
+        <p class="label">论语的故事</p>
+        <p>子贡说自己能做到"贫而无谄，富而无骄"，孔子说"不错"，但更高境界是"根本不会起这种念头，不用贫富的框架去评判别人。"那一刻意识到：也许这就是 missing part——人与人的关系。</p>
+      </div>
+
+      <div class="item">
+        <p class="label">互利共赢的局限</p>
+        <p>创业让人明白，人与人的最高纲领是"互利共赢"的交易模式——它结出的果子可能又大又红，但不一定甜。能不能有一种关系，可以超越"贫富""利益交换"这些评价框架？</p>
+      </div>
+
+      <p class="highlight">人和人的关系，是城堡缺失的第四个角</p>
+
+      <div class="divider"></div>
+
+      <h2>六、真理与活出来</h2>
+
+      <div class="item">
+        <p class="label">三世界结合点</p>
+        <p>人活在三个世界里：物理世界（原子、材料、工程）；概念世界（制度、管理、愿景）；感受世界（快乐、痛苦、意义）。真理是找到这三个世界的结合点：怎么感受、怎么组织规则、怎么把东西做出来——最后能在商业上站得住，同时沉淀出更健康的组织和秩序。</p>
+      </div>
+
+      <div class="item">
+        <p class="label">创始人最大的创造</p>
+        <p>把个人的愿景和公司统一。创始人的价值观和公司的价值观，本来是两张皮，等到这两张皮能真正贴在一起，就可以退休了。</p>
+      </div>
+
+      <div class="item">
+        <p class="label">活出来的难度</p>
+        <p>《阿特拉斯耸耸肩》可以牺牲真实拼凑情节。人生：先要是真理，再要真实活出来，然后才能写出来。"活出来，才是那 99% 的难度。"</p>
+      </div>
+
+      <p class="highlight">追求发现真理，并用真理去活</p>
+
+      <div class="divider"></div>
+
+      <h2>七、时间窗口</h2>
+
+      <p>一个人最有创造力的年纪还是 60 岁之前。如果 60 岁之前没把"底子"种好，这辈子可能就没机会了。</p>
+
+      <div class="item">
+        <p class="label">14 年</p>
+        <p>"我现在还有 14 年，但 14 年也不长——你看疫情到现在都 6 年了。"</p>
+      </div>
+
+      <div class="item">
+        <p class="label">出师未捷身先老</p>
+        <p>可能出师未捷身先老是最恐惧的事。未来几年才是见真章的时候。这个游戏最大的乐趣就是它有不确定性。</p>
+      </div>
+
+      <div class="item">
+        <p class="label">不粘锅</p>
+        <p>心魔如金角银角大王，喊你一声你敢答应吗？心里挂着东西就会被勾住。要心无旁骛，就是"不粘锅"，别人怎么来你都不粘。</p>
+      </div>
+
+      <p class="highlight">对结果有足够的信心，但又永远不可能、也不应该 100% 相信会成功。结果不确定，路才有意义</p>
+
+      <div class="divider"></div>
+
+      <h2>八、二十年</h2>
+
+      <p>创业二十年，汪滔对自己最满意的，不是做出一家世界级公司，而是学会了反思。</p>
+
+      <p class="highlight">人最宝贵的品质：不自欺，不自我包装、自我感动</p>
+
+      <p>从"世界蠢得不可思议"到"世界蠢得不可思议，我也是"，再到"世界可以好很多，我也还能好很多"。</p>
+
+      <p>这是一个创业者从年少轻狂走向成熟，重新看到自己、看到他人，也看到世界的过程。</p>
+    </div>
+    <div class="footer">
+      <div class="author">
+        <img class="avatar" src="/assets/kanye.png" alt="">
+        <span class="author-name">晚点 LatePost</span>
+      </div>
+    </div>
+  </div>
+<script src="/assets/gate.js"></script>
+</body>
+</html>
