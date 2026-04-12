@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="viewport" content="width=1080, user-scalable=yes">
+<title>Andy Jassy · koi</title>
+<meta charset="UTF-8">
+<style>
+  @font-face {
+    font-family: 'KingHwa_OldSong';
+    src: url('/assets/KingHwa_OldSong.subset.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+  }
+
+  :root {
+    --bg: #FAF7F2;
+    --text: #1A1612;
+    --text-mid: #6B5E50;
+    --text-dim: #B0A090;
+    --accent: #7C5228;
+    --rule: #E8DFD0;
+    --font: 'KingHwa_OldSong', 'PingFang SC', system-ui, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 1080px;
+    background: var(--bg);
+  }
+
+  .card {
+    width: 1080px;
+    background: var(--bg);
+    padding: 72px 80px 56px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── Title ── */
+  .title-area {
+    flex-shrink: 0;
+    margin-bottom: 56px;
+  }
+
+  .title-area .eyebrow {
+    font: 400 22px/2 var(--font);
+    color: var(--text-dim);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .title-area h1 {
+    font: 700 88px/1.1 var(--font);
+    color: var(--text);
+    letter-spacing: -0.03em;
+    margin-bottom: 24px;
+  }
+
+  .title-area .subtitle-line {
+    font: 400 36px/1.5 var(--font);
+    color: var(--text-mid);
+    margin-bottom: 28px;
+  }
+
+  .title-area::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--accent);
+  }
+
+  /* ── Content ── */
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .content p {
+    font: 400 34px/1.75 var(--font);
+    color: var(--text);
+    margin-bottom: 28px;
+  }
+
+  .content .highlight {
+    font: 500 38px/1.6 var(--font);
+    color: var(--text);
+    padding: 16px 0 16px 28px;
+    border-left: 3px solid var(--accent);
+    margin: 40px 0;
+    background: rgba(124,82,40,0.04);
+  }
+
+  .content h2 {
+    font: 600 44px/1.35 var(--font);
+    color: var(--text);
+    margin: 56px 0 24px;
+    letter-spacing: -0.02em;
+  }
+
+  .content h2:first-child {
+    margin-top: 0;
+  }
+
+  .content h3 {
+    font: 600 38px/1.4 var(--font);
+    color: var(--accent);
+    margin: 40px 0 18px;
+    letter-spacing: -0.01em;
+  }
+
+  .content .subtitle {
+    font: 400 22px/2 var(--font);
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .content .item {
+    margin-bottom: 40px;
+    padding-left: 0;
+  }
+
+  .content .item:last-child {
+    margin-bottom: 0;
+  }
+
+  .content .item .label {
+    font: 600 36px/1.5 var(--font);
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .content .item p {
+    font: 400 32px/1.7 var(--font);
+    color: var(--text-mid);
+    margin-bottom: 0;
+  }
+
+  .content blockquote {
+    margin: 0 0 32px;
+    padding: 20px 28px;
+    border-left: 3px solid var(--rule);
+    background: rgba(0,0,0,0.02);
+  }
+
+  .content blockquote p {
+    font: 300 34px/1.75 var(--font);
+    color: var(--text-mid);
+    margin-bottom: 0;
+  }
+
+  .content strong {
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .content .divider {
+    height: 1px;
+    background: var(--rule);
+    margin: 48px 0;
+  }
+
+  .content ul {
+    list-style: none;
+    margin-bottom: 28px;
+  }
+
+  .content ul li {
+    font: 400 34px/1.75 var(--font);
+    color: var(--text);
+    padding: 4px 0 4px 32px;
+    position: relative;
+    margin-bottom: 8px;
+  }
+
+  .content ul li::before {
+    content: '·';
+    position: absolute;
+    left: 8px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* number badge for key insights */
+  .num-badge {
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #FAF7F2;
+    font: 600 26px/48px var(--font);
+    text-align: center;
+    margin-right: 14px;
+    vertical-align: middle;
+    flex-shrink: 0;
+  }
+
+  .insight-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    margin-bottom: 36px;
+  }
+
+  .insight-row .badge {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #FAF7F2;
+    font: 700 24px/50px var(--font);
+    text-align: center;
+    margin-top: 4px;
+  }
+
+  .insight-row .body .label {
+    font: 600 36px/1.45 var(--font);
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .insight-row .body p {
+    font: 400 32px/1.7 var(--font);
+    color: var(--text-mid);
+    margin-bottom: 0;
+  }
+
+  /* data table */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 36px;
+    font: 400 30px/1.6 var(--font);
+  }
+
+  .data-table th {
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-mid);
+    font-size: 26px;
+    letter-spacing: 0.08em;
+    padding: 12px 16px 12px 0;
+    border-bottom: 2px solid var(--rule);
+  }
+
+  .data-table td {
+    padding: 14px 16px 14px 0;
+    border-bottom: 1px solid var(--rule);
+    color: var(--text);
+    vertical-align: top;
+  }
+
+  .data-table td strong {
+    color: var(--accent);
+  }
+
+  .data-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  /* ── Drop Cap ── */
+  .content .dropcap::first-letter {
+    font: 700 132px/0.82 'KingHwa_OldSong', Georgia, serif;
+    float: left;
+    margin: 6px 18px 0 -4px;
+    color: var(--accent);
+  }
+
+  /* ── End Mark ── */
+  .content::after {
+    content: '∎';
+    display: block;
+    text-align: right;
+    font-size: 18px;
+    color: var(--text-dim);
+    margin-top: 48px;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 52px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .footer .author {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .footer .avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .footer .author-name {
+    font: 400 24px/1.5 var(--font);
+    color: var(--text-mid);
+    letter-spacing: 0.03em;
+  }
+
+  .footer .source-tag {
+    font: 400 22px/1.5 var(--font);
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+  }
+</style>
+
+<style>
+  html, body {
+    width: 100% !important;
+    min-width: 1080px !important;
+    background: #F5F5F7 !important;
+  }
+  body > .card, body > .page, body > main {
+    margin: 0 auto !important;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="title-area">
+      <p class="eyebrow">2025 年致股东信</p>
+      <h1>Andy Jassy</h1>
+      <p class="subtitle-line">直线是个谎言——全量 Insight 提取</p>
+    </div>
+
+    <div class="content">
+
+      <h2>壹 · 主题论点："直线是个谎言"</h2>
+
+      <p class="dropcap">信的标题来自一支新西兰乐队 The Beths 的专辑名——<strong>"Straight Line Was a Lie"</strong>。这不是文学修辞，而是整封信的认识论基础。</p>
+
+      <p>Jassy 自己的职业路径：体育解说员 → 体育制作 → 高中足球教练 → 零售 PM → 创业失败 → 销售 → 投行 → 商学院 → Amazon。AWS 的路径：初始愿景（存储+计算+支付+人力智能）→ 数据库失败重来 → 企业说"绝不用云" → CIA 上了 AWS → 高速增长 → 2014 年有高管问"我们为什么要做这个业务？"</p>
+
+      <p class="highlight">任何在复杂系统中的长期赌注，中间的路径都是蜿蜒的。能接受这一点的人和组织，才能熬到终点。无法接受的人，在每次弯曲时就退出了。</p>
+
+      <div class="divider"></div>
+
+      <h2>贰 · 五个战略框架</h2>
+
+      <h3>框架 1：主动发明下一个"拐点"</h3>
+
+      <p>核心逻辑：不等市场来冲击你，你主动预见并制造拐点。</p>
+
+      <div class="item">
+        <p class="label">机器人</p>
+        <p>2012 年收购 Kiva，14 年投入，现在超过 <strong>100 万台机器人</strong>在仓库运作（拣货/分拣/内部运输）。还处于早期。未来可能对外出售机器人解决方案给工业和消费者客户。</p>
+      </div>
+
+      <div class="item">
+        <p class="label">农村配送</p>
+        <p>竞争对手撤退的地方，Amazon 进。承诺 $40 亿扩张农村配送网络。农村 Same-Day 月均用户数 2025 年同比<strong>翻倍</strong>。网络建成后每年可多送 <strong>10 亿个包裹</strong>，覆盖 13,000 个邮编、<strong>120 万平方英里</strong>。</p>
+      </div>
+
+      <div class="item">
+        <p class="label">Amazon Leo（低轨卫星宽带）</p>
+        <p>7 年建设，已有 200+ 颗卫星入轨（全球第三大 LEO 网络）。上行速度提升 <strong>6-8 倍</strong>，下行提升 <strong>2 倍</strong>，成本更低，且<strong>无缝整合 AWS</strong>。客户：Delta（500 架飞机，2028 年），JetBlue，AT&T，Vodafone，NASA 等。2026 年中正式商业发射。</p>
+      </div>
+
+      <p class="highlight">选择在竞争对手认为不划算的市场进入（农村、偏远地区），是一种长期的反共识战略。别人撤退，你的网络效应和品牌忠诚度更纯净。</p>
+
+      <h3>框架 2：追求并行路径（2 > 0）</h3>
+
+      <p>核心逻辑：当不清楚哪条路最好时，同时走几条。</p>
+
+      <p><strong>极速配送的并行三路——</strong></p>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>方式</th>
+            <th>形态</th>
+            <th>目标</th>
+            <th>现状</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>SSD 同日配送中心</strong></td>
+            <td>地面，90,000 SKU</td>
+            <td>全天同日达</td>
+            <td>全美 85+ 个，2026 已送超 5 亿件</td>
+          </tr>
+          <tr>
+            <td><strong>Prime Air 无人机</strong></td>
+            <td>空中，30 分钟内</td>
+            <td>年底覆盖 3000 万用户</td>
+            <td>设计已成熟，计划十年内送 5 亿件</td>
+          </tr>
+          <tr>
+            <td><strong>Amazon Now</strong></td>
+            <td>微型仓，20 分钟</td>
+            <td>印度/UAE/美国/欧洲</td>
+            <td>印度 360+ 微仓，月环比增 25%</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>很多公司会辩论几个月选哪条路，然后全部放弃。Amazon 的选择是<strong>同时押注</strong>——无人机需要多年研发周期，不能等；三者之间存在协同（无人机以 SSD 为起点）；单独"等一等"是让竞争对手进入的窗口。</p>
+
+      <p><strong>杂货的并行路径</strong>：Whole Foods（有机）+ Amazon Fresh（主流实体）+ 会员订阅 + 店中店 + 同日生鲜。并非所有实验成功，但每个都教会了他们什么。结论：生鲜并入同日配送后，销量增长 <strong>40 倍</strong>，成为同日配送 Top 10 品类中的 9 个。杂货业务总销售额 $1500 亿，美国<strong>第二大杂货商</strong>。</p>
+
+      <h3>框架 3：发现不成比例的拐点时，重注押入</h3>
+
+      <p>Jassy 对"AI 是否被高估"给出了他最强的回答：不是。用 6 个"hard to debate"的论据——</p>
+
+      <div class="item">
+        <p class="label">论据 1：采用速度史无前例</p>
+        <p>ChatGPT 上线 2 个月达到 1 亿用户——是 TikTok 的 4 倍速、Instagram 的 15 倍速。现在已超过 <strong>9 亿周活跃用户</strong>。OpenAI 和 Anthropic 的年化营收都接近 $300 亿。爱迪生 1882 年开电厂时，人们只看到"更好的灯"——没人预见电力会重组地球上每一个工厂、家庭、产业。AI 可能类似，但<strong>速度快 10 倍</strong>。</p>
+      </div>
+
+      <div class="item">
+        <p class="label">论据 2：AWS 处于这场"圈地运动"的中心</p>
+        <p>AWS 商业化 3 年后，年化营收 $5800 万。AI 浪潮开始 3 年后（Q1 2026），AWS AI 年化营收超过 <strong>$150 亿</strong>——是前者的 <strong>260 倍</strong>。</p>
+      </div>
+
+      <div class="item">
+        <p class="label">论据 3：供不应求</p>
+        <p>AWS 2025 年新增 <strong>3.9 吉瓦（GW）</strong>电力容量，2027 年底前预计总电力容量翻倍。Q4 2025：AWS 年化营收 $1420 亿，同比增 24%，仍有未被满足的需求。已有两家大客户请求包下 AWS 全部 Graviton 算力（2026 年）——被拒了，但足见需求量级。</p>
+      </div>
+
+      <div class="item">
+        <p class="label">论据 4：芯片业务（见第三章详述）</p>
+        <p>当前年化营收 $200 亿，如独立出售约 $500 亿。增速三位数。</p>
+      </div>
+
+      <div class="item">
+        <p class="label">论据 5：FCF 力学——短期阵痛，长期爆发</p>
+        <p>capex 先行 6-24 个月。资产使用寿命：数据中心 30+ 年，服务器 5-6 年。几年后 FCF 和 ROIC 极具吸引力。</p>
+      </div>
+
+      <div class="item">
+        <p class="label">论据 6：客户承诺让 capex 可预期</p>
+        <p>OpenAI 承诺超过 <strong>$1000 亿</strong>，还有多个尚未宣布的大额协议。2026 年约 $2000 亿 capex 中，大部分已有客户承诺。</p>
+      </div>
+
+      <p class="highlight">AI 是一生一次的机会。当前增长史无前例，未来增长更大。我们不会保守——我们要成为有实质性领导地位的玩家。</p>
+
+      <h3>框架 4：接受"回到起跑线"</h3>
+
+      <p>这是信中最反常识、最难执行的洞察。</p>
+
+      <div class="item">
+        <p class="label">Bedrock 推理引擎重建（最惊艳的具体案例）</p>
+        <p>正常做法：40 人花 1 年小心重建。Amazon 的做法：<strong>6 个工程师</strong>，使用 Kiro（AI 编程工具），<strong>76 天完成</strong>。新引擎代号"Mantle"，成为 Bedrock 骨干。结果：Bedrock 在 2026 年 3 月月环比近乎翻倍，Q1 2026 处理的 token 数量<strong>超过此前所有年份的总和</strong>。40 人年 → 6 人 × 76 天，工程生产力提升约 10-15 倍。</p>
+      </div>
+
+      <div class="item">
+        <p class="label">Alexa+ 完全重构</p>
+        <p>600 million 活跃端点。大模型出现后，必须完全重写 Alexa 的"大脑"、路由逻辑、API 接入、任务能力，同时服务现有庞大用户群。结果：用户和 Alexa 的通话量 <strong>×2</strong>（更长、更广），设备购物 <strong>×3</strong>，音乐流媒体 <strong>+25%</strong>，智能家居 <strong>+50%</strong>。</p>
+      </div>
+
+      <p class="highlight">如果你相信所有客户体验都会被 AI 重塑，那么最舒适、最广泛采用的体验也不例外。诱惑是"只加一点 AI"。但真正的挑战是：假设今天才开始，用现有技术从白纸开始构建。</p>
+
+      <h3>框架 5：培育能应对"蜿蜒路径"的文化</h3>
+
+      <p>以下 8 条，是 Jassy 在 Amazon 28 年提炼出的文化要素——</p>
+
+      <ul>
+        <li>正确的数据、机制、"说真话的人"——不是政治正确，而是能质问"什么变了、应该怎么做"</li>
+        <li>能与模糊共存——新常态形成过程中，必须有能够在不确定性中运作的人和文化</li>
+        <li>疯狂地发明和实验——大量实验会失败，但文化必须有<strong>坚韧（tenacity）</strong>继续</li>
+        <li>不断学习——每次尝试（自己的或他人的）都在揭示用户真正想要什么</li>
+        <li>快速行动，像真正的 owner——Amazon 过去一年大力"压平组织"，决策和交付速度明显提升</li>
+        <li>愿意"过度押注"重要的事——投资多一点比错过大机会好。新信号出现时迅速纠偏</li>
+        <li>既能发明拐点，也能跟进别人的拐点——不只做先行者，没有率先进入时，受启发后发明独特体验</li>
+        <li>承受被误解——<strong>"comfortable being misunderstood for long periods of time"</strong>——在变革中，外部批评是噪声，不是信号</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <h2>叁 · 芯片战略：被严重低估的信息</h2>
+
+      <p>历史类比：2018 年发明 Graviton（自研 CPU）前，AWS 几乎所有工作负载跑在 Intel 芯片上。Graviton 比同类 x86 性能价格比高 <strong>40%</strong>。现在：Top 1,000 EC2 客户中 <strong>98%</strong> 使用 Graviton。</p>
+
+      <p><strong>AI 芯片正在复刻同一剧本——</strong></p>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>芯片代际</th>
+            <th>性价比优势</th>
+            <th>状态</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Trainium2</strong></td>
+            <td>比同类 GPU 好 30%</td>
+            <td>基本售罄</td>
+          </tr>
+          <tr>
+            <td><strong>Trainium3</strong>（2026 年初发货）</td>
+            <td>比 Trainium2 好 30-40%</td>
+            <td>几乎全部预订完</td>
+          </tr>
+          <tr>
+            <td><strong>Trainium4</strong>（约 18 个月后）</td>
+            <td>未披露</td>
+            <td>大量已被预留</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>Amazon Bedrock 的大部分推理——跑在 Trainium 上，不是 NVIDIA。</p>
+
+      <p><strong>财务量级：</strong>当前年化营收 <strong>$200 亿</strong>（Graviton + Trainium + Nitro），增速三位数同比增长。如果作为独立公司出售（像其他芯片公司那样），年化营收约 <strong>$500 亿</strong>。"There's so much demand for our chips that it's quite possible we'll sell racks of them to third parties in the future."</p>
+
+      <p class="highlight">At scale，Trainium 每年将为 Amazon 节省数百亿美元 capex，并在 inference 上带来数百个基点的营业利润优势。这是成本结构的根本性改变，不只是技术独立。</p>
+
+      <div class="divider"></div>
+
+      <h2>肆 · 财务结构拆解</h2>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>指标</th>
+            <th>2024</th>
+            <th>2025</th>
+            <th>增速</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>总营收</td>
+            <td>$6380 亿</td>
+            <td>$7170 亿</td>
+            <td>+12%</td>
+          </tr>
+          <tr>
+            <td>北美</td>
+            <td>$3870 亿</td>
+            <td>$4260 亿</td>
+            <td>+10%</td>
+          </tr>
+          <tr>
+            <td>国际</td>
+            <td>$1430 亿</td>
+            <td>$1620 亿</td>
+            <td>+13%</td>
+          </tr>
+          <tr>
+            <td>AWS</td>
+            <td>$1080 亿</td>
+            <td>$1290 亿</td>
+            <td>+20%</td>
+          </tr>
+          <tr>
+            <td>营业利润</td>
+            <td>$690 亿（10.8%）</td>
+            <td>$800 亿（11.2%）</td>
+            <td>+17%</td>
+          </tr>
+          <tr>
+            <td><strong>自由现金流（FCF）</strong></td>
+            <td>$380 亿</td>
+            <td>$110 亿</td>
+            <td><strong>-71%</strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p><strong>FCF 暴跌解读（最容易被误读的数字）：</strong>FCF 从 $380 亿 → $110 亿，原因是固定资产购置同比多花了 $507 亿。这是<strong>主动的、预谋的</strong>，不是业绩恶化。Jassy 明确说：我们经历过第一波 AWS 高速增长时相同的 FCF 模式，最后很喜欢结果。这次也一样。</p>
+
+      <p><strong>还有多大空间：</strong></p>
+      <ul>
+        <li>零售：$6000 亿 topline，但全球零售 <strong>80% 仍在实体店</strong></li>
+        <li>AWS：$1420 亿 run rate，但全球 IT 支出 <strong>85% 仍在本地部署（on-premises）</strong></li>
+      </ul>
+
+      <p>Jassy 用的是 "This will change"，不是 "can change"。这是确信，不是愿景。</p>
+
+      <div class="divider"></div>
+
+      <h2>伍 · AI 作为"乘法器"，不是独立项目</h2>
+
+      <p class="highlight">AI is not a standalone initiative—it's a multiplier. It will reshape every customer experience we offer and unlock entirely new ones.</p>
+
+      <p><strong>乘法器（multiplier）</strong>vs <strong>独立项目（initiative）</strong>的区别：独立项目是在公司里有个 AI 团队，做几个 AI 产品。乘法器是：零售体验要重构、AWS 要重构、Alexa 要重构、物流要重构、广告要重构——AI 作用于每一层。这也是为什么 Jassy 愿意接受 $2000 亿 capex 带来的短期 FCF 压力：这不是押注一个新业务，而是整个公司的能力系数在提升。</p>
+
+      <div class="divider"></div>
+
+      <h2>陆 · 1997 年 Bezos 信——时间锚</h2>
+
+      <p>Jassy 在信末附上 <strong>1997 年 Bezos 致股东信全文</strong>，并说："What's written there is as true today as it was in 1997."</p>
+
+      <div class="item">
+        <p class="label">"It's All About the Long Term"</p>
+        <p>当短期利润和未来现金流冲突，选现金流。当 GAAP 账面好看和实际 FCF 冲突，选 FCF。</p>
+      </div>
+
+      <div class="item">
+        <p class="label">五个字的面试标准</p>
+        <p>"You can work long, hard, or smart, but at Amazon.com you can't choose two out of three."——你可以选工作时间长、工作努力、或工作聪明，但 Amazon 不给你只选两个的机会，三个都要。</p>
+      </div>
+
+      <div class="item">
+        <p class="label">Day 1 的定义</p>
+        <p>"This is Day 1 for the Internet, and, if we execute well, for Amazon.com."——1997 年说这话。2025 年 Jassy 附上这封信，意思是：<strong>我们还是 Day 1</strong>。28 年后仍自称创业公司。</p>
+      </div>
+
+      <div class="item">
+        <p class="label">成长的代价</p>
+        <p>"We will make bold rather than timid investment decisions where we see a sufficient probability of gaining market leadership advantages. Some of these investments will pay off, others will not, and we will have learned another valuable lesson in either case."——失败也是课。这是 Amazon 整个投资哲学的原文出处。</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <h2>柒 · 最被低估的 5 个 Insight</h2>
+
+      <div class="insight-row">
+        <div class="badge">1</div>
+        <div class="body">
+          <p class="label">农村战略是反共识长牌</p>
+          <p>竞争对手都在农村撤退。Amazon 冲进去。理由：全球零售 80% 在实体，农村市场巨大但被忽视。先到的人锁定了忠诚度，后来者难以追赶。这是一种在对手看不上的市场建立垄断的经典动作。</p>
+        </div>
+      </div>
+
+      <div class="insight-row">
+        <div class="badge">2</div>
+        <div class="body">
+          <p class="label">Bedrock 的 76 天故事 = AI 工程生产力的基准</p>
+          <p>6 人 × 76 天 = 40 人 × 1 年的工作。这不是内部提效故事，这是 Jassy 在向股东（和市场）宣告：AI 原生工程的时代来了，效率曲线发生了根本性变化。这个数字会被引用很多年。</p>
+        </div>
+      </div>
+
+      <div class="insight-row">
+        <div class="badge">3</div>
+        <div class="body">
+          <p class="label">芯片是下一个 AWS</p>
+          <p>Graviton 用 7 年替换了 Intel，现在 Trainium 要用同样的逻辑替换 NVIDIA。但规模更大——AI 芯片是百亿级业务，且在最关键的成本结构（inference）上产生压倒性优势。$500 亿独立估值目前几乎未被市场定价。</p>
+        </div>
+      </div>
+
+      <div class="insight-row">
+        <div class="badge">4</div>
+        <div class="body">
+          <p class="label">Amazon Leo + AWS 是"互联网基础设施的垂直整合"</p>
+          <p>不是独立的卫星宽带业务——而是把 AWS 扩展到"没有互联网的地方"。企业和政府用 Leo 连上来，数据自然流向 AWS。这是一条新的 AWS 进入路径，打开了地球上 85% 尚未上云的 IT 支出。</p>
+        </div>
+      </div>
+
+      <div class="insight-row">
+        <div class="badge">5</div>
+        <div class="body">
+          <p class="label">FCF 下跌是信号，不是警报</p>
+          <p>市场往往把 FCF 下降解读为坏消息。但如果你理解 capex-revenue 时间差的力学，这恰恰是 Amazon 历史上最好的状态之一：有确定性的需求，有定价权，有长寿命资产，有客户承诺——只是账还没出来。懂这个的人，就从口香糖纸参透了宇宙。</p>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <p class="highlight">这封信的元结构本身是一个战略文件：同时是股东沟通、文化宣言、竞争者信号、招聘文件、历史记录。每一个具体案例背后都是一套可复用的思维框架，不只是 Amazon 的故事。</p>
+
+    </div>
+
+    <div class="footer">
+      <div class="author">
+        <img class="avatar" src="/assets/kanye.png" alt="">
+        <span class="author-name">Andy Jassy · Amazon 2025 致股东信</span>
+      </div>
+      <span class="source-tag"></span>
+    </div>
+  </div>
+<script src="/assets/gate.js"></script>
+</body>
+</html>
