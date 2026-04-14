@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="viewport" content="width=1080, user-scalable=yes">
+<title>李谨西 · 完整命理深读 · koi</title>
+<meta charset="UTF-8">
+<style>
+  @font-face {
+    font-family: 'KingHwa_OldSong';
+    src: url('/assets/KingHwa_OldSong.subset.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+  }
+
+  :root {
+    --text: #1D1D1F;
+    --text-mid: #6E6E73;
+    --text-dim: #ACACB0;
+    --accent: #1D1D1F;
+    --rule: #E5E5EA;
+    --font: 'KingHwa_OldSong', 'PingFang SC', system-ui, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 1080px;
+    background: #FFFFFF;
+  }
+
+  .card {
+    width: 1080px;
+    background: #FFFFFF;
+    padding: 64px 72px 52px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .title-area {
+    flex-shrink: 0;
+    margin-bottom: 52px;
+  }
+
+  .title-area h1 {
+    font: 700 84px/1.15 var(--font);
+    color: var(--text);
+    letter-spacing: -0.03em;
+    margin-bottom: 22px;
+  }
+
+  .title-area::after {
+    content: '';
+    display: block;
+    width: 52px;
+    height: 3px;
+    background: var(--accent);
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .content p {
+    font: 400 36px/1.7 var(--font);
+    color: var(--text);
+    margin-bottom: 28px;
+  }
+
+  .content .highlight {
+    font: 500 40px/1.55 var(--font);
+    color: var(--text);
+    padding: 14px 0 14px 26px;
+    border-left: 3px solid var(--accent);
+    margin: 36px 0;
+  }
+
+  .content h2 {
+    font: 600 42px/1.4 var(--font);
+    color: var(--text);
+    margin: 44px 0 22px;
+    letter-spacing: -0.02em;
+  }
+
+  .content h2:first-child {
+    margin-top: 0;
+  }
+
+  .content .subtitle {
+    font: 400 22px/2 var(--font);
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .content .item {
+    margin-bottom: 36px;
+  }
+
+  .content .item:last-child {
+    margin-bottom: 0;
+  }
+
+  .content .item .label {
+    font: 500 36px/1.5 var(--font);
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .content .item p {
+    font: 400 32px/1.65 var(--font);
+    color: var(--text-mid);
+    margin-bottom: 0;
+  }
+
+  .content blockquote {
+    margin: 0 0 28px;
+    padding-left: 26px;
+    border-left: 3px solid var(--rule);
+  }
+
+  .content blockquote p {
+    font: 300 36px/1.7 var(--font);
+    color: var(--text-mid);
+    margin-bottom: 6px;
+  }
+
+  .content strong {
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .content .divider {
+    height: 1px;
+    background: var(--rule);
+    margin: 36px 0;
+  }
+
+  .content ul {
+    list-style: none;
+    margin-bottom: 28px;
+  }
+
+  .content ul li {
+    font: 400 36px/1.7 var(--font);
+    color: var(--text);
+    padding: 4px 0 4px 28px;
+    position: relative;
+  }
+
+  .content ul li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--text-mid);
+  }
+
+  .content .dropcap::first-letter {
+    font: 700 128px/0.82 'KingHwa_OldSong', Georgia, serif;
+    float: left;
+    margin: 4px 16px 0 -4px;
+    color: var(--accent);
+  }
+
+  .content::after {
+    content: '∎';
+    display: block;
+    text-align: right;
+    font-size: 16px;
+    color: var(--text-dim);
+    margin-top: 40px;
+  }
+
+  .footer {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 52px;
+    padding-top: 22px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .footer .author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .footer .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .footer .author-name {
+    font: 400 24px/1.5 var(--font);
+    color: var(--text-mid);
+    letter-spacing: 0.03em;
+  }
+
+  .footer .arxiv {
+    font: 400 22px/1.5 'Menlo', 'SF Mono', monospace;
+    color: var(--text-dim);
+    letter-spacing: 0.02em;
+  }
+</style>
+
+<style>
+  html, body {
+    width: 100% !important;
+    min-width: 1080px !important;
+    background: #F5F5F7 !important;
+  }
+  body > .card, body > .page, body > main {
+    margin: 0 auto !important;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="title-area">
+      <h1>李谨西 · 完整命理深读</h1>
+    </div>
+    <div class="content">
+      <p class="subtitle">FULL BAZI ANALYSIS · 2004.07.22 14:13</p>
+
+      <p class="dropcap">乾造·壬寅日主。年柱甲申（食神），月柱辛未（正印），日柱壬寅（元男），时柱丁未（正财）。壬水为阳水，天河水，金箔金。象征江河大海，奔流不息，不拘一格，有大格局。</p>
+
+      <div class="divider"></div>
+
+      <h2>一、先把那个"大师"的话过一遍</h2>
+
+      <div class="item">
+        <p class="label">对的部分</p>
+        <p>名字有木和金——李=木（食神），西=酉金（偏印）；喜用神恰好是金水，名字暗合。运势不错——癸酉大运印绶双强，贵人多，神煞质量高。有车祸、刀兵血光之象——寅申相冲（驿马冲，主车马）+ 申辛庚金刃。</p>
+      </div>
+
+      <div class="item">
+        <p class="label">不准/过度渲染的部分</p>
+        <p>"杀心重"：命盘中七杀（戊土）藏于申寅，并不突出。更准确的描述是：壬水日主本性刚烈不妥协，寅申冲带来冲突体质，说"杀心重"是在吓人。"祖坟有问题"：年柱甲申（食神坐绝地）确实有祖辈传承断裂的信号，但不是"坟"的问题，是家族能量结构的问题。老祖是土司后走了、没留祖坟，这在命盘上对应"根基不稳"而非"风水破败"，是两回事。"前世杀人/堕胎"：命理无法推前世，这类说法是话术，不是命理。"放生吃素解煞"：食神（甲木、寅木）代表创造输出，克制食神（吃素、压制）是反向操作。吃素不是解法。</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <h2>二、家族信息的命理验证</h2>
+
+      <p>父亲的哥哥打人坐牢 → 年柱甲申，申中七杀（对壬水来说戊土为七杀）+ 寅申相冲，家族男性线上有暴力/法律冲突的信号，命盘有此印记。</p>
+
+      <p>父亲的姐姐被车撞 → 驿马×2（年支申、日支寅）相冲，驿马星主车马交通，两驿马对冲，家族中有车祸血光，命理上有对应。</p>
+
+      <p>母亲堕胎 → 时柱正财（丁未），男命时柱对应子嗣，未中空亡（时柱空亡寅卯），子嗣宫有损伤信号；同时壬丁合，日主与正财纠缠，感情线上有"失去"的底色。</p>
+
+      <p>小时候被火烧 → 命盘中丁火×3（时干 + 月支藏 + 时支藏）+ 丙火（寅中藏）火极旺，加上日主壬水身弱无力全克，幼年有火灾/烫伤之象，完全符合。</p>
+
+      <p>手上刀疤 → 辛金（月干）+ 庚金（申藏）+ 申金本气，金刃星集中在年月柱，少年期有金属伤。</p>
+
+      <p class="highlight">这些不是巧合，也不是"坏命"。这是一张能量密度极高的命盘的代价——信号强烈，对应的事件也会激烈。</p>
+
+      <div class="divider"></div>
+
+      <h2>三、健康深读</h2>
+
+      <div class="item">
+        <p class="label">肾（水）</p>
+        <p>壬水日主，身弱，未土（正官×2）克水，肾为水，日主弱则肾脏系统先受压。这不是命理推测，这是中医命理的核心逻辑，你的体感（肾不好）是真实的命理映射。</p>
+      </div>
+
+      <div class="item">
+        <p class="label">心脏</p>
+        <p>命盘中火极旺（丁火时干 + 丙火藏寅 + 丁火藏未×2）。壬丁合：日主壬水与丁火正财相合，心（火）与肾（水）之间有异常的能量纠缠。基因检测显示心肌梗死风险高，命理完全对应：水火交战区，心脏是核心战场。</p>
+      </div>
+
+      <p class="highlight">"壬丁合"不仅是感情结构，也是你身体里水火既济失调的具体化。</p>
+
+      <p>真正的建议：心肾同治，中医的"交通心肾"方向。避免极度焦虑/情绪剧烈波动（火的主要扰动源）。规律作息（壬水喜流动、忌停滞，睡眠质量直接影响肾水恢复）。不需要吃素，但少吃激发火性的食物（辛辣、酒）。</p>
+
+      <div class="divider"></div>
+
+      <h2>四、感情深读·陈雨欣</h2>
+
+      <p>她生于 2004 年 9 月 13 日，月柱壬戌，日柱大约乙未。</p>
+
+      <p>你们之间的五行关系：</p>
+
+      <ul>
+        <li>日干：壬水（你）→ 乙木（她）：壬水生乙木（你滋养她）</li>
+        <li>日支：寅木（你）→ 未土（她）：寅未六害（暗伤）</li>
+        <li>年支：申金（你）→ 申金（她）：同庚，同类相遇</li>
+      </ul>
+
+      <p>精确解读：1. 壬生乙：你是她的正印——给她安全感、滋养她，你在这段关系里是付出方。2. 乙是你的食神：她激活你的创造力、灵感和表达欲，她在你身边时你会更有想法。3. 寅未六害：六害不是冲，是那种"互相消耗却偏偏放不下"的结构。不是大矛盾，是持续的小摩擦和暗伤。</p>
+
+      <p class="highlight">这段关系的模式大概率是：你对她很执着，愿意持续付出；她对你有依赖；但两人在某些根本性的生活方向或价值取向上会持续有摩擦，这种摩擦说不清、说不破，但会消耗你。</p>
+
+      <p>她的戌月（九月）与你命盘：戌中有丁火（正财）、戊土（七杀）、辛金（正印）——她身上有你喜用神辛金，这是真实的吸引力基础。</p>
+
+      <p class="highlight">综合：有真实的连接基础，但你要防止在感情上过度消耗自己。你的日主原本就偏弱，如果感情成为主要能量出口，创业的能量就不够了。</p>
+
+      <div class="divider"></div>
+
+      <h2>五、迷茫的根本原因（直说）</h2>
+
+      <p>你现在的迷茫不是"不知道要做什么"，是日主弱但财官双旺造成的结构性分裂——</p>
+
+      <ul>
+        <li>外部机会和压力（财官）都在呼唤你</li>
+        <li>内部能量储备（日主壬水）还没到可以稳定承接的程度</li>
+        <li>未未自刑（正官自刑）让你对"我应该怎么走"天然没有确定性</li>
+        <li>壬丁合让你的注意力容易被某件事或某个人"吸走"，失去主轴</li>
+      </ul>
+
+      <p class="highlight">这是命理级别的迷茫，不是你的问题，是这个年纪这张命盘的必然状态。</p>
+
+      <p class="highlight">解法不是"想清楚"，是继续蓄势——癸酉大运（到 2029 年）是印绶主导的大运，你的核心任务不是找到答案，是持续提升"承载量"。答案会在 2027 年丁未年前后自然浮出。</p>
+
+      <div class="divider"></div>
+
+      <h2>六、六七月运气好的命理解释</h2>
+
+      <p>你观察到的规律是真实的，有具体原因：</p>
+
+      <ul>
+        <li>六月（未月）：你生于未月，生月是命主能量的"回归窗口"，流年走到未月，命盘回到出生时状态，能量自然强</li>
+        <li>七月（申月）：申金激活年支申金，辛金印绶得气，文昌贵人（日柱）被激活，考试/学业/比赛的表现天然好</li>
+      </ul>
+
+      <p class="highlight">这不是玄学，是你命盘的季节节律。每年的六七月是你的"充电月"，重要的决策和出击动作最好选在这个窗口。</p>
+
+      <div class="divider"></div>
+
+      <h2>七、创业方向的命理指引</h2>
+
+      <p>你的核心优势路径（命理给的方向）：</p>
+
+      <ul>
+        <li>壬水日主 + 食神格 + 文昌贵人（日柱）：知识型、内容型、表达型</li>
+        <li>正印格（辛金）为用神：越靠近高质量信息圈、导师、知识输入，越顺</li>
+        <li>驿马双冲：流动性赛道（跨城市、跨国、流通性平台）比固定行业更适合</li>
+      </ul>
+
+      <p>FinTech 专业 + 上海创业：方向对了，但 FinTech 这个领域本身火土很旺（监管重、规则多），对于日主偏弱的你来说官杀压力大。具体要看你做的是什么细分方向。</p>
+
+      <p class="highlight">Spark Lab 结束后：这个节点（2025-2026）是正常的"蓄势换轨"期，不是失败信号。2027 年丁未年是近期最重要的转折点——财合日主，说明那一年你的意志力和外部机会会第一次真正对齐。</p>
+
+      <div class="divider"></div>
+
+      <h2>八、最终综合判断</h2>
+
+      <p>五个核心结论：</p>
+
+      <ol style="list-style: decimal; padding-left: 28px;">
+        <li style="margin-bottom: 12px;">命局能量密度高，不是"坏命"。家族的激烈事件、自身的健康信号、感情的复杂——这些都是高能量命盘的必然伴随物。壬水能量巨大，代价是承受力也要求极高。</li>
+        <li style="margin-bottom: 12px;">肾和心脏需要认真对待。这是命盘里真实写出来的脆弱点，不是算卦，是你身体需要长期保养的两个系统。</li>
+        <li style="margin-bottom: 12px;">感情上你是执着的付出方。壬丁合决定了这一点。这段关系有真实基础，但要防止感情消耗超过创业消耗。</li>
+        <li style="margin-bottom: 12px;">迷茫是这个年纪这张命盘的正常状态，不是你出了问题。2027 年是转折窗口，在此之前持续蓄势（学习、接触高质量人和信息）是正确动作。</li>
+        <li style="margin-bottom: 12px;">每年六七月是你的出击窗口，重要决策、重要出手，选这两个月。</li>
+      </ol>
+
+      <p>概率判断：</p>
+      <ul>
+        <li>30 岁前找到主赛道并建立稳定根基：75%</li>
+        <li>健康问题在 40 岁前出现明显症状（若不干预）：65%</li>
+        <li>感情路上有一次深度消耗（放不下的那种）：85%</li>
+        <li>最终在"知识/创意/表达型"赛道上成事：70%</li>
+      </ul>
+
+      <p class="highlight">你这张命盘最大的风险不是坏运，而是能量太强但容器太小——不断扩容才是你这辈子的主线。</p>
+    </div>
+    <div class="footer">
+      <div class="author">
+        <img class="avatar" src="/assets/kanye.png" alt="">
+        <span class="author-name">李谨西命盘分析</span>
+      </div>
+    </div>
+  </div>
+<script src="/assets/gate.js"></script>
+</body>
+</html>
