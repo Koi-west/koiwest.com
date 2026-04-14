@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="viewport" content="width=1080, user-scalable=yes">
+<title>李谨西 · 命盘操作系统 · koi</title>
+<meta charset="UTF-8">
+<style>
+  @font-face {
+    font-family: 'KingHwa_OldSong';
+    src: url('/assets/KingHwa_OldSong.subset.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+  }
+
+  :root {
+    --text: #1D1D1F;
+    --text-mid: #6E6E73;
+    --text-dim: #ACACB0;
+    --accent: #1D1D1F;
+    --rule: #E5E5EA;
+    --font: 'KingHwa_OldSong', 'PingFang SC', system-ui, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 1080px;
+    background: #FFFFFF;
+  }
+
+  .card {
+    width: 1080px;
+    background: #FFFFFF;
+    padding: 64px 72px 52px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .title-area {
+    flex-shrink: 0;
+    margin-bottom: 52px;
+  }
+
+  .title-area h1 {
+    font: 700 84px/1.15 var(--font);
+    color: var(--text);
+    letter-spacing: -0.03em;
+    margin-bottom: 22px;
+  }
+
+  .title-area::after {
+    content: '';
+    display: block;
+    width: 52px;
+    height: 3px;
+    background: var(--accent);
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .content p {
+    font: 400 36px/1.7 var(--font);
+    color: var(--text);
+    margin-bottom: 28px;
+  }
+
+  .content .highlight {
+    font: 500 40px/1.55 var(--font);
+    color: var(--text);
+    padding: 14px 0 14px 26px;
+    border-left: 3px solid var(--accent);
+    margin: 36px 0;
+  }
+
+  .content h2 {
+    font: 600 42px/1.4 var(--font);
+    color: var(--text);
+    margin: 44px 0 22px;
+    letter-spacing: -0.02em;
+  }
+
+  .content h2:first-child {
+    margin-top: 0;
+  }
+
+  .content .subtitle {
+    font: 400 22px/2 var(--font);
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .content .item {
+    margin-bottom: 36px;
+  }
+
+  .content .item:last-child {
+    margin-bottom: 0;
+  }
+
+  .content .item .label {
+    font: 500 36px/1.5 var(--font);
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .content .item p {
+    font: 400 32px/1.65 var(--font);
+    color: var(--text-mid);
+    margin-bottom: 0;
+  }
+
+  .content blockquote {
+    margin: 0 0 28px;
+    padding-left: 26px;
+    border-left: 3px solid var(--rule);
+  }
+
+  .content blockquote p {
+    font: 300 36px/1.7 var(--font);
+    color: var(--text-mid);
+    margin-bottom: 6px;
+  }
+
+  .content strong {
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .content .divider {
+    height: 1px;
+    background: var(--rule);
+    margin: 36px 0;
+  }
+
+  .content ul {
+    list-style: none;
+    margin-bottom: 28px;
+  }
+
+  .content ul li {
+    font: 400 36px/1.7 var(--font);
+    color: var(--text);
+    padding: 4px 0 4px 28px;
+    position: relative;
+  }
+
+  .content ul li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--text-mid);
+  }
+
+  .content .dropcap::first-letter {
+    font: 700 128px/0.82 'KingHwa_OldSong', Georgia, serif;
+    float: left;
+    margin: 4px 16px 0 -4px;
+    color: var(--accent);
+  }
+
+  .content .table {
+    width: 100%;
+    margin: 28px 0;
+    border-collapse: collapse;
+    font-size: 28px;
+  }
+
+  .content .table th,
+  .content .table td {
+    border: 1px solid var(--rule);
+    padding: 16px 20px;
+    text-align: left;
+  }
+
+  .content .table th {
+    background: #F9F9FA;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .content .table td {
+    color: var(--text-mid);
+  }
+
+  .content .numbered {
+    list-style: none;
+    counter-reset: item;
+  }
+
+  .content .numbered li {
+    counter-increment: item;
+    padding-left: 48px;
+    position: relative;
+    margin-bottom: 24px;
+  }
+
+  .content .numbered li::before {
+    content: counter(item);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 32px;
+    height: 32px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 32px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .content .numbered li p {
+    margin-bottom: 0;
+  }
+
+  .content::after {
+    content: '∎';
+    display: block;
+    text-align: right;
+    font-size: 16px;
+    color: var(--text-dim);
+    margin-top: 40px;
+  }
+
+  .footer {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 52px;
+    padding-top: 22px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .footer .author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .footer .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .footer .author-name {
+    font: 400 24px/1.5 var(--font);
+    color: var(--text-mid);
+    letter-spacing: 0.03em;
+  }
+
+  .footer .arxiv {
+    font: 400 22px/1.5 'Menlo', 'SF Mono', monospace;
+    color: var(--text-dim);
+    letter-spacing: 0.02em;
+  }
+</style>
+
+<style>
+  html, body {
+    width: 100% !important;
+    min-width: 1080px !important;
+    background: #F5F5F7 !important;
+  }
+  body > .card, body > .page, body > main {
+    margin: 0 auto !important;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="title-area">
+      <h1>李谨西 · 命盘操作系统</h1>
+    </div>
+    <div class="content">
+      <p class="subtitle">BAZI · CHRONO · NUTRITION · CAPITAL</p>
+
+      <p class="dropcap">壬水日主身弱，不是"量小"而是"流对了就无敌"。河流和水坑的区别不在总量，在流速和方向。你的命盘给了你极高的信号强度，但容器本来就不大——这辈子的主线是扩容。</p>
+
+      <div class="divider"></div>
+
+      <h2>一、你是谁</h2>
+
+      <p>命盘骨架的三层意思：</p>
+
+      <div class="item">
+        <p class="label">壬水日主身弱</p>
+        <p>能量池不大，但水的势能极高。河流和水坑的区别不是总量，是流速和方向。你的状态不是"量大"而是"流对了就无敌"。</p>
+      </div>
+
+      <div class="item">
+        <p class="label">食神 + 文昌</p>
+        <p>你的核心竞争力是创意输出和表达，不是执行或管理。但食神空亡——这是你最关键的一个特征。</p>
+      </div>
+
+      <div class="item">
+        <p class="label">财官双旺日主弱</p>
+        <p>外部机会和压力永远大于当下的承载力。这意味着你永远会感觉"机会太多，精力不够"，这不会消失，是结构性的。</p>
+      </div>
+
+      <div class="item">
+        <p class="label">未未自刑</p>
+        <p>你的最大内耗来源：每次面对规则/权威/"我够不够格"的时候，脑子里会自动生成两个声音互相打架。这是你拖延和犹豫的真实机制，不是懒，是自刑。</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <h2>二、工作时间</h2>
+
+      <div class="item">
+        <p class="label">最佳工作时段</p>
+        <p>上午 9:00-12:00 + 晚上 9:00-11:30</p>
+      </div>
+
+      <p>理由：壬水在卯辰时（5-9am）复苏最快，但需要 30-60 分钟的预热期。真正的爆发区是 9-12 点的辰巳时段。晚上的亥时（21-23 点）是壬水第二个自然峰值——你如果观察过自己，凌晨那种"突然开窍"的感觉就是这个。</p>
+
+      <div class="item">
+        <p class="label">每天深度工作</p>
+        <p>4-5 小时上限</p>
+      </div>
+
+      <p>不是 8 小时，不是"能坚持多久"。身弱的人强行维持高强度的代价是第二天的恢复期拖更长。4 小时极深 > 8 小时中等，对你更加成立，因为你的能量结构不支持长时间平均输出，支持短时间爆发。</p>
+
+      <div class="item">
+        <p class="label">最专注的时间（精确到类型）</p>
+        <p>9:00-11:00：适合创造性输出（写作、方案、想法生成）<br>
+        11:00-12:00：适合决策和沟通<br>
+        14:00-15:30：低谷，做机械性事务（邮件、整理、行政）<br>
+        21:00-23:00：适合深度阅读、构想、个人学习</p>
+      </div>
+
+      <p class="highlight">食神空亡的触发机制——你的创造力不会"自启动"。它需要一个前置输入。正确序列是：读到让你震撼的内容 → 48 小时内输出爆发</p>
+
+      <p>大多数人给你的建议是"就开始做"。错的。对你来说，正确的做法是先让印绶（高质量知识输入）启动，再让食神（创造输出）跟着走。你的内容日历应该设计为：周一大量输入 → 周二三爆发输出，而不是每天均匀分配。</p>
+
+      <div class="divider"></div>
+
+      <h2>三、时间分配</h2>
+
+      <p class="highlight">核心原则：2 条主线，不要 3 条以上</p>
+
+      <p>壬水能流向多个方向，但身弱意味着分支太多会全部变成细流，没有一个有力量。2 个主线是上限：一个主项目（创业），一个副线（个人知识积累/个人品牌）。</p>
+
+      <p>一天的时间框架（建议）：</p>
+
+      <ul>
+        <li>07:00 起床（不要更早，壬水子时到卯时是复苏期，强行早起伤肾）</li>
+        <li>07:30 晨间：20 分钟走路/轻运动（不要剧烈），早餐</li>
+        <li>08:30 输入时间：读文章、看内容、知识吸收（为上午的输出预热）</li>
+        <li>09:00 深度工作 Block 1（最重要的事，关闭手机）</li>
+        <li>12:00 午餐</li>
+        <li>13:00 睡 15-20 分钟（壬水午时能量低谷，补一次是真的恢复，不是懒）</li>
+        <li>14:00 沟通/行政/事务性工作</li>
+        <li>17:00 运动（后面详解）</li>
+        <li>19:00 晚饭</li>
+        <li>20:00 自由时间（娱乐/朋友）</li>
+        <li>21:00 深度阅读/个人学习</li>
+        <li>23:00 结束，睡前 30 分钟无屏幕</li>
+        <li>23:30 入睡</li>
+      </ul>
+
+      <div class="item">
+        <p class="label">健身</p>
+        <p>17:00-18:30，每周 4 次</p>
+      </div>
+
+      <p>避开午时（11-13 点）——这是你命盘火最旺的时段，那时运动会额外消耗肾水能量。酉时（17-19 点）金气当令，配合你的喜用神（金），这个时段健身效率最高，也对你的心肾最友好。</p>
+
+      <div class="item">
+        <p class="label">娱乐</p>
+        <p>晚 8 点 -9 点，不超过 1 小时，工作日</p>
+      </div>
+
+      <p>不是因为克制，而是亥时（21-23 点）是你的第二个黄金思考时段，如果被娱乐占满，你会损失掉一天里质量最高的个人时间。</p>
+
+      <div class="item">
+        <p class="label">睡觉</p>
+        <p>23:30 前</p>
+      </div>
+
+      <p>这是硬约束，不是建议。子时（23 点 -1 点）是肾经最旺时，也是全身细胞修复的高峰。对于肾已经偏弱的你，错过这个窗口的代价是同等时间睡眠无法补偿的。长期熬夜对普通人是 -10 分，对你是 -30 分，机制不同。</p>
+
+      <div class="divider"></div>
+
+      <h2>四、金钱分配</h2>
+
+      <p>假设月现金流 10,000-15,000 元区间，按比例：</p>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>分类</th>
+            <th>比例</th>
+            <th>实操说明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>创业/项目再投入</td>
+            <td>40%</td>
+            <td>命理：壬丁合化木，财要通过创造输出来放大</td>
+          </tr>
+          <tr>
+            <td>知识/人脉/接触高质量圈子</td>
+            <td>25%</td>
+            <td>这是你这张命盘 ROI 最高的支出。一次能进对房间的花费 > 十节课</td>
+          </tr>
+          <tr>
+            <td>储蓄（保底安全垫）</td>
+            <td>15%</td>
+            <td>目标：3 个月生活费的现金缓冲，不投资，就放着</td>
+          </tr>
+          <tr>
+            <td>健康</td>
+            <td>15%</td>
+            <td>优先级：体检 + 心肾专项 > 健身房 > 蛋白粉</td>
+          </tr>
+          <tr>
+            <td>娱乐/生活质量</td>
+            <td>5%</td>
+            <td>控制，不是因为苦行，而是你当前处于蓄势期</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="highlight">"人脉/接触高质量圈子"这一项，多数人会把它算进娱乐或零散花销。错了。对壬水 + 食神格 + 文昌贵人的命来说，每接触一个高质量的人/圈子，它会激活食神，带来实质性的输出和机会。这不是社交成本，这是你最高效的 ROI 支出。比买课更值，因为买课是死的，人是活的。</p>
+
+      <div class="divider"></div>
+
+      <h2>五、饮食</h2>
+
+      <div class="item">
+        <p class="label">适合吃素吗</p>
+        <p>不适合</p>
+      </div>
+
+      <p>之前那个大师说吃素是错的，我在上次的分析里已经推翻了。原理：食神代表创造、享受和旺盛的生命力，强制吃素是在克制食神，反向操作。</p>
+
+      <div class="item">
+        <p class="label">肉的比例</p>
+        <p>50-60% 来自鱼/海鲜，20% 白肉，20% 红肉</p>
+      </div>
+
+      <ul>
+        <li>鱼类和海鲜（水族）直接滋养壬水，最适合你的体质</li>
+        <li>白肉（鸡、鸭）中性，可以</li>
+        <li>红肉（牛、羊）性热，火性强，少吃，尤其在 2026 年这个火旺的流年里</li>
+      </ul>
+
+      <p>营养核心逻辑（基于心肾弱）：</p>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>目标</th>
+            <th>食物</th>
+            <th>原因</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>养肾（水）</td>
+            <td>黑豆、黑木耳、黑芝麻、核桃、枸杞</td>
+            <td>五行黑色入肾</td>
+          </tr>
+          <tr>
+            <td>护心（水火交济）</td>
+            <td>深色浆果（蓝莓/桑葚）、红枣、三文鱼</td>
+            <td>抗氧化+omega3 降心梗风险</td>
+          </tr>
+          <tr>
+            <td>金生水</td>
+            <td>白萝卜、梨、白木耳</td>
+            <td>金生水，补金以强水</td>
+          </tr>
+          <tr>
+            <td>避免</td>
+            <td>酒精、浓咖啡、辛辣、油炸</td>
+            <td>激发火性，直接损耗你的肾水能量</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="highlight">一个你不知道的关键：咖啡因对你的代价比普通人高 3 倍</p>
+
+      <p>壬水身弱肾虚的人，咖啡因不是借能量，是透支肾精。短期你感觉提神，长期你的肾功能会比同龄人退化更快。不是不能喝，是不能把它当主要的续航工具。尤其晚上的咖啡，等于在你的心肾最需要修复的时段主动破坏修复。</p>
+
+      <div class="divider"></div>
+
+      <h2>六、体检方案</h2>
+
+      <p class="highlight">标准体检的盲区：你的遗传风险需要专项检测</p>
+
+      <p>普通体检查不出来你最大的风险，以下是你需要加的项目：</p>
+
+      <p>心脏专项（每年一次，从今年开始）：</p>
+      <ul>
+        <li>hsCRP（高敏 C 反应蛋白）：早期心血管炎症指标，标准体检不包含</li>
+        <li>同型半胱氨酸（Homocysteine）：心梗风险最被忽视的预测因子，你的遗传风险高，这个必测</li>
+        <li>心脏超声（Echocardiography）：不是 ECG，是超声，看结构性风险</li>
+        <li>空腹胰岛素 + 血脂全套（包括 LDL-P，颗粒数，不只是 LDL-C）</li>
+      </ul>
+
+      <p>肾脏专项（每半年一次）：</p>
+      <ul>
+        <li>尿微量白蛋白（Microalbumin urine test）：肾损伤最早期信号，比肌酐灵敏</li>
+        <li>eGFR（肾小球滤过率）</li>
+        <li>尿酸：肾和心脏的双重风险因子</li>
+      </ul>
+
+      <p>其他：</p>
+      <ul>
+        <li>维生素 D：免疫和心脏保护，大多数城市年轻人严重缺乏</li>
+        <li>甲状腺功能（TSH+FT4）：和疲劳、代谢、情绪直接相关</li>
+      </ul>
+
+      <p class="highlight">什么时候做：每年六七月——你的六七月是命盘充电期，这时的身体状态是你一年里最接近"基线"的状态，体检数据参考价值最高。</p>
+
+      <div class="divider"></div>
+
+      <h2>七、你注意不到但能实打实改变命的几件事</h2>
+
+      <ol class="numbered">
+        <li>
+          <p><strong>2026 年是你健康风险最高的年份，不是以后</strong></p>
+          <p>丙午流年 + 寅午未三合火局，今年你命盘里的火达到了 21 年里的最高峰。心肾压力同步峰值。你的心肌梗死遗传风险 × 今年的命盘火局 = 今年做上面那张体检清单的紧迫度是 100 分，不是"迟早做"。</p>
+        </li>
+        <li>
+          <p><strong>自刑的机制：你不是拖延，是卡在"够不够格"的循环里</strong></p>
+          <p>每次你要做一件有点重要的事，内心会自动触发"我够不够"的自问，然后开始内耗。这不是心理问题，是未未自刑的行为模式。破解方式不是"建立自信"（太慢），而是：为自己设计一个外部启动程序——比如一个固定的开始仪式（写下 3 件你已经做成的事），让脑子绕过自刑的触发点，直接进入工作状态。</p>
+        </li>
+        <li>
+          <p><strong>每年六七月是你真正的"出击窗口"，大多数人不知道自己有这个</strong></p>
+          <p>重要的提案、关键的决策、值得冒的风险——选在六七月。你已经在无意识地用这个节律了（高考/竞赛/黑客松），现在开始有意识地设计它。</p>
+        </li>
+        <li>
+          <p><strong>你不能靠"在同一个地方努力更久"来突破</strong></p>
+          <p>寅申双驿马对冲的人，能量是通过"移动"来补充的，不是通过"坚持"。每当你感觉卡住、低能量、想不清楚，答案通常是：换一个城市待两周、去见一些新的人、物理上离开现在的环境。这不是逃避，是你这张命的实际运作机制。</p>
+        </li>
+        <li>
+          <p><strong>感情上的能量管理</strong></p>
+          <p>壬丁合化木：你一旦被某个人或某件事黏住，创业的能量会被分流。不是说感情是坏事，是说你需要把感情纳入能量预算管理——它不是"在创业之外的事"，它消耗的是同一个池子里的水。</p>
+        </li>
+        <li>
+          <p><strong>最高 ROI 的一件事：花钱进对房间</strong></p>
+          <p>25% 的支出分配给"接触高质量圈子"，这不是社交成本，是你命盘里文昌贵人 + 天乙贵人双激活的最快路径。你的财运走的是"食神转化财"的路——创意输出换钱。而食神需要正印来触发。高质量的人就是你的活体正印。每接触一个让你觉得"这个人比我厉害很多"的人，你之后一个月的输出质量会上升一个档次。</p>
+        </li>
+      </ol>
+
+      <div class="divider"></div>
+
+      <p class="highlight">一句话总结：你的命盘给了你极高的信号强度，但容器本来就不大。当下（2026-2029）的唯一任务是扩容：持续输入高质量的人和知识，保护心肾，在六七月出击，把壬丁合的执着对准一件事。2027 年转折点会自然出现，但前提是你 2026 年没有把身体搞垮。</p>
+    </div>
+    <div class="footer">
+      <div class="author">
+        <img class="avatar" src="/assets/kanye.png" alt="">
+        <span class="author-name">李谨西 · 生活系统设计</span>
+      </div>
+    </div>
+  </div>
+<script src="/assets/gate.js"></script>
+</body>
+</html>
