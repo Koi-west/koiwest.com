@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="viewport" content="width=1080, user-scalable=yes">
+<title>Kira 招聘计划 W1 · koi</title>
+<meta charset="UTF-8">
+<style>
+  @font-face {
+    font-family: 'KingHwa_OldSong';
+    src: url('/assets/KingHwa_OldSong.subset.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+  }
+
+  :root {
+    --text: #1D1D1F;
+    --text-mid: #6E6E73;
+    --text-dim: #ACACB0;
+    --accent: #1D1D1F;
+    --rule: #E5E5EA;
+    --font: 'KingHwa_OldSong', 'PingFang SC', system-ui, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 1080px;
+    background: #FFFFFF;
+  }
+
+  .card {
+    width: 1080px;
+    background: #FFFFFF;
+    padding: 64px 72px 52px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .title-area {
+    flex-shrink: 0;
+    margin-bottom: 52px;
+  }
+
+  .title-area h1 {
+    font: 700 84px/1.15 var(--font);
+    color: var(--text);
+    letter-spacing: -0.03em;
+    margin-bottom: 22px;
+  }
+
+  .title-area .subtitle {
+    font: 400 28px/1.5 var(--font);
+    color: var(--text-mid);
+  }
+
+  .title-area::after {
+    content: '';
+    display: block;
+    width: 52px;
+    height: 3px;
+    background: var(--accent);
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .content p {
+    font: 400 36px/1.7 var(--font);
+    color: var(--text);
+    margin-bottom: 28px;
+  }
+
+  .content h2 {
+    font: 600 42px/1.4 var(--font);
+    color: var(--text);
+    margin: 44px 0 22px;
+    letter-spacing: -0.02em;
+  }
+
+  .content h2:first-child {
+    margin-top: 0;
+  }
+
+  .content .highlight {
+    font: 500 40px/1.55 var(--font);
+    color: var(--text);
+    padding: 14px 0 14px 26px;
+    border-left: 3px solid var(--accent);
+    margin: 36px 0;
+  }
+
+  .content .stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    margin: 36px 0;
+    padding: 32px;
+    background: #F9F9FA;
+    border-radius: 12px;
+  }
+
+  .content .stat-item {
+    text-align: center;
+  }
+
+  .content .stat-value {
+    font: 700 48px/1.2 var(--font);
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+
+  .content .stat-label {
+    font: 400 22px/1.5 var(--font);
+    color: var(--text-mid);
+    margin-top: 8px;
+  }
+
+  .content ul {
+    list-style: none;
+    margin-bottom: 28px;
+  }
+
+  .content ul li {
+    font: 400 36px/1.7 var(--font);
+    color: var(--text);
+    padding: 4px 0 4px 28px;
+    position: relative;
+  }
+
+  .content ul li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--text-mid);
+  }
+
+  .content .divider {
+    height: 1px;
+    background: var(--rule);
+    margin: 36px 0;
+  }
+
+  .content .job-card {
+    margin: 32px 0;
+    padding: 32px;
+    background: #F9F9FA;
+    border-radius: 12px;
+  }
+
+  .content .job-card h3 {
+    font: 600 36px/1.4 var(--font);
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+
+  .content .job-card .tech-stack {
+    font: 400 28px/1.6 var(--font);
+    color: var(--text-mid);
+    margin-bottom: 20px;
+  }
+
+  .content .job-card strong {
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .content blockquote {
+    margin: 0 0 28px;
+    padding-left: 26px;
+    border-left: 3px solid var(--rule);
+  }
+
+  .content blockquote p {
+    font: 300 36px/1.7 var(--font);
+    color: var(--text-mid);
+    margin-bottom: 6px;
+  }
+
+  .content .tagline {
+    font: 500 32px/1.5 var(--font);
+    color: var(--text);
+    text-align: center;
+    padding: 48px 0;
+    margin: 36px 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .content::after {
+    content: '∎';
+    display: block;
+    text-align: right;
+    font-size: 16px;
+    color: var(--text-dim);
+    margin-top: 40px;
+  }
+
+  .footer {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 52px;
+    padding-top: 22px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .footer .author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .footer .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .footer .author-name {
+    font: 400 24px/1.5 var(--font);
+    color: var(--text-mid);
+    letter-spacing: 0.03em;
+  }
+
+  .footer .url {
+    font: 400 22px/1.5 var(--font);
+    color: var(--text-dim);
+    letter-spacing: 0.02em;
+  }
+</style>
+
+<style>
+  html, body {
+    width: 100% !important;
+    min-width: 1080px !important;
+    background: #F5F5F7 !important;
+  }
+  body > .card, body > .page, body > main {
+    margin: 0 auto !important;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="title-area">
+      <h1>Kira 招聘计划 W1</h1>
+      <div class="subtitle">Hi, I'm Owen. The founder of Kira Art.</div>
+    </div>
+    <div class="content">
+      <p class="highlight">好久没有招聘了。作为一家目前只有四个人的微型公司，目前希望扩增到 6 个人。</p>
+
+      <p>目前 AI 应用还是早期阶段，希望能找到合适的伙伴一起探索！</p>
+
+      <h2>有趣的产品</h2>
+      <p>Kira Art 是一家 AI toC 公司，致力于通过生成式 AI 功能探索未知的社交场景。</p>
+      <p>目前我们提供了面向小白用户的完整的</p>
+      <p style="text-align: center; margin: 24px 0;"><strong>「修图」「修视频」「修声音」</strong></p>
+      <p>工具，不需要任何复杂的模型选择和交互，轻松进行修改。</p>
+      <p>我们目前在全力探索工具到社区的转型，希望作出有趣的社交产品形态。</p>
+      <p>目前我们只有网页版本，还没有移动端产品，更在努力构建。</p>
+
+      <p class="tagline">Make joy worth sharing.</p>
+
+      <h2>小而美的公司</h2>
+      <p>我们是一家出海公司，目前用户主要在大部分美国，小部分欧洲。</p>
+      <p>从公司去年的上一轮融资之后，目前已经全面盈利，ARR $1M。</p>
+
+      <div class="stats">
+        <div class="stat-item">
+          <div class="stat-value">5W</div>
+          <div class="stat-label">注册用户 MAU</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">50%+</div>
+          <div class="stat-label">用户粘性</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">3M</div>
+          <div class="stat-label">月 PV</div>
+        </div>
+      </div>
+
+      <p>公司在过去的 6 个月在没有任何投放的情况下增长到了以上数据。目前来看虽然没有很大的成功，但是公司目前来看已经脱离倒计时死亡状态，进入到增长状态。</p>
+
+      <p>我们不是一家融资驱动的公司，所以很难保证公司估值会短时间内大幅度增长从而让员工有极大的即时满足感，也不是因为不想，因为 CEO 能力有限，做不太到（狗头）。</p>
+
+      <div class="divider"></div>
+
+      <h2>舒适的环境</h2>
+      <p>公司在上海张江，我们在张江双子塔有一间宽敞明亮的舒服办公室，无论从写字楼环境还是配套的居住体验都是国内一流的。</p>
+      <p>完美实现了周内工作，周末进市区快乐的闭环。</p>
+      <p>目前因为 CEO 本人的管理能力不足，暂时不接受远程工作，欢迎来到张江一起快乐 Build。</p>
+
+      <div class="divider"></div>
+
+      <h2>期待的伙伴</h2>
+      <p>我们希望能招聘到有趣的年轻人，希望你有留学背景并且已经或者即将拿到毕业证。这条很重要，学校很美好，请不要辍学。</p>
+      <p>我们唯一的硬性要求是可以使用英文工作。所以我们会安排最少 1 轮纯英文面试。</p>
+      <p class="highlight">伙伴之间最重要的是相信彼此，相信相信的力量。道不同，不相为谋。</p>
+
+      <div class="divider"></div>
+
+      <h2>职位</h2>
+
+      <div class="job-card">
+        <h3>全栈开发实习生</h3>
+        <p class="tech-stack">技术栈：Node.js 全栈，使用 Bun, Hono 等 Node 生态技术构建产品</p>
+        <p>不过说回来反正已经不太需要手写代码了，所以我们主要考察工程设计能力和想法，希望你能</p>
+        <ul>
+          <li>良好的算法基础</li>
+          <li>良好的工程设计能力</li>
+          <li>对常见的架构设计和设计模式有充分的了解</li>
+          <li>对未知的方向能有独到的技术见解</li>
+        </ul>
+        <p>要求不是很简单，但是时代变了，不是吗？</p>
+      </div>
+
+      <div class="job-card">
+        <h3>AI 产品经理实习生</h3>
+        <p>目前我们在非常大量且全面的使用所有模型，为了让小白用户有非常好的体验，我们需要对模型有良好的 Benchmark 从而进行迭代产品，希望你能</p>
+        <ul>
+          <li>对 Agent 架构有充分的了解</li>
+          <li>对模型的能力有充分的了解</li>
+          <li>能快速掌握模型能力</li>
+          <li>熟练使用相机类产品</li>
+          <li>日常自拍，对这条很重要，拍都不拍我不信能做好</li>
+        </ul>
+        <p>要求不是很简单，但是 PM 我认为需要独特的 taste 才能做出好东西不是吗？</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <h2>最后</h2>
+      <p>我们非常喜欢实习转正这种路线，所以可以承诺每一个实习生通过考核都有转正机会。</p>
+      <p>公司无法提供跟大公司一样的待遇，但是可以提供一个舒服的工作环境和一个快乐的团队以及因为公司成长而带来的物质奖励。全员持有期权。</p>
+
+      <p class="highlight">自己动手，丰衣足食，不是吗？</p>
+    </div>
+    <div class="footer">
+      <div class="author">
+        <img class="avatar" src="/assets/kanye.png" alt="">
+        <span class="author-name">Kira Art</span>
+      </div>
+      <div class="url">kira.art</div>
+    </div>
+  </div>
+<script src="/assets/gate.js"></script>
+</body>
+</html>
