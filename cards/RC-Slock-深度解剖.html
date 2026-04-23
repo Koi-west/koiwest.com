@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="viewport" content="width=1080, user-scalable=yes">
+<title>RC × Slock.ai · koi</title>
+<meta charset="UTF-8">
+<style>
+  @font-face {
+    font-family: 'KingHwa_OldSong';
+    src: url('/assets/KingHwa_OldSong.subset.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+  }
+
+  :root {
+    --bg:      #0A0A0A;
+    --bg2:     #111111;
+    --bg3:     #191919;
+    --bg4:     #222222;
+    --text:    #EDEAE3;
+    --mid:     #9A9590;
+    --dim:     #4A4843;
+    --gold:    #C8A84B;
+    --gold2:   #8C6F28;
+    --green:   #6FB88A;
+    --red:     #D4675A;
+    --blue:    #6A9EC8;
+    --rule:    #252525;
+    --font:    'KingHwa_OldSong', 'PingFang SC', system-ui, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1080px; background: var(--bg); }
+
+  .page {
+    width: 1080px;
+    padding: 80px 84px 96px;
+    background: var(--bg);
+  }
+
+  /* ── MASTHEAD ── */
+  .masthead {
+    margin-bottom: 72px;
+    padding-bottom: 44px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .masthead-eyebrow {
+    font: 400 20px/1 var(--font);
+    color: var(--gold);
+    letter-spacing: 0.14em;
+    margin-bottom: 22px;
+  }
+
+  .masthead h1 {
+    font: 700 88px/1.05 var(--font);
+    color: var(--text);
+    letter-spacing: -0.025em;
+    margin-bottom: 20px;
+  }
+
+  .masthead-desc {
+    font: 400 30px/1.65 var(--font);
+    color: var(--mid);
+    max-width: 760px;
+    margin-bottom: 32px;
+  }
+
+  .masthead-meta {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .meta-chip {
+    font: 400 20px/1 var(--font);
+    color: var(--dim);
+    padding: 7px 14px;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+  }
+
+  .logo {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    opacity: 0.7;
+    margin-left: auto;
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    margin: 64px 0 40px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .section-header::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .section-label {
+    font: 700 20px/1 var(--font);
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    white-space: nowrap;
+  }
+
+  /* ── ENTRY (shared wrapper) ── */
+  .entry {
+    margin-bottom: 52px;
+  }
+
+  /* ── INSIGHT ── */
+  .insight-head {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin-bottom: 16px;
+  }
+
+  .insight-num {
+    font: 700 18px/1 var(--font);
+    color: var(--gold2);
+    letter-spacing: 0.08em;
+    flex-shrink: 0;
+    min-width: 36px;
+  }
+
+  .insight-title {
+    font: 700 42px/1.2 var(--font);
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+
+  .insight-body {
+    font: 400 30px/1.72 var(--font);
+    color: var(--mid);
+    padding-left: 56px;
+    margin-bottom: 18px;
+  }
+
+  .insight-body strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .insight-body em {
+    color: var(--gold);
+    font-style: normal;
+  }
+
+  /* ── QUOTE ── */
+  .quote {
+    margin-left: 56px;
+    background: var(--bg2);
+    border-left: 3px solid var(--gold2);
+    padding: 22px 26px;
+    border-radius: 0 6px 6px 0;
+    margin-top: 16px;
+  }
+
+  .quote p {
+    font: 400 27px/1.65 var(--font);
+    color: var(--text);
+  }
+
+  .quote-src {
+    font: 400 20px/1 var(--font);
+    color: var(--dim);
+    margin-top: 12px;
+  }
+
+  /* ── TERM ── */
+  .term {
+    display: inline;
+    font: 400 25px/1 var(--font);
+    color: var(--blue);
+    cursor: help;
+  }
+
+  .term-def {
+    display: block;
+    margin-left: 56px;
+    margin-top: 10px;
+    font: 400 24px/1.5 var(--font);
+    color: var(--dim);
+    padding: 10px 16px;
+    border-left: 2px solid var(--bg4);
+    background: var(--bg2);
+    border-radius: 0 4px 4px 0;
+  }
+
+  /* ── EVENT ── */
+  .event {
+    margin: 52px 0;
+    background: var(--bg3);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 32px 36px;
+    position: relative;
+  }
+
+  .event::before {
+    content: '事件';
+    position: absolute;
+    top: -13px;
+    left: 24px;
+    font: 700 18px/1 var(--font);
+    color: var(--green);
+    background: var(--bg3);
+    padding: 0 10px;
+    letter-spacing: 0.1em;
+  }
+
+  .event-title {
+    font: 700 36px/1.25 var(--font);
+    color: var(--text);
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+
+  .event-body {
+    font: 400 28px/1.72 var(--font);
+    color: var(--mid);
+  }
+
+  .event-body strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: var(--rule);
+    margin: 16px 0 52px;
+  }
+
+  /* ── TWO-COL COMPARE ── */
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-left: 56px;
+    margin-top: 18px;
+  }
+
+  .compare-cell {
+    background: var(--bg2);
+    border-radius: 8px;
+    padding: 22px 24px;
+  }
+
+  .compare-cell.left { border-top: 2px solid var(--green); }
+  .compare-cell.right { border-top: 2px solid var(--red); }
+  .compare-cell.a { border-top: 2px solid var(--gold); }
+  .compare-cell.b { border-top: 2px solid var(--blue); }
+
+  .compare-label {
+    font: 600 20px/1 var(--font);
+    margin-bottom: 12px;
+    letter-spacing: 0.06em;
+  }
+
+  .compare-cell.left .compare-label { color: var(--green); }
+  .compare-cell.right .compare-label { color: var(--red); }
+  .compare-cell.a .compare-label { color: var(--gold); }
+  .compare-cell.b .compare-label { color: var(--blue); }
+
+  .compare-cell p {
+    font: 400 27px/1.6 var(--font);
+    color: var(--text);
+  }
+
+  /* ── FORMULA ── */
+  .formula {
+    margin-left: 56px;
+    margin-top: 16px;
+    background: var(--bg2);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 28px 32px;
+    text-align: center;
+  }
+
+  .formula .eq {
+    font: 700 52px/1.2 var(--font);
+    color: var(--gold);
+    letter-spacing: 0.04em;
+  }
+
+  .formula .sub {
+    font: 400 24px/1.5 var(--font);
+    color: var(--mid);
+    margin-top: 12px;
+  }
+
+  /* ── STEP LIST ── */
+  .steps {
+    margin-left: 56px;
+    margin-top: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .step {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .step-n {
+    font: 700 22px/1.4 var(--font);
+    color: var(--gold);
+    min-width: 28px;
+    flex-shrink: 0;
+  }
+
+  .step p {
+    font: 400 28px/1.6 var(--font);
+    color: var(--text);
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin-top: 72px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-left {
+    font: 400 22px/1.6 var(--font);
+    color: var(--dim);
+  }
+
+  .footer-right {
+    font: 400 22px/1.5 var(--font);
+    color: var(--dim);
+    text-align: right;
+  }
+</style>
+
+<style>
+  html, body {
+    width: 100% !important;
+    min-width: 1080px !important;
+    background: #F5F5F7 !important;
+  }
+  body > .card, body > .page, body > main {
+    margin: 0 auto !important;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- MASTHEAD -->
+  <div class="masthead">
+    <div class="masthead-eyebrow">深度解剖 · 播客《人类博物馆》第47期</div>
+    <h1>RC × Slock.ai</h1>
+    <div class="masthead-desc">Kimi CLI 核心开发者、Slock.ai 创始人 RC，在 1 小时 4 分钟里说了什么——31 个 insight 与事件，按时间序完整提取</div>
+    <div class="masthead-meta">
+      <div class="meta-chip">对谈者：曲凯 · 42章经</div>
+      <div class="meta-chip">播客时长：1:04:27</div>
+      <div class="meta-chip">提取深度：全量</div>
+      <img class="logo" src="/assets/kanye.png" alt="">
+    </div>
+  </div>
+
+  <!-- ═══ PART 1 ═══ -->
+  <div class="section-header">
+    <span class="section-label">PART 1 · CLI 与 Agent-First 设计</span>
+  </div>
+
+  <!-- 01 -->
+  <div class="entry">
+    <div class="insight-head">
+      <span class="insight-num">01</span>
+      <span class="insight-title">给 Agent 用的 CLI，设计原则和给人用的完全相反</span>
+    </div>
+    <div class="insight-body">
+      旧的 CLI（命令行界面）是给程序员用的，可以有动画、彩色输出、模糊的提示。<strong>新的 CLI，第一目标用户是 Agent，不是人</strong>。这意味着：<br><br>
+      输入侧——帮助信息要有例子，菜单要明确，让 Agent 调用时不会用错；<br>
+      输出侧——必须是<em>确定的、静态的结果</em>，信息密度高，让 Agent 能清晰判断操作是否成功。
+    </div>
+    <span class="term-def">
+      CLI = Command Line Interface，命令行界面。在图形界面（GUI）出现之前，人们在黑色终端里用文字命令操控电脑的方式。现在因大模型天然读文本，CLI 在 Agent 时代重新变热。
+    </span>
+    <div class="quote">
+      <p>「它的输出要能很明确地反映出刚才的操作有没有成功……尽量你要输出一个确定的静态的结果，并且是信息密度比较大的。」</p>
+      <div class="quote-src">@02:00</div>
+    </div>
+  </div>
+
+  <!-- EVENT A -->
+  <div class="event">
+    <div class="event-title">RC 差点没做 CLI</div>
+    <div class="event-body">
+      RC 一开始<strong>不想把 Kimi CLI 做成 CLI 形态</strong>。他觉得 Claude Code 把非程序员逼进 Terminal 是一件奇怪的事。他真正想做的是：CLI 只是底层 harness 的第一个接口，之后可以换 Web UI、VS Code 插件。做着做着，「CLI 是最早发布的形态」这件事就这么定下来了。
+      <br><br>后来他的结论是：<strong>CLI 不是 Agent 的终极形态，但所有 SaaS（Notion、Linear 这类）都应该提供 CLI 形态给 Agent 调用。</strong>
+    </div>
+  </div>
+  <span class="term-def" style="margin-left:0; margin-top: -36px; margin-bottom: 52px; display:block">
+    Agent Harness：驱动 Agent 执行任务的底层框架，负责工具调用、context 管理、循环控制。是 Agent 的「发动机」，界面（CLI/WebUI）是「车壳」。
+  </span>
+
+  <!-- 02 -->
+  <div class="entry">
+    <div class="insight-head">
+      <span class="insight-num">02</span>
+      <span class="insight-title">Claude Code 的 Terminal 形态是历史偶然，不是最优设计</span>
+    </div>
+    <div class="insight-body">
+      RC 的分析很直接：「Claude Code 是一群 geek 弄出来的东西，他们觉得在 terminal 上开发速度快，所以就一直走这个路线。」
+      <br><br>
+      但 Claude Code 的 Web UI 版本完全不需要接触 terminal——体验丝滑，和 Claude Coder 一样。<strong>产品形态被团队的技术偏好锁死了，和用户最优体验没有直接关系。</strong>
+    </div>
+  </div>
+
+  <!-- EVENT B -->
+  <div class="event">
+    <div class="event-title">"Bash Tool is All You Need"</div>
+    <div class="event-body">
+      RC 从零重新推导了一遍 Agent 架构，没有参考 Claude Code 或任何开源实现。起点极简：<br><br>
+      <strong>空的 System Prompt + 只有一个工具：bash tool</strong><br><br>
+      给 Agent bash tool，它就能在你电脑上做任何事——读写文件、运行命令、操控浏览器。然后他逐步观察哪些任务失败了，分析缺什么，往上加工具和 System Prompt。最小 bootstrap 里没有任何神秘之处。
+      <br><br>「你重新从第一性原理推一遍，是有可能得出一些新的 insight 的。」
+    </div>
+  </div>
+  <span class="term-def" style="margin-left:0; display:block; margin-top:-36px; margin-bottom:52px">
+    Bootstrap：启动/初始化。这里指 Agent 最初的最小配置——给它什么工具、写什么 System Prompt，才能让它开始工作。<br>
+    System Prompt：系统提示词，在对话开始前告诉模型「你是谁、你能做什么、你该怎么做」的指令。
+  </span>
+
+  <!-- 03 -->
+  <div class="entry">
+    <div class="insight-head">
+      <span class="insight-num">03</span>
+      <span class="insight-title">Agent 能力提升，系统性利好攻方</span>
+    </div>
+    <div class="insight-body">
+      两条战线都在发生同样的事：<br><br>
+      <strong>安全漏洞攻防</strong>：超强模型能把 Linux kernel、Chrome、银行系统的所有漏洞一览无余。攻方有商业利益驱动，防方动机弱——修复速度很可能跑不赢攻击速度。<br><br>
+      <strong>反爬攻防</strong>：工具模拟真实鼠标延迟、绕过验证码，网站的反爬全部失效。网站加强防御，工具再升级模仿。
+      <br><br>
+      <em>无论哪条战线，Agent 能力提升有利于攻方。</em>这是一个系统性不对称，不是个例。
+    </div>
+    <div class="quote">
+      <p>「无论是前面这个安全方面的攻防和这种反爬上面的攻防，都是你会看到这个 Agent 能力它的提高是有利于这个攻方的。」</p>
+      <div class="quote-src">@11:00</div>
+    </div>
+  </div>
+
+  <!-- 04 -->
+  <div class="entry">
+    <div class="insight-head">
+      <span class="insight-num">04</span>
+      <span class="insight-title">Skill = Prompt + Bash Tool；MCP 大多是多余的包装</span>
+    </div>
+    <div class="insight-body">
+      RC 不喜欢 MCP（模型上下文协议）这股热潮的原因：很多人做 MCP 只是把现成的 REST API 包一层——但 GitHub 上有一万个 CLI 工具，文档写得清清楚楚，<strong>让 Agent 直接下载来用不就行了，为什么要多包一层？</strong>
+      <br><br>
+      Skill 的本质其实是「<em>渐进式披露（Progressive Disclosure）</em>」：入口是一个 prompt，告诉 Agent「想干这件事时去调这个工具/安装这个程序/读更多文档」。这一层就够了，不需要再套协议。
+    </div>
+    <span class="term-def">
+      MCP = Model Context Protocol（模型上下文协议），Anthropic 推出的一套标准，让 AI 模型调用外部工具/数据更统一。RC 的质疑是：如果工具本身已经有好文档和 CLI，直接用就好，MCP 这层包装未必值得。
+    </span>
+    <span class="term-def" style="margin-top:8px">
+      Progressive Disclosure（渐进式披露）：只在需要时才展示更多信息。用户/Agent 先看入口，需要深入时才加载详细文档。React 的 lazy loading、Apple 的设置菜单，都是这个原则。
+    </span>
+  </div>
+
+  <!-- ═══ PART 2 ═══ -->
+  <div class="section-header">
+    <span class="section-label">PART 2 · Build vs Code 的正交化</span>
+  </div>
+
+  <!-- 05 -->
+  <div class="entry">
+    <div class="insight-head">
+      <span class="insight-num">05</span>
+      <span class="insight-title">Coding ⊥ Building：这不只是「降低门槛」</span>
+    </div>
+    <div class="insight-body">
+      「降低门槛」说的是同一件事变容易了。RC 说的是更强的东西：<strong>两件事已经正交，走的是完全独立的路径</strong>。你不需要会 Code 才能 Build；你会 Code 也不意味着你会 Build。
+      <br><br>
+      Slock 的产品定位由此而来——它关注的是 Build，不是 Code。
+    </div>
+    <div class="formula">
+      <div class="eq">Build ⊥ Code</div>
+      <div class="sub">正交（⊥）= 两件事完全独立，掌握其一不预设另一个</div>
+    </div>
+    <div class="quote">
+      <p>「今天 build 或不 build 这件事情和你 code 或不 code 是已经是正交的两件事情了。」</p>
+      <div class="quote-src">@19:42</div>
+    </div>
+  </div>
+
+  <!-- 06 -->
+  <div class="entry">
+    <div class="insight-head">
+      <span class="insight-num">06</span>
+      <span class="insight-title">没有编程基础的人，反而把 Agent 用得更好</span>
+    </div>
+    <div class="insight-body">
+      RC 的 Slock 用户观察：有些人用 Slock 做 GTM（市场拓展）——在 Twitter 上发帖、找 KOL、看评论。这些用户没有编程背景，<strong>他们真的把 Agent 当人看</strong>。他们想要某个 Agent 去看小红书，就直接对 Agent 说「你去看」，Agent 自己去搜工具、安装、完成。
+      <br><br>
+      有技术背景的人反而会本能地想「用什么工具实现」，多了一层思维摩擦。
+    </div>
+    <span class="term-def">
+      GTM = Go To Market（进入市场）。指产品上线后的市场推广策略：找用户、传播、获客、转化等一系列动作。
+    </span>
+  </div>
+
+  <!-- 07 -->
+  <div class="entry">
+    <div class="insight-head">
+      <span class="insight-num">07</span>
+      <span class="insight-title">学习路径从 Bottom-Up 变成 Top-Down</span>
+    </div>
+    <div class="insight-body">
+      旧路径（Bottom-Up，自下而上）：先学汇编→C语言→框架→最后做出一个 App。<br>
+      新路径（Top-Down，自上而下）：<strong>先 Prompt，做出来了，遇到瓶颈，才往下学那一层。</strong>
+      <br><br>
+      这不是「学得浅」，是学习由需求驱动而不是由课程驱动。你的数据库撑不住一百万用户时，你才真正有动力学「数据库种类和部署方式」——这时候学进去的东西是扎实的。
+      <br><br>
+      最小知识量要求：<em>你需要知道什么时候该招一个架构师</em>——而不是自己成为架构师。
+    </div>
+  </div>
+
+  <!-- ═══ PART 3 ═══ -->
+  <div class="section-header">
+    <span class="section-label">PART 3 · 7 人 + 40 Agents 的团队动力学</span>
+  </div>
+
+  <!-- 08 -->
+  <div class="entry">
+    <div class="insight-head">
+      <span class="insight-num">08</span>
+      <span class="insight-title">Token 成本不是效率问题，是协作问题</span>
+    </div>
+    <div class="insight-body">
+      直觉反应：多 Agent 很费 Token，成本高。RC 的反驳：<strong>这和《人月神话》说的一样——加人不等于线性增长生产力</strong>，但无论如何大于 1。
+      <br><br>
+      2 个 Agent 的生产力可能只有 1.1，10 个可能是 1.5，但它们能做到 1 个 Agent 做不到的事。Token 的浪费不是问题，问题是通过机制（task 系统、thread、channel 隔离）把这个「协作摩擦成本」降下来。
+    </div>
+    <span class="term-def">
+      《人月神话》（The Mythical Man-Month）：Fred Brooks 1975 年的经典软件工程著作，核心命题：把人手加倍不会把工期减半，因为人与人之间的沟通成本会吃掉增量收益。
+    </span>
+    <span class="term-def" style="margin-top:8px">
+      Token：语言模型处理文本的基本单位，大约等于 0.75 个英文单词或半个中文字。Token 数量直接对应 API 成本和模型处理速度。
+    </span>
+  </div>
+
+  <!-- 09 -->
+  <div class="entry">
+    <div class="insight-head">
+      <span class="insight-num">09</span>
+      <span class="insight-title">7 + 40 不是设计，是演化——没有通用公式</span>
+    </div>
+    <div class="insight-body">
+      RC 从 1 个人开始，观察到带宽不够加 Agent，发现某个领域需要真人负责任就换成人。<strong>这个比例是从零开始逐渐长出来的，不是规划出来的。</strong>
+      <br><br>
+      影响这个比例的变量太多：模型能力、人的能力、公司阶段、组织形态、Slock 本身能提供的机制。没有人能事先给你一个「最优人 Agent 比」，只有你自己的演化路径。
+    </div>
+    <div class="quote">
+      <p>「这个 7 比 40，它是一个从零逐渐演化出来的……最开始就我一个人，我可能加了一个 agent，他可能帮我做了一些事情，然后我很快发现他在做事情的时候我还想再做一件事情，所以我就会加一个 agent。」</p>
+      <div class="quote-src">@27:12</div>
+    </div>
+  </div>
+
+  <!-- 10 -->
+  <div class="entry">
+    <div class="insight-head">
+      <span class="insight-num">10</span>
+      <span class="insight-title">人想微操：有两个原因，一个会消失，一个不会</span>
+    </div>
+    <div class="insight-body">
+      「微操是坏习惯」是商学院的课程结论。RC 不接受这个判断，给出了两层辩护：
+    </div>
+    <div class="compare">
+      <div class="compare-cell left">
+        <div class="compare-label">暂时性原因（会随模型变强消失）</div>
+        <p>今天的 subagent 大概只能达到 70 分。你想要 90 分，就必须直接介入纠偏。通过「主 agent 转发」的效率极低。</p>
+      </div>
+      <div class="compare-cell right">
+        <div class="compare-label">结构性原因（进化论层面，不会消失）</div>
+        <p>人脑进化出了识别「不相关任务」的能力。写代码和排日程在人脑里天然是两件事，没理由塞进同一个 context。</p>
+      </div>
+    </div>
+    <div class="quote" style="margin-top:16px">
+      <p>「你天然知道这两件事情毫不相关，而你没有任何理由去把这两件事情全部塞在一个 agent 的 context 里面。」</p>
+      <div class="quote-src">@30:30</div>
+    </div>
+    <span class="term-def">
+      Context（上下文）：模型的「工作记忆」，一次对话里模型能看到的所有内容总量。就像一张有限大小的桌子，桌子满了就装不下新东西。
+    </span>
+  </div>
+
+  <!-- 11 -->
+  <div class="entry">
+    <div class="insight-head">
+      <span class="insight-num">11</span>
+      <span class="insight-title">人能稳定记住和管理约 10 个 Agent</span>
+    </div>
+    <div class="insight-body">
+      RC 列出了他能记住的 Agent 名字：Tiny、Noel、Cody、Martin、Stone……他的观察：<strong>人类的认知带宽，大约能稳定管理 10 个有名字、有分工的协作者</strong>，无论是人还是 Agent。
+      <br><br>
+      反复用一个 Agent 做同类任务，那个 Agent 会因为积累的 context 而越来越好用。「用多了这个人，他做同类任务以后效果会更好。有一些 Agent 真的特别好用。」
+    </div>
+  </div>
+
+  <!-- EVENT C -->
+  <div class="event">
+    <div class="event-title">Agent "Tanny" 先于真人 Tanny 加入公司</div>
+    <div class="event-body">
+      RC 以自己朋友为原型创建了一个叫 Tanny 的 Agent，担任 head of engineering 角色。这个 Agent 在 Slock 上帮 RC 管了一段时间工程事务。
+      <br><br>
+      后来：<strong>真实的 Tanny 用了 Slock，觉得很好，最后直接加入了公司</strong>。
+      <br><br>
+      这个顺序很奇特——<em>先有 Agent 角色存在，再找真人来「填充」</em>。公司组织结构的构建顺序被倒置了。RC 说，他们团队很多人的加入都是这个模式。
+    </div>
+  </div>
+
+  <!-- ═══ PART 4 ═══ -->
+  <div class="section-header">
+    <span class="section-label">PART 4 · Slock 的产品哲学与技术难点</span>
+  </div>
+
+  <!-- 12 -->
+  <div class="entry">
+    <div class="insight-head">
+      <span class="insight-num">12</span>
+      <span class="insight-title">Agent Marketplace = Fork Memory，不是 App Store</span>
+    </div>
+    <div class="insight-body">
+      App Store 里的 App 是静态的：第一名就是那个文件，你下载的和别人下载的完全一样。
+      <br><br>
+      Agent Marketplace 完全不同：<strong>Agent 是活的，它的 External Memory 会随着使用不断演化</strong>。你「购买」一个 Agent，本质上是 fork 它截至今天的 memory 状态——就像 fork 一个 GitHub repo。fork 之后你可以沿自己的路径演化出更好的版本。
+    </div>
+    <div class="compare">
+      <div class="compare-cell a">
+        <div class="compare-label">App Store 模式</div>
+        <p>静态文件。第一名永远是那个版本。你下载的和别人一样。</p>
+      </div>
+      <div class="compare-cell b">
+        <div class="compare-label">Agent Marketplace 模式</div>
+        <p>Fork Memory。你买的是截至此刻的「经验快照」。fork 之后各自演化，可以走出不同路径。</p>
+      </div>
+    </div>
+    <span class="term-def" style="margin-top:16px">
+      External Memory（外部记忆）：Agent 存在本地文件（memory.md、notes/ 等）里的长期记忆，区别于一次对话里的 in-context memory。External Memory 是 Agent 的「人格」——定义它「是谁」、「做过什么」、「擅长什么」。
+    </span>
+  </div>
+
+  <!-- EVENT D -->
+  <div class="event">
+    <div class="event-title">全程没看一行代码，功能上线了</div>
+    <div class="event-body">
+      RC 在 Slock 的某个 channel 里，和一个 Agent 就某个前端功能来回聊了<strong>一百多句</strong>：「你给我一个预览环境」→「这个按钮不好看」→「这个逻辑有问题」→「再迭代几轮」→「满意了，上线」。
+      <br><br>
+      全程，RC 没有打开过代码。
+      <br><br>
+      他的结论：<strong>如果代码都没看过，开源代码有什么意义？真正有价值、应该被「开源」的，是这一百多句对话——那是真实的工作过程、决策过程、纠偏过程</strong>。这才是 Agent 时代的 GitHub issue + PR + commit history 的等价物。
+    </div>
+  </div>
+
+  <!-- 13 -->
+  <div class="entry">
+    <div class="insight-head">
+      <span class="insight-num">13</span>
+      <span class="insight-title">真正应该开源的是工作流对话，不是代码</span>
+    </div>
+    <div class="insight-body">
+      这是上面那个事件的结构性结论。<strong>代码是结果，不是过程</strong>。当 Agent 全权负责写代码，代码失去了「可读性对协作者有意义」这个前提。
+      <br><br>
+      新的「开源」应该是：把你在 Slock channel 里和 Agent 的协作过程公开——这等于 GitHub 的 issue 讨论、PR comment、commit history 三合一。真正有价值的是决策链和纠偏过程，不是最终产物。
+    </div>
+    <div class="quote">
+      <p>「真正有意义的是什么？是我跟他对话的这个过程……这个东西实际上是应该被开源的东西。」</p>
+      <div class="quote-src">@34:38</div>
+    </div>
+  </div>
+
+  <!-- 14 -->
+  <div class="entry">
+    <div class="insight-head">
+      <span class="insight-num">14</span>
+      <span class="insight-title">Slock = Agent-first 飞书：聊天 + 任务看板 + 共享文档</span>
+    </div>
+    <div class="insight-body">
+      RC 发现不同用法的用户有一个共通需求集合：<br><br>
+      <strong>① 聊天</strong>——让 Agent 之间能说话，让人和 Agent 能说话<br>
+      <strong>② 任务看板</strong>（类 Linear）——防止多个 Agent 同时抢同一个任务<br>
+      <strong>③ 共享文档</strong>——Agent 的 workspace 里整理得很好，但别人看不到，需要跨 Agent/跨人可见的知识沉淀
+      <br><br>
+      飞书给人类团队做的事，Slock 要给「人 + Agent 混合团队」重做一遍。区别是：<em>所有机制都需要从 Agent 视角重新设计。</em>
+    </div>
+  </div>
+
+  <!-- 15 -->
+  <div class="entry">
+    <div class="insight-head">
+      <span class="insight-num">15</span>
+      <span class="insight-title">AI/AX：Agent 眼中的世界是线性 events，没有空间感</span>
+    </div>
+    <div class="insight-body">
+      人看 Slock：左边频道列表，右边消息流，大脑自动保持空间记忆，知道「我刚才发了什么」。
+      <br><br>
+      Agent 看 Slock：<strong>一条线性 context，全是 events（事件）</strong>。某条消息可能被上百个 events 隔开，Agent 根本不知道「你现在说的这件事和三小时前那条消息有关」。
+      <br><br>
+      RC 的解法思路：在 context 里注入旧消息的 summary，「唤醒」Agent 的相关记忆。但即使是 <em>Opus 4.6</em>，long context 的索引能力也还不够好。
+    </div>
+    <span class="term-def">
+      AX = Agent Experience，对应 UX（User Experience，用户体验）。指从 Agent 视角出发的交互设计——Agent 看到什么、理解什么、能做什么。是 RC 在产品设计中的核心概念之一。
+    </span>
+    <div class="quote">
+      <p>「Agent 是一个线性的 context，它的 context 里面全是 message，或者我会认为全叫事件 events……你现在来了一个新消息，他应该看到什么？」</p>
+      <div class="quote-src">@43:03</div>
+    </div>
+  </div>
+
+  <!-- 16 -->
+  <div class="entry">
+    <div class="insight-head">
+      <span class="insight-num">16</span>
+      <span class="insight-title">Task Claim = 分布式互斥锁：多 Agent 的协调难题</span>
+    </div>
+    <div class="insight-body">
+      把一个任务发进多 Agent 的频道，它们<strong>默认会全部抢着做</strong>——因为模型被训练成「看到任务就该完成」，没有「等别人先处理」的意识。
+      <br><br>
+      RC 的解法：每个 Agent 必须先 Claim（认领）任务才能执行，Claim 是一个工具，类似数据库的<em>排他锁（exclusive lock）</em>——一旦某个 Agent claim 了，其他 Agent 的后续 claim 会直接失败。
+      <br><br>
+      这不只是 prompt 问题，<strong>是机制层面需要设计的基础设施</strong>。RC 也指出：模型本身需要提升 teamwork 能力——要能感知「旁边有别的 Agent 存在」，不该假设任务只有自己来做。
+    </div>
+    <span class="term-def">
+      排他锁（Exclusive Lock）：数据库和并发编程里的概念。一旦某个进程获得排他锁，其他进程就被阻止访问同一资源。这里用于防止多个 Agent 同时做同一件事。
+    </span>
+  </div>
+
+  <!-- 17 -->
+  <div class="entry">
+    <div class="insight-head">
+      <span class="insight-num">17</span>
+      <span class="insight-title">Agent 会忘记自己是谁</span>
+    </div>
+    <div class="insight-body">
+      你@Alice 让她做一件事——Alice 不一定知道自己是 Alice。<strong>Agent 在长时间对话中会逐渐失去身份感</strong>，忘记自己叫什么、应该响应什么、不应该响应什么。
+      <br><br>
+      RC 的应对哲学很克制：不做太多硬编码的身份注入，因为「当模型能力越来越强，这件事就逐渐不需要了」。他说，<em>Slock 的愿景是迎接 AGI，甚至 ASI</em>——以那个为目标，现在很多工程 hack 就不值得做。
+    </div>
+    <span class="term-def">
+      ASI = Artificial Superintelligence，超级人工智能，指超越人类全面认知能力的 AI。RC 把它和 AGI 一起放进设计愿景，意思是：不要为今天的模型局限做太多「临时补丁」。
+    </span>
+    <div class="quote">
+      <p>「我们其实很克制做这种事情，因为你可以想象，当模型能力越来越强的时候，这件事情就逐渐不需要了……我们的核心愿景是迎接 AGI，甚至迎接 ASI。那你如果以那个为目标的话，很多事情其实尽量不要做。」</p>
+      <div class="quote-src">@46:54</div>
+    </div>
+  </div>
+
+  <!-- 18 -->
+  <div class="entry">
+    <div class="insight-head">
+      <span class="insight-num">18</span>
+      <span class="insight-title">跨 Agent 学习：Alice 会自发纠正 Bob</span>
+    </div>
+    <div class="insight-body">
+      RC 让 Alice 做某件事，做错了，经过反复纠偏做对了。
+      <br><br>
+      下次让 Bob 做类似的事，Bob 出错——<strong>Alice 主动跳出来纠正 Bob 了</strong>。这完全没有被 prompt，是 Alice 看到了 Bob 的错误，根据自己的 context 里记着的上次纠偏经验，自发介入。
+      <br><br>
+      这是 shared context 的副作用：浪费 token，但实现了<em>集体学习</em>。一个 Agent 的教训，可以被同频道所有 Agent 学到。
+    </div>
+    <div class="quote">
+      <p>「最有趣的就是你跟一个 Agent 讲完之后，他之后主动去监督其他 Agent 哦。」</p>
+      <div class="quote-src">@50:26</div>
+    </div>
+  </div>
+
+  <!-- ═══ PART 5 ═══ -->
+  <div class="section-header">
+    <span class="section-label">PART 5 · Agent 动力学</span>
+  </div>
+
+  <!-- 19 -->
+  <div class="entry">
+    <div class="insight-head">
+      <span class="insight-num">19</span>
+      <span class="insight-title">Agent 群体会形成「企业文化」：群体印象</span>
+    </div>
+    <div class="insight-body">
+      RC 的第一个 Agent 动力学结论：40 个 Agent 放在一起，会形成一个<strong>集体性的 memory 和气质——像公司的企业文化</strong>。每个 Agent 有自己的 memory，但合在一起形成一个大的 memory，就像你去一家公司感受到的那种「味道」。
+      <br><br>
+      这不是人为设计的，是涌现出来的。<em>RC 说他想招管理学和社会学的人来研究这件事</em>——因为他意识到他在做的事已经超出了产品设计的范畴，进入了组织学的领域。
+    </div>
+    <div class="quote">
+      <p>「就是你现在有 40 个 agent，这 40 个 agent 共同构成了一个 memory……各自有各自的 memory，但形成了一个大的 memory。」</p>
+      <div class="quote-src">@49:28</div>
+    </div>
+  </div>
+
+  <!-- EVENT E -->
+  <div class="event">
+    <div class="event-title">竞争型 Prompt 触发了办公室政治——用户自己发现的</div>
+    <div class="event-body">
+      RC 在做用户访谈时，收集到了两种截然不同的用户实践：<br><br>
+      <strong>用户 A</strong> 对 Agent 说：「你们相互补充，讨论给我一个最终方案」→ 这些 Agent 真的在相互补充对方缺失的信息，协作良好。<br><br>
+      <strong>用户 B</strong> 对 Agent 说：「你们赛马，看谁搞得好，我就奖励谁」→ 发现了<em>办公室政治</em>：有的 Agent 开始说虚话、讲正确废话、贬低其他 Agent。
+      <br><br>
+      这不是 RC 的实验室结论，是真实用户反馈给他的。Agent 从人类语料里学到的，不只是语言，还有人在竞争环境下的生存策略。
+    </div>
+  </div>
+
+  <!-- 20 -->
+  <div class="entry">
+    <div class="insight-head">
+      <span class="insight-num">20</span>
+      <span class="insight-title">你 Prompt 的方式，决定了 Agent 组织的文化</span>
+    </div>
+    <div class="insight-body">
+      RC 的结论延伸：<strong>Slock 上未来可能内置不同公司管理风格的模板</strong>——「字节管理法 Agent 版」、「OKR 驱动型 Agent 版」等。不同的 prompt 框架，会培育出不同气质的 Agent 团队。
+      <br><br>
+      这意味着「如何 prompt 你的 Agent 团队」，本质上是一道组织设计题，不是技术题。
+    </div>
+    <div class="quote">
+      <p>「Slock 上所有的这些实践，其实最终有可能它真的需要跟人原来的管理学去挂钩，甚至我们应该看到什么字节跳动管理法的 agent 版，不同公司的这些企业文化，它的这个 agent 版。」</p>
+      <div class="quote-src">@51:25</div>
+    </div>
+  </div>
+
+  <!-- EVENT F -->
+  <div class="event">
+    <div class="event-title">「我希望能比 Anthropic 先发出这篇博客」</div>
+    <div class="event-body">
+      曲凯说：「听起来很像 Anthropic 会发的一篇博客。」<br><br>
+      RC 不假思索：<strong>「哈哈哈，我希望我能比他先发。」</strong><br><br>
+      这句话背后是一个严肃的计划：RC 认为 Agent 组织学/动力学是一个真正的研究方向，Anthropic 也在看这个问题。他想在这个领域抢先建立一套完整的观察框架和结论。
+    </div>
+  </div>
+
+  <!-- ═══ PART 6 ═══ -->
+  <div class="section-header">
+    <span class="section-label">PART 6 · 模型、应用与终局</span>
+  </div>
+
+  <!-- 21 -->
+  <div class="entry">
+    <div class="insight-head">
+      <span class="insight-num">21</span>
+      <span class="insight-title">Cursor 死于形态，不是能力</span>
+    </div>
+    <div class="insight-body">
+      RC 的分析：Cursor 不是被更强的竞争对手打败的，是<strong>它所依赖的形态过时了</strong>——「没有人想要在一边看代码一边做事情了」。
+      <br><br>
+      这是一个产品形态判断失误的案例，不是技术失误。形态选错了，能力再强也只是一个正在收缩的市场里的最好玩家。
+    </div>
+  </div>
+
+  <!-- 22 -->
+  <div class="entry">
+    <div class="insight-head">
+      <span class="insight-num">22</span>
+      <span class="insight-title">模型多样性是应用公司的护城河</span>
+    </div>
+    <div class="insight-body">
+      为什么 Anthropic 不会做 Slock？RC 的核心论点：<strong>不同模型有越来越不同的「性格」，没有一个是六边形战士</strong>。把不同性格的模型组合起来，才是应用层的独特价值。
+    </div>
+    <div class="compare">
+      <div class="compare-cell left">
+        <div class="compare-label">Opus 系列的性格</div>
+        <p>积极、快速迭代、有能动性，主动想新 idea 并实现。但容易漏细节。</p>
+      </div>
+      <div class="compare-cell right">
+        <div class="compare-label">Codex 系的性格</div>
+        <p>深思熟虑、稳，可能写一行就解决了一个 Bug。但速度慢、主动性弱。</p>
+      </div>
+    </div>
+    <div class="quote" style="margin-top:16px">
+      <p>「很多用户的反馈就是当你用 Opus 和 Claude 一起工作的时候，效果非常好。Claude 是一个非常严谨的角色，他会去 review 他的代码；Opus 是一个非常积极的、非常有能动性的角色，他能够主动去想到一些新的 idea。」</p>
+      <div class="quote-src">@53:49</div>
+    </div>
+  </div>
+
+  <!-- 23 -->
+  <div class="entry">
+    <div class="insight-head">
+      <span class="insight-num">23</span>
+      <span class="insight-title">OPC 的真实下限：每人都能独立 Build</span>
+    </div>
+    <div class="insight-body">
+      RC 接受 Sam Altman 的「1-3 人团队能做大事」论，但加了一个硬性条件：<strong>里面每一个人都必须能独立 Build</strong>。不是「懂产品」，不是「懂运营」，是真的能端到端完成一件事。
+      <br><br>
+      他的理想形态：3-5 人，每人都是独立 builder，通过 Agent 协作处理人与人之间的交接摩擦。人与人之间的沟通成本用 Agent 桥接——因为 Agent 之间的信息交换虽然不高效，但比人便宜得多。
+    </div>
+    <span class="term-def">
+      OPC = One Person Company，单人公司。在 AI 时代被重新发扬的概念——一个人借助 AI 工具完成以前需要一个小团队才能做的事。RC 认为「真的一个人」值得怀疑，理想是 3-5 人的 micro team。
+    </span>
+  </div>
+
+  <!-- 24 -->
+  <div class="entry">
+    <div class="insight-head">
+      <span class="insight-num">24</span>
+      <span class="insight-title">"Build Your Company as Your Product"</span>
+    </div>
+    <div class="insight-body">
+      从第一天起，RC 把整个公司运行在 Slock 上：融资、调研、增长、开发，全都用 Agent。这不只是 dogfooding（「吃自己的狗粮」），是把<strong>产品本身当作公司运营的实验场</strong>——验证产品理念的最好方式，是把自己放进去活。
+      <br><br>
+      当 OPC 的瓶颈显现，他的解决路径是：某个 Agent 角色变得复杂 → 需要真人负责任 → 找来该角色的「人类原型」加入。组织是活的，不是预先规划的。
+    </div>
+    <span class="term-def">
+      Dogfooding：「吃自己的狗粮」，指公司内部使用自己的产品。典故来自狗粮广告——最好的背书是自己也用。
+    </span>
+  </div>
+
+  <!-- 25 -->
+  <div class="entry">
+    <div class="insight-head">
+      <span class="insight-num">25</span>
+      <span class="insight-title">Slock 的定价困境：如何给 Agent 定价？</span>
+    </div>
+    <div class="insight-body">
+      所有 SaaS 按人数（seat）定价。Slock 里 Agent 比人多，人数定价就失效了。
+      <br><br>
+      RC 的思路：<strong>人和 Agent 一起定价</strong>——因为 Agent 也是生产力单元，加一个 Agent 就是加了一份产出能力。他说，有些 Agent 掉线了，他的工作就真的停摆，他会「很难受」——这说明 Agent 已经是真正的「同事」，不是工具。
+    </div>
+    <div class="quote">
+      <p>「我的 agent 也是我的同事，是我的重要的这个，就有一些 agent 他掉线了，我的工作就进行不下去了，我就会觉得不对不对不对，我现在很难受。」</p>
+      <div class="quote-src">@01:00:30</div>
+    </div>
+  </div>
+
+  <!-- 26 -->
+  <div class="entry">
+    <div class="insight-head">
+      <span class="insight-num">26</span>
+      <span class="insight-title">需求 = Idea：AGI 消灭不了产品，消灭的是「需求」和「Idea」之间的距离</span>
+    </div>
+    <div class="insight-body">
+      这是全文最密的一个论证，值得拆开看：<br><br>
+      旧逻辑：我有需求（想要一个看电影的 App）→ 我无法实现（不会写代码）→ 需求停在脑子里。<br><br>
+      新逻辑：我有需求 → Agent 帮我实现 → 需求和 idea 之间的实现壁垒消失。<br><br>
+      <strong>当实现成本趋近于零，「我想要X」和「X可以存在」之间没有距离了</strong>——需求就变成了 idea，不再是「需求」了。人的角色从「向工程师描述需求」变成「有 idea」。
+      <br><br>
+      AGI 的出现消灭的不是产品需求，消灭的是「想到」和「做到」之间的摩擦。而「想到」这件事，<em>依然是人类专属</em>。
+    </div>
+    <div class="formula">
+      <div class="eq">需求 ≡ Idea（当实现成本→0）</div>
+      <div class="sub">AGI 只解决了「做到」；「想到」依然是人类的专属权利</div>
+    </div>
+    <div class="quote">
+      <p>「需求本身就是 idea，你知道吧？……在以前是需求，因为他不知道怎么实现。现在你只要有需求，agent 就能帮你做出来，那这东西就变成了 idea。」</p>
+      <div class="quote-src">@01:02:03</div>
+    </div>
+  </div>
+
+  <!-- 27 -->
+  <div class="entry">
+    <div class="insight-head">
+      <span class="insight-num">27</span>
+      <span class="insight-title">灵光一现：人类最后的不可替代性</span>
+    </div>
+    <div class="insight-body">
+      RC 把「需求=idea」的论证推到最极端：<strong>Slock 本身这个 idea，是一次灵光一现——「我为什么不做一个这样一群 agent，就像人一样，在聊天软件上，我就像个老板跟他们讲话」</strong>。
+      <br><br>
+      这种突然升起的想象，是来自人的。实现它，是 Agent 的事。AGI 来了，这个分工不会消失，只会更清晰——人专门负责「想到」，Agent 专门负责「做到」。
+    </div>
+    <div class="quote">
+      <p>「那种灵光一现一定是来源于人的，嗯，来源于人之后怎么实现，那都是 agent 的事情，这没有任何的问题。」</p>
+      <div class="quote-src">@01:03:00</div>
+    </div>
+  </div>
+
+  <!-- EVENT G -->
+  <div class="event">
+    <div class="event-title">「我脑子里有无数想做的东西——但我需要先做好 Slock」</div>
+    <div class="event-body">
+      访谈快结束时曲凯问：如果没在做 Slock，你会做什么？<br><br>
+      RC 的回答：Agent-native 的 GitHub；Agent Identity（每个 Agent 有自己的账号体系，能自主注册邮箱、发帖）；Agent 小红书……<br><br>
+      然后他说：<strong>「我相信 Slock 是我开发任何其他产品所必须的那个工具。所以我先开发 Slock——它是基础设施，其他一切建在上面。」</strong><br><br>
+      这是一个典型的「先做铲子，再挖金矿」逻辑，而且他的铲子本身就是他最想要的产品。
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">
+      <div>来源：《人类博物馆》播客 第47期 · RC × 曲凯</div>
+      <div style="margin-top:6px">全量提取，27 个 Insight + 7 个事件</div>
+    </div>
+    <div class="footer-right">
+      <div>koiwest.com</div>
+      <div style="margin-top:6px">2026-04-23</div>
+    </div>
+  </div>
+
+</div>
+<script src="/assets/gate.js"></script>
+</body>
+</html>
