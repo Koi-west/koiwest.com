@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="viewport" content="width=1080, user-scalable=yes">
+<title>Residency 执行文档 · koi</title>
+<meta charset="UTF-8">
+<style>
+  @font-face {
+    font-family: 'KingHwa_OldSong';
+    src: url('/assets/KingHwa_OldSong.subset.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+  }
+
+  :root {
+    --text: #1a1a1a;
+    --text-mid: #6E6E73;
+    --text-dim: #ACACB0;
+    --accent: #C05C28;
+    --rule: #E5E5EA;
+    --bg: #FAFAF8;
+    --font: 'KingHwa_OldSong', 'PingFang SC', system-ui, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 1080px;
+    background: var(--bg);
+  }
+
+  .card {
+    width: 1080px;
+    background: var(--bg);
+    padding: 64px 72px 52px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .title-area {
+    flex-shrink: 0;
+    margin-bottom: 52px;
+  }
+
+  .title-area h1 {
+    font: 700 78px/1.15 var(--font);
+    color: var(--text);
+    letter-spacing: -0.03em;
+    margin-bottom: 16px;
+  }
+
+  .title-area .meta {
+    font: 400 24px/1.5 var(--font);
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+    margin-bottom: 22px;
+  }
+
+  .title-area::after {
+    content: '';
+    display: block;
+    width: 52px;
+    height: 3px;
+    background: var(--accent);
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .content p {
+    font: 400 34px/1.75 var(--font);
+    color: var(--text);
+    margin-bottom: 28px;
+  }
+
+  .content .highlight {
+    font: 500 38px/1.55 var(--font);
+    color: var(--text);
+    padding: 14px 0 14px 26px;
+    border-left: 3px solid var(--accent);
+    margin: 36px 0;
+  }
+
+  .content h2 {
+    font: 600 40px/1.4 var(--font);
+    color: var(--text);
+    margin: 52px 0 20px;
+    letter-spacing: -0.02em;
+  }
+
+  .content h2:first-child {
+    margin-top: 0;
+  }
+
+  .content .subtitle {
+    font: 400 20px/2 var(--font);
+    color: var(--text-dim);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .content .item {
+    margin-bottom: 36px;
+  }
+
+  .content .item:last-child {
+    margin-bottom: 0;
+  }
+
+  .content .item .label {
+    font: 600 34px/1.5 var(--font);
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+
+  .content .item p {
+    font: 400 32px/1.65 var(--font);
+    color: var(--text-mid);
+    margin-bottom: 0;
+  }
+
+  .content blockquote {
+    margin: 8px 0 36px;
+    padding: 20px 28px;
+    background: rgba(192, 92, 40, 0.05);
+    border-left: 3px solid var(--accent);
+  }
+
+  .content blockquote p {
+    font: 400 34px/1.75 var(--font);
+    color: var(--text);
+    margin-bottom: 0;
+  }
+
+  .content strong {
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .content .divider {
+    height: 1px;
+    background: var(--rule);
+    margin: 44px 0;
+  }
+
+  .content ul {
+    list-style: none;
+    margin-bottom: 28px;
+  }
+
+  .content ul li {
+    font: 400 33px/1.75 var(--font);
+    color: var(--text);
+    padding: 4px 0 4px 28px;
+    position: relative;
+  }
+
+  .content ul li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .content .dropcap::first-letter {
+    font: 700 120px/0.82 'KingHwa_OldSong', Georgia, serif;
+    float: left;
+    margin: 4px 16px 0 -4px;
+    color: var(--accent);
+  }
+
+  .tension-block {
+    background: rgba(192, 92, 40, 0.04);
+    border: 1px solid rgba(192, 92, 40, 0.15);
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 28px;
+  }
+
+  .tension-block .tension-title {
+    font: 600 30px/1.5 var(--font);
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+
+  .tension-block p {
+    margin-bottom: 0;
+    font-size: 30px;
+    color: var(--text-mid);
+  }
+
+  .content::after {
+    content: '∎';
+    display: block;
+    text-align: right;
+    font-size: 16px;
+    color: var(--text-dim);
+    margin-top: 40px;
+  }
+
+  .footer {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 52px;
+    padding-top: 22px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .footer .author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .footer .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .footer .author-name {
+    font: 400 24px/1.5 var(--font);
+    color: var(--text-mid);
+    letter-spacing: 0.03em;
+  }
+</style>
+
+<style>
+  html, body {
+    width: 100% !important;
+    min-width: 1080px !important;
+    background: #F5F5F7 !important;
+  }
+  body > .card, body > .page, body > main {
+    margin: 0 auto !important;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="title-area">
+      <h1>Residency 执行文档</h1>
+      <div class="meta">Spark Lab 内部知识库 · 伴读笔记</div>
+    </div>
+    <div class="content">
+
+      <p class="dropcap">这不是一份"住一段时间"的说明书。它试图把原本偶然发生的「车库时刻」，变成一种可以反复出现的结构。</p>
+
+      <h2>一句话摘要</h2>
+      <p>通过「减法、边界、筛选、空间、时间」五维设计，把 42 天创业驻地变成不可复制的「魔法」场域——既是产品哲学，也是后勤操作手册。</p>
+
+      <div class="divider"></div>
+
+      <h2>5S 框架</h2>
+
+      <div class="item">
+        <p class="label">Stealth · 半封闭</p>
+        <p>Founder-only，不对投资人/媒体开放。不安排 Demo Day，只做闭门 Launch Day。暂停冗余社交，把关系深度 > 广度。</p>
+      </div>
+
+      <div class="item">
+        <p class="label">Speed · 时间容器</p>
+        <p>42 天 / 每周一次迭代。Ship it Monday：公开承诺 + peer pressure，有明确 DDL，不拖。</p>
+      </div>
+
+      <div class="item">
+        <p class="label">Subtraction · 减法</p>
+        <p>外包一切非创业事务：阿姨做饭、水吧、洗衣、补剂、健身。周中不安排活动，不打扰 building。团队每周只 All in 做一件事。</p>
+      </div>
+
+      <div class="item">
+        <p class="label">Synergy · 筛选共振</p>
+        <p>只选 10 支团队。正确的筛选机制让同频创业者自发涌现集体智慧，社区解决微观问题。</p>
+      </div>
+
+      <div class="item">
+        <p class="label">Spark · 激发场域</p>
+        <p>让整个空间弥漫让人上瘾的「魔法」气息。有且仅有一件事重要：离开时实现你来时的目标。</p>
+      </div>
+
+      <p class="highlight">Community is the new mentor</p>
+
+      <div class="divider"></div>
+
+      <h2>三大目标</h2>
+
+      <div class="item">
+        <p class="label">O1 · 加速创业者</p>
+        <p>42 天内实现可衡量进展——产品新版本、ARR 翻倍、北极星指标达成。构建让人上瘾的「魔法」气息，帮创业者做减法，All in 一件事，distraction-proof。</p>
+      </div>
+
+      <div class="item">
+        <p class="label">O2 · 社区</p>
+        <p>校友深度链接，自发 Side Event，彼此成为用户/客户/资源。同吃同住同办公，选择性设计活动。</p>
+      </div>
+
+      <div class="item">
+        <p class="label">O3 · SL Identity</p>
+        <p>离开后疯狂戒断，对外骄傲自称 SL 校友，戴手环。完全不同的体验：香薰、音乐、灯光、建筑、橙色、wellness。各种仪式：Day0、敲钟、Ship it Monday BGM、毕业典礼。</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <h2>用户旅程</h2>
+      <ul>
+        <li><strong>Sourcing</strong> — 通过内容、品牌、活动实现更广覆盖</li>
+        <li><strong>Matching</strong> — 文化识别人；判断 vibe；符合产品阶段</li>
+        <li><strong>Winning</strong> — 用核心产品说服</li>
+        <li><strong>Building</strong> — 驻地期间支持</li>
+        <li><strong>Harvesting</strong> — 口碑裂变，推荐其他创业者</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <h2>哲学金句</h2>
+
+      <blockquote>
+        <p>当艺术家聚在一起时，他们谈论在哪里能买到便宜的松节油。</p>
+      </blockquote>
+
+      <blockquote>
+        <p>Spark Lab 的稀缺性不在于这栋房子，而在于谁能走进这栋房子。</p>
+      </blockquote>
+
+      <blockquote>
+        <p>最好的创业场域是"在施工现场"，而不是"在演说会场"。真正的创业者不需要被孵化，也不需要被教导。</p>
+      </blockquote>
+
+      <blockquote>
+        <p>把原本偶然发生的「车库时刻」，变成一种可以反复出现的结构。</p>
+      </blockquote>
+
+      <div class="divider"></div>
+
+      <h2>结构性张力</h2>
+
+      <div class="tension-block">
+        <div class="tension-title">减法哲学 vs 丰富后勤</div>
+        <p>一边强调 distraction-proof，一边详细设计补剂菜单、Super Veggie 配方、水吧管理。并不矛盾——减的是创业者的决策负担，用「丰富的幕后支撑」换取「极简的前台注意力」。</p>
+      </div>
+
+      <div class="tension-block">
+        <div class="tension-title">筛选精英 vs 不是精英主义</div>
+        <p>拒绝过 ARR $100k+ top-VC backed 的 startup，同时强调"不是为了制造精英感"。高门槛实现文化对齐，而非资历筛选。</p>
+      </div>
+
+      <div class="tension-block">
+        <div class="tension-title">社区自治 vs 工作人员主动引导</div>
+        <p>"社区成员可自主发起活动"，同时"工作人员需要 24/7 陪伴，主动引导营造社区感"。要制造"自然涌现"的幻觉，但其实是精心编排的——这是 Residency 最难执行的地方。</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <h2>来自复盘的关键洞察</h2>
+      <ul>
+        <li>活动最重要的是<strong>峰值 moment + 结尾 moment</strong>，产品经理思维</li>
+        <li>物料的目的不是"做出来"，而是"满足使用场景"——welcome kit 核心是让他拿到有感觉的东西</li>
+        <li>Workshop 不能变成广告，需要「内容导演」角色控制内容质量</li>
+        <li>不要强制发朋友圈，只用一个微信群，反而更容易营造氛围</li>
+        <li>Office Hour 要重新设计，1on1 比一对多分享效果好得多</li>
+        <li>工作人员需要更多「活人感」，才能和大家玩在一起</li>
+      </ul>
+
+    </div>
+    <div class="footer">
+      <div class="author">
+        <img class="avatar" src="/assets/kanye.png" alt="">
+        <span class="author-name">Spark Lab 内部知识库</span>
+      </div>
+    </div>
+  </div>
+<script src="/assets/gate.js"></script>
+</body>
+</html>
